@@ -1,10 +1,10 @@
 Requirements
 In the first week you should:
     Find a partner - DONE
-    Decide on a topic  
+    Decide on a topic - DONE
     Present topic at övning
     Create a single repo on KTH Github and share with partner - DONE
-    Write a short Project Description, using the repo's README
+    Write a short Project Description, using the repo's README - DONE
     Decide and map out the Project Plan using Features/Milestones via Issue Tracker
     Start developing!
 
@@ -35,6 +35,7 @@ Go: Börja med Leaderboards
 
 ### Filer
 JSON-kartor mha Java 3rd Party Libraries
+ ,http://www.json.org/
 
 ## BRAIN-STORM, Design
 * game
@@ -60,5 +61,4 @@ HOSTILE non violence: Som undviker dig, måste fångas
 *  Hinderbana
 *  Serie-PUSSEl
 *  Kurragömma
-
-* internet
+* internet (Leaderboards)
