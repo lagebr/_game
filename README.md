@@ -1,2 +1,6 @@
 # nameless_project
-This is a project description.
+nameless is a beautiful game made in Oracle's Java, with The Internet™ features by the use a server written in Golang.
+
+* game
+
+* internet

@@ -3,7 +3,7 @@ In the first week you should:
 
     Find a partner - DONE
     Decide on a topic  
-    Present topic at övning
+    Present topic at övning 
     Create a single repo on KTH Github and share with partner - DONE
     Write a short Project Description, using the repo's README
     Decide and map out the Project Plan using Features/Milestones via Issue Tracker
