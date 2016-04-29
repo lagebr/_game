@@ -28,7 +28,7 @@ The Project Plan should be expressed using Features/Milestones that are:
 LW-JGL: Slick2D, LigGDX, JavaFX
 
 ### Databas
-User settigns
+User settings
 
 ### Server/klient
 Go: Börja med Leaderboards
@@ -47,6 +47,11 @@ Next Level genom nyckelhålsfunktion.
 Rymdlasrar som begränsar rörelseytan #HARD
 Stänga in fiender för att absorbera deras form/förmågor
 SPELARE: Kontrollera rotation och acceleration inkl ev förmågor
+
+MÅL KNOCKA: Knocka hostile som passar i nyckelhålet -> går vidare
+MÅL TID: Inget nyckelhål på banan, överlever x minuter så dyker hålet upp delar banan och man kommer vidare.
+NPC: T ex dammsuger banan, non aggro
+HOSTILE non violence: Som undviker dig, måste fångas
 
 
 ### öv spelmekanik
