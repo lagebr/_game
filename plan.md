@@ -25,7 +25,7 @@ The Project Plan should be expressed using Features/Milestones that are:
 
 ## BRAIN-STORM, Technical Plan
 ### GUI
-LW-JGL: Slick2D, LigGDX, JavaFX
+LW-JGL: Slick2D, LibGDX, JavaFX
 
 ### Databas
 User settings
