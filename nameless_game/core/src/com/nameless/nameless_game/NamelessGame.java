@@ -25,7 +25,7 @@ public class NamelessGame extends ApplicationAdapter {
 		rectangle = new Rectangle(100,100,100,100);
 		
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 600);
+		camera.setToOrtho(false, 800, 600); // true/false, origo top-left/bottom left
 	}
 
 	@Override
@@ -37,11 +37,11 @@ public class NamelessGame extends ApplicationAdapter {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(1, 0, 0, 1);
+		shapeRenderer.setColor(1, 0, 200, 1);
 		
 		shapeRenderer.translate(1, 0, 0);
 		
-		shapeRenderer.rect(0, 0, rectangle.width, rectangle.height);
+		shapeRenderer.rect(0, 0, 2*rectangle.width, 2*rectangle.height);
 		
 		shapeRenderer.end();
 		
