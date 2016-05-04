@@ -50,17 +50,6 @@ public class GameInputProcessor extends InputAdapter {
 		return true;
 	}
 
-	/**
-	 * Checks if a keycode corresponds to an action, if so adds it to the action
-	 * queue.
-	 * 
-	 * @param keycode
-	 *            The keycode.
-	 */
-	private void processInput(int keycode) {
-		
-	}
-
 	public List<InputAction> getActionQueue() {
 		return actionQueue;
 	}
