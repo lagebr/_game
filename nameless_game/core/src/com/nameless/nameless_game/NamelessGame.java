@@ -28,8 +28,9 @@ public class NamelessGame extends ApplicationAdapter {
 	public void create() {
 		renderer = new ScreenRenderer(800, 600);
 		world = new World(new Vector2(0, 0), true);
+		entities = new ArrayList<Entity>();
 		
-		Texture texture = new Texture(Gdx.files.internal("image.png"));
+		Texture texture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
 		Entity entity = new Entity(100, 100, 100, 100, texture, world);
 		entities.add(entity);
 	}
