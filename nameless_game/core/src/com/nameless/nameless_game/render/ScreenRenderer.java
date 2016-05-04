@@ -1,5 +1,7 @@
 package com.nameless.nameless_game.render;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -33,7 +35,7 @@ public class ScreenRenderer extends Renderer {
 	 *            The entities to be drawn.
 	 */
 	@Override
-	public void render(Entity[] entities) {
+	public void render(ArrayList<Entity> entities) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
