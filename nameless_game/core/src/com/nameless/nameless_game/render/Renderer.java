@@ -1,5 +1,7 @@
 package com.nameless.nameless_game.render;
 
+import com.nameless.nameless_game.model.Entity;
+
 /**
  * Renderer is an abstract class which describes how a renderer should look
  * like.
@@ -10,8 +12,11 @@ package com.nameless.nameless_game.render;
 public abstract class Renderer {
 
 	/**
-	 * Draws objects to screen. Once model is created, all entities should be
-	 * passed as a parameter to renderer.
+	 * Draws all entities to screen.
+	 * 
+	 * @param entities
+	 *            The entities to be drawn.
 	 */
-	public abstract void render();
+	public abstract void render(Entity[] entities);
+
 }
