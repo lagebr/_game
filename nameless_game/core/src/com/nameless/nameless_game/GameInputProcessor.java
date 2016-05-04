@@ -50,7 +50,7 @@ public class GameInputProcessor extends InputAdapter {
 		return true;
 	}
 
-	public List<InputAction> getActionQueue() {
+	public List<InputEvent> getActionQueue() {
 		return actionQueue;
 	}
 }
