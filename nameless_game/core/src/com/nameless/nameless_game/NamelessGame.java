@@ -36,6 +36,6 @@ public class NamelessGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		
+		renderer.render(entities);
 	}
 }
