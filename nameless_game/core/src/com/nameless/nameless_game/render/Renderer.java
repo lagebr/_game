@@ -1,5 +1,7 @@
 package com.nameless.nameless_game.render;
 
+import java.util.ArrayList;
+
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -17,6 +19,6 @@ public abstract class Renderer {
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void render(Entity[] entities);
+	public abstract void render(ArrayList<Entity> entities);
 
 }
