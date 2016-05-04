@@ -1,22 +1,22 @@
 package com.nameless.nameless_game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * NamelessGame is the main controller for the game. Handles input and updates.
+ * 
+ * @author Henrik Lagebrand, Isaac Arvestad
+ * @version 2016-05-04
+ */
 public class NamelessGame extends ApplicationAdapter {
 	
 	@Override
-	public void create () {
-		
+	public void create() {
+
 	}
 
 	@Override
-	public void render () {
-		
+	public void render() {
+
 	}
 }
