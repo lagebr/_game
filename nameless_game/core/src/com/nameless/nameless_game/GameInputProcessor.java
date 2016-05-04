@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 
 /**
@@ -17,19 +18,35 @@ public class GameInputProcessor extends InputAdapter {
 
 	private Map<Integer, InputAction> actionLookUp = new HashMap<Integer, InputAction>();
 
-	private List<InputAction> actionQueue = new LinkedList<InputAction>();
+	private List<InputEvent> actionQueue = new LinkedList<InputEvent>();
 
+	public GameInputProcessor() {
+		actionLookUp.put(Input.Keys.A, InputAction.LEFT);
+	}
+	
 	@Override
 	public boolean keyDown(int keycode) {
-		processInput(keycode);
+		InputAction action = actionLookUp.get(keycode);
 
+		if (action != null) {
+			InputEvent event = new InputEvent(action, true);
+			
+			actionQueue.add(event);
+		}
+		
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		processInput(keycode);
+		InputAction action = actionLookUp.get(keycode);
 
+		if (action != null) {
+			InputEvent event = new InputEvent(action, false);
+			
+			actionQueue.add(event);
+		}
+		
 		return true;
 	}
 
@@ -41,11 +58,7 @@ public class GameInputProcessor extends InputAdapter {
 	 *            The keycode.
 	 */
 	private void processInput(int keycode) {
-		InputAction action = actionLookUp.get(keycode);
-
-		if (action != null) {
-			actionQueue.add(action);
-		}
+		
 	}
 
 	public List<InputAction> getActionQueue() {
