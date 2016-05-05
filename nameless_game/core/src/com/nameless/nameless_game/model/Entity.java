@@ -39,6 +39,19 @@ public class Entity {
 	}
 
 	/**
+	 * Creates an entity with a physics body and a texture.
+	 * 
+	 * @param body
+	 *            The physics body.
+	 * @param texture
+	 *            The texture.
+	 */
+	public Entity(Body body, Texture texture) {
+		this.body = body;
+		this.texture = texture;
+	}
+
+	/**
 	 * createBody creates a rectangular, static physics body, adds it to the
 	 * physics world and returns it.
 	 * 
