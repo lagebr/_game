@@ -41,6 +41,15 @@ public class NamelessGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+		for (InputEvent event : inputProcessor.getActionQueue()) {
+			if (event.action == InputAction.LEFT && event.keyPressed == true) {
+				System.out.println("Left");
+			} else if (event.action == InputAction.RIGHT && event.keyPressed == true) {
+				System.out.println("Right");
+			}
+		}
+		inputProcessor.getActionQueue().clear();
+		
 		renderer.render(entities);
 	}
 }
