@@ -18,6 +18,20 @@ public class Entity {
 	private Body body;
 	private Texture texture;
 
+	/**
+	 * Creates an entity with a static physics body and a texture.
+	 * 
+	 * @param x
+	 *            Center on x-axis
+	 * @param y
+	 *            Center on y-axis
+	 * @param width
+	 * @param height
+	 * @param texture
+	 *            Texture to use.
+	 * @param world
+	 *            Physics world to add body to.
+	 */
 	public Entity(float x, float y, float width, float height, Texture texture, World world) {
 		body = createBody(x, y, width, height, world);
 
