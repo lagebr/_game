@@ -66,6 +66,11 @@ public class NamelessGame extends ApplicationAdapter {
 			} else if (event.action == InputAction.RIGHT && event.keyPressed == true) {
 				System.out.println("Right");
 			}
+			else if (event.action == InputAction.UP && event.keyPressed == true) {
+				System.out.println("Up");
+			} else if (event.action == InputAction.DOWN && event.keyPressed == true) {
+				System.out.println("Down");
+			}
 		}
 		inputProcessor.getActionQueue().clear();
 	}
