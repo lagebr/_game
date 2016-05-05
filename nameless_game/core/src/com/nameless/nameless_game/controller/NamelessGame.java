@@ -45,8 +45,6 @@ public class NamelessGame extends ApplicationAdapter {
 		player = new Player(ScreenRenderer.pixelToMeter(250), ScreenRenderer.pixelToMeter(75), 60, playerTexture,
 				world);
 		entities.add(player);
-		
-		
 	}
 
 	@Override
