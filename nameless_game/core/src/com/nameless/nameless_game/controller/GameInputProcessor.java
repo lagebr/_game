@@ -27,6 +27,12 @@ public class GameInputProcessor extends InputAdapter {
 		// Moving RIGHT
 		actionLookUp.put(Input.Keys.D, InputAction.RIGHT);
 		actionLookUp.put(Input.Keys.RIGHT, InputAction.RIGHT);
+		// Moving UP
+		actionLookUp.put(Input.Keys.W, InputAction.UP);
+		actionLookUp.put(Input.Keys.UP, InputAction.UP);
+		// Moving DOWN
+		actionLookUp.put(Input.Keys.S, InputAction.RIGHT);
+		actionLookUp.put(Input.Keys.DOWN, InputAction.DOWN);
 	}
 	
 	/**
