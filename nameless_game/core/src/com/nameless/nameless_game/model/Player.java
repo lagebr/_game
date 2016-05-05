@@ -35,10 +35,10 @@ public class Player extends Entity {
 	 *            The world to add the body to
 	 * @return the physics body
 	 */
-	public Player(float x, float y, float width, float height, Texture texture, World world) {
+	public Player(float x, float y, float radius, Texture texture, World world) {
 		super(texture); // calls alternative super-constructor from Entity
 
-		body = createDynamicBody(x, y, width, height, world);
+		body = createDynamicBody(x, y, radius, world);
 
 	}
 
@@ -50,15 +50,13 @@ public class Player extends Entity {
 	 *            the x center of the body
 	 * @param y
 	 *            the y center of the body
-	 * @param width
-	 *            the width of the body
-	 * @param height
-	 *            the height of the body
+	 * @param radius
+	 *            The radius of the circle
 	 * @param world
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	private static Body createDynamicBody(float x, float y, float width, float height, World world) {
+	private static Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
@@ -66,7 +64,7 @@ public class Player extends Entity {
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();
-		circle.setRadius(60);
+		circle.setRadius(radius);
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
