@@ -39,7 +39,6 @@ public class Player extends Entity {
 		super(texture); // calls alternative super-constructor from Entity
 
 		body = createDynamicBody(x, y, radius, world);
-
 	}
 
 	/**
