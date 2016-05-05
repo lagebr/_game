@@ -48,6 +48,7 @@ public class NamelessGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		handleInput();
+		world.step(1/60f, 6, 2); // Look into why those are the parameters, found on LibGDX wiki.
 
 		renderer.render(entities);
 	}
