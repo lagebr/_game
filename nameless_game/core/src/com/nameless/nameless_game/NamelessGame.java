@@ -19,13 +19,17 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  */
 public class NamelessGame extends ApplicationAdapter {
 
+	GameInputProcessor inputProcessor;
 	Renderer renderer;
 	World world;
 	
 	ArrayList<Entity> entities;
-
+	
 	@Override
 	public void create() {
+		inputProcessor = new GameInputProcessor();
+		Gdx.input.setInputProcessor(inputProcessor);
+		
 		renderer = new ScreenRenderer(800, 600);
 		world = new World(new Vector2(0, 0), true);
 		entities = new ArrayList<Entity>();
@@ -38,6 +42,5 @@ public class NamelessGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		renderer.render(entities);
-		
 	}
 }
