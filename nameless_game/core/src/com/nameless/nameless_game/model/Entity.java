@@ -15,8 +15,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
  * @version 2016-05-04
  */
 public class Entity {
-	private Body body;
-	private Texture texture;
+	protected Body body;
+	protected Texture texture;
 
 	/**
 	 * Creates an entity with a static physics body and a texture.
