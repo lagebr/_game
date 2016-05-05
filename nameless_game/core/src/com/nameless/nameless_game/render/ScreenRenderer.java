@@ -43,9 +43,29 @@ public class ScreenRenderer extends Renderer {
 
 		batch.begin();
 		for (Entity entity : entities) {
-			batch.draw(entity.getTexture(), entity.getBody().getPosition().x * (float) METER_TO_PIXEL,
-					entity.getBody().getPosition().y * (float) METER_TO_PIXEL);
+			batch.draw(entity.getTexture(), meterToPixel(entity.getBody().getPosition().x),
+					meterToPixel(entity.getBody().getPosition().y));
 		}
 		batch.end(); // openGL stuff
+	}
+
+	/**
+	 * Converts screen pixels to physics meters.
+	 * 
+	 * @param pixels
+	 * @return meters
+	 */
+	public static float pixelToMeter(float pixels) {
+		return pixels / (float) METER_TO_PIXEL;
+	}
+
+	/**
+	 * Converts physics meters to screen pixels
+	 * 
+	 * @param meters
+	 * @return pixels
+	 */
+	public static float meterToPixel(float meters) {
+		return meters * (float) METER_TO_PIXEL;
 	}
 }
