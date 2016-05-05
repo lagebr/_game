@@ -30,7 +30,7 @@ public class GameInputProcessor extends InputAdapter {
 	}
 	
 	/**
-	 * 
+	 * Processes the key input.
 	 */
 	@Override
 	public boolean keyDown(int keycode) {
@@ -46,7 +46,7 @@ public class GameInputProcessor extends InputAdapter {
 	}
 	
 	/**
-	 * 
+	 * Processes the key input.
 	 */
 	@Override
 	public boolean keyUp(int keycode) {
