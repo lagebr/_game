@@ -44,6 +44,5 @@ public class ScreenRenderer extends Renderer {
 			batch.draw(entity.getTexture(), entity.getBody().getPosition().x, entity.getBody().getPosition().y);
 		}
 		batch.end(); // openGL stuff
-
 	}
 }
