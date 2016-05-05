@@ -33,26 +33,23 @@ public class Entity {
 	 *            Physics world to add body to.
 	 */
 	public Entity(float x, float y, float width, float height, Texture texture, World world) {
-		body = createBody(x, y, width, height, world);
+		body = createStaticBody(x, y, width, height, world);
 
 		this.texture = texture;
 	}
 
 	/**
-	 * Creates an entity with a physics body and a texture.
+	 * Creates an entity with a texture.
 	 * 
-	 * @param body
-	 *            The physics body.
 	 * @param texture
 	 *            The texture.
 	 */
-	public Entity(Body body, Texture texture) {
-		this.body = body;
+	public Entity(Texture texture) {
 		this.texture = texture;
 	}
 
 	/**
-	 * createBody creates a rectangular, static physics body, adds it to the
+	 * createStaticBody creates a rectangular, static physics body, adds it to the
 	 * physics world and returns it.
 	 * 
 	 * @param x
@@ -67,7 +64,7 @@ public class Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	private Body createBody(float x, float y, float width, float height, World world) {
+	private Body createStaticBody(float x, float y, float width, float height, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.StaticBody;
 		bodyDef.position.set(x, y);
