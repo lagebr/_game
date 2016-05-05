@@ -22,18 +22,18 @@ public class NamelessGame extends ApplicationAdapter {
 	GameInputProcessor inputProcessor;
 	Renderer renderer;
 	World world;
-	
+
 	ArrayList<Entity> entities;
-	
+
 	@Override
 	public void create() {
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
-		
+
 		renderer = new ScreenRenderer(800, 600);
 		world = new World(new Vector2(0, 0), true);
 		entities = new ArrayList<Entity>();
-		
+
 		Texture texture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
 		Entity entity = new Entity(100, 100, 100, 100, texture, world);
 		entities.add(entity);
@@ -41,6 +41,16 @@ public class NamelessGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+		handleInput();
+
+		renderer.render(entities);
+	}
+
+	/**
+	 * Receives all input events in the input processors event queue, processes
+	 * them and then empties the event queue.
+	 */
+	private void handleInput() {
 		for (InputEvent event : inputProcessor.getActionQueue()) {
 			if (event.action == InputAction.LEFT && event.keyPressed == true) {
 				System.out.println("Left");
@@ -49,7 +59,5 @@ public class NamelessGame extends ApplicationAdapter {
 			}
 		}
 		inputProcessor.getActionQueue().clear();
-		
-		renderer.render(entities);
 	}
 }
