@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.Renderer;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
@@ -24,6 +25,7 @@ public class NamelessGame extends ApplicationAdapter {
 	World world;
 
 	ArrayList<Entity> entities;
+	Player player;
 
 	@Override
 	public void create() {
@@ -37,6 +39,7 @@ public class NamelessGame extends ApplicationAdapter {
 		Texture texture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
 		Entity entity = new Entity(100, 100, 100, 100, texture, world);
 		entities.add(entity);
+		
 	}
 
 	@Override
