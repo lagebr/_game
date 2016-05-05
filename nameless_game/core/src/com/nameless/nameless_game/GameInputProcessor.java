@@ -22,6 +22,10 @@ public class GameInputProcessor extends InputAdapter {
 
 	public GameInputProcessor() {
 		actionLookUp.put(Input.Keys.A, InputAction.LEFT);
+		actionLookUp.put(Input.Keys.LEFT, InputAction.LEFT);
+		actionLookUp.put(Input.Keys.D, InputAction.RIGHT);
+		actionLookUp.put(Input.Keys.RIGHT, InputAction.RIGHT);
+		
 	}
 	
 	@Override
