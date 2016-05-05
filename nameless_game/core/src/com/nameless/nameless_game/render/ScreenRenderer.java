@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.nameless.nameless_game.model.Entity;
 
 public class ScreenRenderer extends Renderer {
+	public static final int METER_TO_PIXEL = 100;
+
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 
@@ -41,7 +43,8 @@ public class ScreenRenderer extends Renderer {
 
 		batch.begin();
 		for (Entity entity : entities) {
-			batch.draw(entity.getTexture(), entity.getBody().getPosition().x, entity.getBody().getPosition().y);
+			batch.draw(entity.getTexture(), entity.getBody().getPosition().x * (float) METER_TO_PIXEL,
+					entity.getBody().getPosition().y * (float) METER_TO_PIXEL);
 		}
 		batch.end(); // openGL stuff
 	}
