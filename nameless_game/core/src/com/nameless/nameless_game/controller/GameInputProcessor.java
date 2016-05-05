@@ -1,4 +1,4 @@
-package com.nameless.nameless_game;
+package com.nameless.nameless_game.controller;
 
 import java.util.HashMap;
 import java.util.LinkedList;

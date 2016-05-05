@@ -1,4 +1,4 @@
-package com.nameless.nameless_game;
+package com.nameless.nameless_game.controller;
 
 /**
  * InputEvent describes an event added to an event queue. Contains an input
