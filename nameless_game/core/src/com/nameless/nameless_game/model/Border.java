@@ -24,8 +24,8 @@ public class Border extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
-		float w = ScreenRenderer.meterToPixel(Gdx.graphics.getWidth());
-		float h = ScreenRenderer.meterToPixel(Gdx.graphics.getWidth());
+		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
+		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		
 		bodyDef.position.set(0, 0);
         FixtureDef fixtureDef = new FixtureDef();
