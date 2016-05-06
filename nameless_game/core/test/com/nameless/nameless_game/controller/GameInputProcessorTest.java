@@ -11,9 +11,13 @@ public class GameInputProcessorTest {
 	public void setUp() throws Exception {
 	}
 
+	/**
+	 * Tests that the queue is empty at first.
+	 */
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testQueueEmpty() {
+		GameInputProcessor inputProcessor = new GameInputProcessor();
+		assertTrue("Queue should be empty at first.", inputProcessor.getActionQueue().isEmpty());
 	}
 
 }
