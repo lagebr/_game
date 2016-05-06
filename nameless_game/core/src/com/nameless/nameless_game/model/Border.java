@@ -20,7 +20,7 @@ public class Border extends Entity {
 
 	public Border(World world) {
 		super();
-		// TODO Auto-generated constructor stub
+		// TODO Make it work
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
