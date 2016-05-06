@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.Renderer;
@@ -24,6 +25,7 @@ public class NamelessGame extends ApplicationAdapter {
 	Renderer renderer;
 	World world;
 
+	Border border;
 	ArrayList<Entity> entities;
 	Player player;
 
@@ -36,10 +38,12 @@ public class NamelessGame extends ApplicationAdapter {
 		world = new World(new Vector2(0, 0), false);
 		entities = new ArrayList<Entity>();
 
+		border = new Border(world);
+		
 		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
 		Entity entity = new Entity(100, 100, 100, 100, entityTexture, world);
 		entities.add(entity);
-
+		
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		player = new Player(250, 75, 60, playerTexture, world);
 		entities.add(player);
