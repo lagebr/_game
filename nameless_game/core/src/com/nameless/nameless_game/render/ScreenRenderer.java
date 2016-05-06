@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 
 public class ScreenRenderer extends Renderer {
