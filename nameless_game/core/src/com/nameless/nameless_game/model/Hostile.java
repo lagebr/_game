@@ -7,7 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * @author lagebr
+ * The entity model for the hostile entities in the game world. 
+ * 
+ * 
+ * @author Isaac Arvestad, Henrik Lagebrand
+ * @version 2015-05-06
  *
  */
 public class Hostile extends Entity {
