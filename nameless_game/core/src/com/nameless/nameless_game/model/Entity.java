@@ -76,7 +76,7 @@ public class Entity {
 
 		physicsBody.createFixture(rectShape, 1.0f);
 
-		rectShape.dispose(); // no idea
+		rectShape.dispose(); // openGL
 
 		return physicsBody;
 	}
