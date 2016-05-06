@@ -55,6 +55,13 @@ public class Entity {
 	public Entity(Texture texture) {
 		this.texture = texture;
 	}
+	
+	/**
+	 * Empty constructor.
+	 */
+	public Entity(){
+		// This constructor is intentionally left empty.
+	}
 
 	/**
 	 * createStaticBody creates a rectangular, static physics body, adds it to
