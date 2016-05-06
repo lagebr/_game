@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -16,7 +17,9 @@ import com.badlogic.gdx.physics.box2d.World;
  *
  */
 public class Player extends Entity {
-
+	
+	Sprite playerSprite;
+	
 	/**
 	 * The player entity model creates a player entity in the world, with a
 	 * dynamic physics body.
@@ -39,6 +42,8 @@ public class Player extends Entity {
 		super(texture); // calls alternative super-constructor from Entity
 
 		body = createDynamicBody(x, y, radius, world);
+		playerSprite = new Sprite();
+		playerSprite.setPosition(x, y);
 	}
 
 	/**
@@ -70,9 +75,16 @@ public class Player extends Entity {
 		fixtureDef.density = 0.5f; // hardy
 		fixtureDef.friction = 0.4f; // frit
 		fixtureDef.restitution = 0.6f; // bounce
-
+        fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY; // this what I am
+        fixtureDef.filter.maskBits = Entity.NPC_ENTITY; // this is what I collide with
+        physicsBody.createFixture(fixtureDef); // if activate makes Player run out of screen
+        
 		circle.dispose(); // openGL
 
 		return physicsBody;
+	}
+	
+	public void update() {
+		playerSprite.setPosition(getBody().getPosition().x, getBody().getPosition().y);
 	}
 }
