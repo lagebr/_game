@@ -3,6 +3,8 @@
  */
 package com.nameless.nameless_game.model;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -20,7 +22,7 @@ public class Border extends Entity {
 
 	public Border(World world) {
 		super();
-		// TODO Make it work
+	
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
@@ -32,14 +34,14 @@ public class Border extends Entity {
 		fixtureDef.filter.categoryBits = NPC_ENTITY;
 		fixtureDef.filter.maskBits = PLAYER_ENTITY;
 
-		EdgeShape edgeShape = new EdgeShape();
-		edgeShape.set(0, 0, w, 0);
-		fixtureDef.shape = edgeShape;
+		EdgeShape border = new EdgeShape();
+		border.set(0, 0, w, 0);
+		fixtureDef.shape = border;
 
 		bodyEdgeScreen = world.createBody(bodyDef);
 		bodyEdgeScreen.createFixture(fixtureDef);
 
-		edgeShape.dispose(); // openGL stuff
+		border.dispose(); // openGL stuff
 	}
 
 	@Override
