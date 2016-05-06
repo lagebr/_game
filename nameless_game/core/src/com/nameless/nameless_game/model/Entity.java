@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.nameless.nameless_game.render.ScreenRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 /**
@@ -18,25 +19,29 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class Entity {
 	protected Body body;
 	protected Texture texture;
-    public final static short PLAYER_ENTITY = 0x1;    // 0001 FILTERING
-    public final static short NPC_ENTITY = 0x1 << 1; // 0010 or 0x2 in hex FILTERING
+	public final static short PLAYER_ENTITY = 0x1; // 0001 FILTERING
+	public final static short NPC_ENTITY = 0x1 << 1; // 0010 or 0x2 in hex
+														// FILTERING
 
 	/**
 	 * Creates an entity with a static physics body and a texture.
 	 * 
 	 * @param x
-	 *            Center on x-axis
+	 *            Center on x-axis in number of pixels.
 	 * @param y
-	 *            Center on y-axis
+	 *            Center on y-axis in number of pixels.
 	 * @param width
+	 *            Width in number of pixels.
 	 * @param height
+	 *            Height in number of pixels.
 	 * @param texture
 	 *            Texture to use.
 	 * @param world
 	 *            Physics world to add body to.
 	 */
 	public Entity(float x, float y, float width, float height, Texture texture, World world) {
-		body = createStaticBody(x, y, width, height, world);
+		body = createStaticBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
+				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
 
 		this.texture = texture;
 	}
@@ -52,17 +57,17 @@ public class Entity {
 	}
 
 	/**
-	 * createStaticBody creates a rectangular, static physics body, adds it to the
-	 * physics world and returns it.
+	 * createStaticBody creates a rectangular, static physics body, adds it to
+	 * the physics world and returns it.
 	 * 
 	 * @param x
-	 *            the x center of the body
+	 *            The x center of the body in physics meters.
 	 * @param y
-	 *            the y center of the body
+	 *            The y center of the body in physics meters.
 	 * @param width
-	 *            The width of the body
+	 *            The width of the body in physics meters.
 	 * @param height
-	 *            The height of the body
+	 *            The height of the body in physics meters.
 	 * @param world
 	 *            the world to add the body to
 	 * @return the physics body
@@ -75,16 +80,17 @@ public class Entity {
 
 		PolygonShape rectShape = new PolygonShape();
 		rectShape.setAsBox(width / 2, height / 2);
-		//physicsBody.createFixture(rectShape, 1.0f); 
+		// physicsBody.createFixture(rectShape, 1.0f);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = rectShape;
 		fixtureDef.density = 0.5f; // hardy
 		fixtureDef.friction = 0.4f; // frit
 		fixtureDef.restitution = 0.6f; // bounce
-        fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
-        fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY; // this is what I collide with
+		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
+		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY; // this is what I
+															// collide with
 		physicsBody.createFixture(fixtureDef);
-		
+
 		rectShape.dispose(); // openGL
 
 		return physicsBody;
