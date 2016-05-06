@@ -50,9 +50,8 @@ public class NamelessGame extends ApplicationAdapter {
 		handleInput();
 
 		renderer.render(entities);
-
-		world.step(1f / 60f, 6, 2); // Look into why those are the parameters,
-									// found on LibGDX wiki.
+		// Look into why those are the parameters
+		world.step(1f / 60f, 6, 2); // {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 	}
 
 	/**
