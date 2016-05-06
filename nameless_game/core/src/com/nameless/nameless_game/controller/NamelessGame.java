@@ -33,24 +33,26 @@ public class NamelessGame extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(inputProcessor);
 
 		renderer = new ScreenRenderer(800, 600);
-		world = new World(new Vector2(0, 0), true);
+		world = new World(new Vector2(0, 0), false);
 		entities = new ArrayList<Entity>();
 
 		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-		Entity entity = new Entity(100, 100, 100, 100, entityTexture, world);
+		Entity entity = new Entity(ScreenRenderer.pixelToMeter(100), ScreenRenderer.pixelToMeter(100), 100, 100,
+				entityTexture, world);
 		entities.add(entity);
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		player = new Player(250, 75, 60, playerTexture, world);
+		player = new Player(ScreenRenderer.pixelToMeter(250), ScreenRenderer.pixelToMeter(75), 60, playerTexture,
+				world);
 		entities.add(player);
 	}
 
 	@Override
 	public void render() {
 		handleInput();
-		
+
 		renderer.render(entities);
-		
+
 		world.step(1 / 60f, 6, 2); // Look into why those are the parameters,
 									// found on LibGDX wiki.
 	}
@@ -63,13 +65,16 @@ public class NamelessGame extends ApplicationAdapter {
 		for (InputEvent event : inputProcessor.getActionQueue()) {
 			if (event.action == InputAction.LEFT && event.keyPressed == true) {
 				System.out.println("Left");
+				player.getBody().applyLinearImpulse(new Vector2(-1.0f, 0), player.getBody().getLocalCenter(), true);
 			} else if (event.action == InputAction.RIGHT && event.keyPressed == true) {
 				System.out.println("Right");
-			}
-			else if (event.action == InputAction.UP && event.keyPressed == true) {
+				player.getBody().applyLinearImpulse(new Vector2(1.0f, 0), player.getBody().getLocalCenter(), true);
+			} else if (event.action == InputAction.UP && event.keyPressed == true) {
 				System.out.println("Up");
+				player.getBody().applyLinearImpulse(new Vector2(0, 1.0f), player.getBody().getLocalCenter(), true);
 			} else if (event.action == InputAction.DOWN && event.keyPressed == true) {
 				System.out.println("Down");
+				player.getBody().applyLinearImpulse(new Vector2(0, -1.0f), player.getBody().getLocalCenter(), true);
 			}
 		}
 		inputProcessor.getActionQueue().clear();

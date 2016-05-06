@@ -74,7 +74,7 @@ public class Entity {
 		PolygonShape rectShape = new PolygonShape();
 		rectShape.setAsBox(width / 2, height / 2);
 
-		physicsBody.createFixture(rectShape, 0.0f);
+		physicsBody.createFixture(rectShape, 1.0f);
 
 		rectShape.dispose(); // no idea
 
