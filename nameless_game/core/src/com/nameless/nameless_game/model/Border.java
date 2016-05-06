@@ -41,4 +41,9 @@ public class Border extends Entity {
         
         edgeShape.dispose(); // openGL stuff
 	}
+	
+	@Override
+	public Body getBody() {
+		return bodyEdgeScreen;
+	}
 }
