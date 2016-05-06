@@ -57,9 +57,9 @@ public class Entity {
 	 * @param y
 	 *            the y center of the body
 	 * @param width
-	 *            the width of the body
+	 *            The width of the body
 	 * @param height
-	 *            the height of the body
+	 *            The height of the body
 	 * @param world
 	 *            the world to add the body to
 	 * @return the physics body
