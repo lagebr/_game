@@ -18,8 +18,6 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 public class Player extends Entity {
 	
-	Sprite playerSprite;
-	
 	/**
 	 * The player entity model creates a player entity in the world, with a
 	 * dynamic physics body.
@@ -42,8 +40,6 @@ public class Player extends Entity {
 		super(texture); // calls alternative super-constructor from Entity
 
 		body = createDynamicBody(x, y, radius, world);
-		playerSprite = new Sprite();
-		playerSprite.setPosition(x, y);
 	}
 
 	/**
@@ -82,9 +78,5 @@ public class Player extends Entity {
 		circle.dispose(); // openGL
 
 		return physicsBody;
-	}
-	
-	public void update() {
-		playerSprite.setPosition(getBody().getPosition().x, getBody().getPosition().y);
 	}
 }

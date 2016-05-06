@@ -51,8 +51,6 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
-		player.update();
-
 		renderer.render(entities);
 
 		world.step(1f / 60f, 6, 2); // Look into why those are the parameters,
