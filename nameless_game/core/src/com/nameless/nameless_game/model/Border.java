@@ -26,22 +26,22 @@ public class Border extends Entity {
 
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
-		
+
 		bodyDef.position.set(0, 0);
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = NPC_ENTITY;
-        fixtureDef.filter.maskBits = PLAYER_ENTITY;
-        
-        EdgeShape edgeShape = new EdgeShape();
-        edgeShape.set(-w/2,-h/2,w/2,-h/2);
-        fixtureDef.shape = edgeShape;
-        
-        bodyEdgeScreen = world.createBody(bodyDef);
-        bodyEdgeScreen.createFixture(fixtureDef);
-        
-        edgeShape.dispose(); // openGL stuff
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.filter.categoryBits = NPC_ENTITY;
+		fixtureDef.filter.maskBits = PLAYER_ENTITY;
+
+		EdgeShape edgeShape = new EdgeShape();
+		edgeShape.set(0, 0, w, 0);
+		fixtureDef.shape = edgeShape;
+
+		bodyEdgeScreen = world.createBody(bodyDef);
+		bodyEdgeScreen.createFixture(fixtureDef);
+
+		edgeShape.dispose(); // openGL stuff
 	}
-	
+
 	@Override
 	public Body getBody() {
 		return bodyEdgeScreen;
