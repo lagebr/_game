@@ -22,7 +22,7 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class NamelessGame extends ApplicationAdapter {
 
 	GameInputProcessor inputProcessor;
-	Renderer renderer;
+	ScreenRenderer renderer;
 	World world;
 
 	Border border;
@@ -39,11 +39,11 @@ public class NamelessGame extends ApplicationAdapter {
 		entities = new ArrayList<Entity>();
 
 		border = new Border(world);
-		
+
 		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
 		Entity entity = new Entity(100, 100, 100, 100, entityTexture, world);
 		entities.add(entity);
-		
+
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		player = new Player(250, 75, 60, playerTexture, world);
 		entities.add(player);
@@ -52,10 +52,11 @@ public class NamelessGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		handleInput();
-		
+
 		renderer.render(entities);
 		// Look into why those are the parameters
-		world.step(1f / 60f, 6, 2); // {@link} https://github.com/libgdx/libgdx/wiki/Box2d
+		world.step(1f / 60f, 6, 2); // {@link}
+									// https://github.com/libgdx/libgdx/wiki/Box2d
 	}
 
 	/**
