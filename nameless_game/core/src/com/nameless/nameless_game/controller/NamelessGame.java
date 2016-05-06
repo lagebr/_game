@@ -52,7 +52,7 @@ public class NamelessGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		handleInput();
-
+		
 		renderer.render(entities);
 		// Look into why those are the parameters
 		world.step(1f / 60f, 6, 2); // {@link} https://github.com/libgdx/libgdx/wiki/Box2d
