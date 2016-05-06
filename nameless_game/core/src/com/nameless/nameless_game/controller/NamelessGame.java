@@ -37,22 +37,22 @@ public class NamelessGame extends ApplicationAdapter {
 		entities = new ArrayList<Entity>();
 
 		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-		Entity entity = new Entity(ScreenRenderer.pixelToMeter(100), ScreenRenderer.pixelToMeter(100), 100, 100,
-				entityTexture, world);
+		Entity entity = new Entity(ScreenRenderer.pixelToMeter(100), ScreenRenderer.pixelToMeter(100),
+				ScreenRenderer.pixelToMeter(100), ScreenRenderer.pixelToMeter(100), entityTexture, world);
 		entities.add(entity);
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		player = new Player(ScreenRenderer.pixelToMeter(250), ScreenRenderer.pixelToMeter(75), 60, playerTexture,
-				world);
+		player = new Player(ScreenRenderer.pixelToMeter(250), ScreenRenderer.pixelToMeter(75),
+				ScreenRenderer.pixelToMeter(60), playerTexture, world);
 		entities.add(player);
 	}
 
 	@Override
 	public void render() {
 		handleInput();
-		
+
 		player.update();
-		
+
 		renderer.render(entities);
 
 		world.step(1f / 60f, 6, 2); // Look into why those are the parameters,
