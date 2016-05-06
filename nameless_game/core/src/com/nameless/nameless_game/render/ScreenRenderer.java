@@ -56,7 +56,7 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
-	 * NOT IN USE 2015-05-06
+	 * NOT IN USE 2016-05-06
 	 * Depracted method to render border. Might be reused later.
 	 * 
 	 * @param border
