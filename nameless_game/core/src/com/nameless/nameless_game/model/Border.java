@@ -3,8 +3,6 @@
  */
 package com.nameless.nameless_game.model;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -22,7 +20,7 @@ public class Border extends Entity {
 
 	public Border(World world) {
 		super();
-	
+
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
