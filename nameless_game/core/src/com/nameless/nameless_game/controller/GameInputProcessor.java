@@ -15,6 +15,8 @@ import com.badlogic.gdx.InputAdapter;
  * @version 2016-05-04
  */
 public class GameInputProcessor extends InputAdapter {
+	// TODO Change from Map and List to IntArray from LibGDX
+	
 	// The mapping of keys (ie keycodes) to specific InputActions
 	private Map<Integer, InputAction> actionLookUp = new HashMap<Integer, InputAction>();
 	// The queue for the processed InputActions (ie InputEvents)
