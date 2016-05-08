@@ -16,7 +16,7 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  *
  */
 public class Border extends Entity {
-	Body bodyEdgeScreen;
+	private Body bodyEdgeScreen;
 
 	public Border(World world) {
 		super();
@@ -41,7 +41,18 @@ public class Border extends Entity {
 	public Body getBody() {
 		return bodyEdgeScreen;
 	}
-
+	
+	/**
+	 * Creates an edgeshape for the four walls of the level.
+	 * 
+	 * @param xBody 
+	 * @param yBody
+	 * @param x1 Starting x-value
+	 * @param y1 Starting y-value
+	 * @param x2 Ending x-value
+	 * @param y2 Ending y-value
+	 * @param world
+	 */
 	private void createBorder(float xBody, float yBody, float x1, float y1, float x2, float y2, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
