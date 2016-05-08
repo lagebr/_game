@@ -39,6 +39,8 @@ public class ScreenRenderer extends Renderer {
 		batch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
+		
+		camera.zoom = 1.1f; // Zoomed out by 2x [FOR TESTING PURPOSES]
 	}
 
 	/**
