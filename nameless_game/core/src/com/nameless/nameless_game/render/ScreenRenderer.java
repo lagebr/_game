@@ -49,15 +49,16 @@ public class ScreenRenderer extends Renderer {
 
 		batch.begin();
 		for (Entity entity : entities) {
-			batch.draw(entity.getTexture(), meterToPixel(entity.getBody().getPosition().x),
-					meterToPixel(entity.getBody().getPosition().y));
+			batch.draw(entity.getTexture(),
+					meterToPixel(entity.getBody().getPosition().x) - entity.getTexture().getWidth() / 2,
+					meterToPixel(entity.getBody().getPosition().y) - entity.getTexture().getHeight() / 2);
 		}
 		batch.end(); // openGL stuff
 	}
 
 	/**
-	 * NOT IN USE 2016-05-06
-	 * Depracted method to render border. Might be reused later.
+	 * NOT IN USE 2016-05-06 Depracted method to render border. Might be reused
+	 * later.
 	 * 
 	 * @param border
 	 */

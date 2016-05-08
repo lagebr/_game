@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Player;
-import com.nameless.nameless_game.render.Renderer;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
