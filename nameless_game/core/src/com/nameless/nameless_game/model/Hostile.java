@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -21,4 +18,5 @@ public class Hostile extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 }
