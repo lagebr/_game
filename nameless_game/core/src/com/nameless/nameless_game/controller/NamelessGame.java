@@ -41,7 +41,7 @@ public class NamelessGame extends ApplicationAdapter {
 		border = new Border(world);
 
 		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-		Entity entity = new Entity(100, 100, 100, 100, entityTexture, world);
+		Entity entity = new Entity(200, 400, 100, 100, entityTexture, world);
 		entities.add(entity);
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
