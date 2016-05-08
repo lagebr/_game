@@ -34,12 +34,10 @@ public class Hostile extends Entity {
 
 	@Override
 	public void update(float deltaTime) {
-		if (random.nextInt(100) < 5) {
-			float impulseX = ((float) random.nextInt(2000) - 1000) / 1000;
-			float impulseY = ((float) random.nextInt(2000) - 1000) / 1000;
+		float impulseX = ((float) random.nextInt(2000) - 1000) / 50000;
+		float impulseY = ((float) random.nextInt(2000) - 1000) / 50000;
 
-			body.applyLinearImpulse(new Vector2(impulseX, impulseY), body.getLocalCenter(), true);
-		}
+		body.applyLinearImpulse(new Vector2(impulseX, impulseY), body.getLocalCenter(), true);
 	}
 
 	/**
