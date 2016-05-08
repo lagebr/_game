@@ -51,7 +51,7 @@ public class NamelessGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		handleInput();
-
+		
 		//renderer.render(entities);
 		renderer.renderDebug(world);
 		
