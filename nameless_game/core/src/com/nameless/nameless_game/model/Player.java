@@ -59,6 +59,7 @@ public class Player extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
+		bodyDef.fixedRotation = true;
 
 		Body physicsBody = world.createBody(bodyDef);
 
