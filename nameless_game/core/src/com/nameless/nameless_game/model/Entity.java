@@ -83,6 +83,7 @@ public class Entity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.StaticBody;
 		bodyDef.position.set(x, y);
+		bodyDef.fixedRotation = true;
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectShape = new PolygonShape();
