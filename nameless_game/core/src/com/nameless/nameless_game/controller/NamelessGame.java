@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
@@ -46,15 +48,27 @@ public class NamelessGame extends ApplicationAdapter {
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		player = new Player(75, 75, 60, playerTexture, world);
 		entities.add(player);
+
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+			Texture hostileTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
+			Hostile hostile = new Hostile(random.nextInt(600) + 100, random.nextInt(400) + 100, 100, 100,
+					hostileTexture, world);
+			entities.add(hostile);
+		}
 	}
 
 	@Override
 	public void render() {
 		handleInput();
-		
+
 		//renderer.render(entities);
 		renderer.renderDebug(world);
-		
+
+		for (Entity entity : entities) {
+			entity.update(Gdx.graphics.getDeltaTime());
+		}
+
 		// Look into why those are the parameters
 		world.step(1f / 60f, 6, 2); // {@link}
 									// https://github.com/libgdx/libgdx/wiki/Box2d
