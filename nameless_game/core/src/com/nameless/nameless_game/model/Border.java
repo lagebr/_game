@@ -20,12 +20,24 @@ public class Border extends Entity {
 
 	public Border(World world) {
 		super();
-
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.StaticBody;
-
+		
+		// Adjust borders according to screen size.
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
+		
+		createBorder(0f, 0f, w, 0f, world);
+		createBorder(0f, 0f, 0f, h, world);
+
+	}
+
+	@Override
+	public Body getBody() {
+		return bodyEdgeScreen;
+	}
+	
+	private void createBorder(float x1, float y1, float x2, float y2, World world){
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.StaticBody;
 
 		bodyDef.position.set(0, 0);
 		FixtureDef fixtureDef = new FixtureDef();
@@ -33,17 +45,12 @@ public class Border extends Entity {
 		fixtureDef.filter.maskBits = PLAYER_ENTITY;
 
 		EdgeShape border = new EdgeShape();
-		border.set(0, 0, w, 0);
+		border.set(x1, y1, x2, y2);
 		fixtureDef.shape = border;
 
 		bodyEdgeScreen = world.createBody(bodyDef);
 		bodyEdgeScreen.createFixture(fixtureDef);
 
 		border.dispose(); // openGL stuff
-	}
-
-	@Override
-	public Body getBody() {
-		return bodyEdgeScreen;
 	}
 }
