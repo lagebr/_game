@@ -24,33 +24,31 @@ public class Border extends Entity {
 		// Adjust borders according to screen size.
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight()); // never forget
-
-		//
-		//createBoxBorder(world, ScreenRenderer.pixelToMeter(-5), ScreenRenderer.pixelToMeter(h / 2),
-		//		ScreenRenderer.pixelToMeter(10), ScreenRenderer.pixelToMeter(h + 20));
-
-		 createBorder(0f, 0f, 0f, 0f, w, 0f, world);
-		 createBorder(0f, 0f, 0f, 0f, 0f, h, world);
-	//	createBorder(0f, 0f, ScreenRenderer.meterToPixel(0f), ScreenRenderer.pixelToMeter(h),
-	//			ScreenRenderer.meterToPixel(w), ScreenRenderer.pixelToMeter(h), world);
-		 createBorder(0f, 0f, w, 0f, w, h, world);
-		 createBorder(0f, 0f, 0f, h, w, h, world);
+		// The four walls
+		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
+		createBorder(0f, 0f, 0f, 0f, 0f, h, world);
+		createBorder(0f, 0f, w, 0f, w, h, world);
+		createBorder(0f, 0f, 0f, h, w, h, world);
 	}
 
 	@Override
 	public Body getBody() {
 		return bodyEdgeScreen;
 	}
-	
+
 	/**
-	 * Creates an edgeshape for the four walls of the level.
+	 * Creates an EdgeShape for the four walls of the level.
 	 * 
-	 * @param xBody 
+	 * @param xBody
 	 * @param yBody
-	 * @param x1 Starting x-value
-	 * @param y1 Starting y-value
-	 * @param x2 Ending x-value
-	 * @param y2 Ending y-value
+	 * @param x1
+	 *            Starting x-value
+	 * @param y1
+	 *            Starting y-value
+	 * @param x2
+	 *            Ending x-value
+	 * @param y2
+	 *            Ending y-value
 	 * @param world
 	 */
 	private void createBorder(float xBody, float yBody, float x1, float y1, float x2, float y2, World world) {
