@@ -55,12 +55,22 @@ public class Entity {
 	public Entity(Texture texture) {
 		this.texture = texture;
 	}
-	
+
 	/**
 	 * Empty constructor.
 	 */
-	public Entity(){
+	public Entity() {
 		// This constructor is intentionally left empty.
+	}
+
+	/**
+	 * Updates the entities animation, and behavior.
+	 * 
+	 * @param deltaTime
+	 *            Time past since last frame.
+	 */
+	public void update(float deltaTime) {
+
 	}
 
 	/**
