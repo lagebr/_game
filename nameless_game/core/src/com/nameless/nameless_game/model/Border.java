@@ -74,7 +74,7 @@ public class Border extends Entity {
 		bodyDef.position.set(xBody, yBody);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.filter.categoryBits = NPC_ENTITY;
-		fixtureDef.filter.maskBits = PLAYER_ENTITY;
+		fixtureDef.filter.maskBits = PLAYER_ENTITY | NPC_ENTITY;
 
 		EdgeShape border = new EdgeShape();
 		border.set(x1, y1, x2, y2);
