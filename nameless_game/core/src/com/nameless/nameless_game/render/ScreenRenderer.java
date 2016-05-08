@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 
@@ -19,6 +21,8 @@ public class ScreenRenderer extends Renderer {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Sprite sprite;
+
+	private Box2DDebugRenderer debugRenderer;
 
 	/**
 	 * Draws all entities on screen using an ortho-camera.
@@ -33,6 +37,8 @@ public class ScreenRenderer extends Renderer {
 		camera.setToOrtho(false, width, height);
 
 		batch = new SpriteBatch();
+
+		debugRenderer = new Box2DDebugRenderer();
 	}
 
 	/**
@@ -54,6 +60,21 @@ public class ScreenRenderer extends Renderer {
 					meterToPixel(entity.getBody().getPosition().y) - entity.getTexture().getHeight() / 2);
 		}
 		batch.end(); // openGL stuff
+	}
+
+	/**
+	 * Draws all physics bodies to a black screen.
+	 * 
+	 * @param world
+	 *            The world that the physics bodies belongs to.
+	 */
+	public void renderDebug(World world) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		camera.update();
+
+		debugRenderer.render(world, camera.combined.scale(meterToPixel(1), meterToPixel(1), meterToPixel(1)));
 	}
 
 	/**
@@ -100,5 +121,14 @@ public class ScreenRenderer extends Renderer {
 	 */
 	public static float meterToPixel(float meters) {
 		return meters * (float) METER_TO_PIXEL;
+	}
+
+	/**
+	 * Returns the camera of the renderer.
+	 * 
+	 * @return camera
+	 */
+	public OrthographicCamera getCamera() {
+		return camera;
 	}
 }
