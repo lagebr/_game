@@ -80,32 +80,6 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
-	 * NOT IN USE 2016-05-06 Depracted method to render border. Might be reused
-	 * later.
-	 * 
-	 * @param border
-	 */
-	public void renderBorder(Border border) {
-		Pixmap pixmap = new Pixmap(800, 600, Format.RGBA8888);
-		pixmap.setColor(0, 1, 0, 0.75f);
-		pixmap.drawLine(0, 0, 0, Gdx.graphics.getHeight()); // Left border
-		pixmap.drawLine(0, Gdx.graphics.getWidth(), 0, 0); // Down border
-		pixmap.drawLine(Gdx.graphics.getWidth(), 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Right
-																										// border
-		pixmap.drawLine(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Up
-																											// border
-		Texture pixMapTex = new Texture(pixmap);
-		pixmap.dispose();
-
-		sprite = new Sprite(pixMapTex);
-		sprite.setPosition(0, 0);
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
-
-	}
-
-	/**
 	 * Converts screen pixels to physics meters.
 	 * 
 	 * @param pixels
