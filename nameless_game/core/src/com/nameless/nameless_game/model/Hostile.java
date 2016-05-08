@@ -17,4 +17,9 @@ public class Hostile extends Entity {
 		super(x, y, width, height, texture, world);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+	}
 }
