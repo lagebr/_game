@@ -1,7 +1,6 @@
 package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,7 +19,6 @@ public class ScreenRenderer extends Renderer {
 
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Sprite sprite;
 
 	private Box2DDebugRenderer debugRenderer;
 
