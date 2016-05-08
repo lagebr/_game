@@ -27,10 +27,10 @@ public class Border extends Entity {
 		
 		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
 		createBorder(0f, 0f, 0f, 0f, 0f, h, world);
-		createBorder(0f, h, 0f, h, w, h, world);
 		//createBorder(0f, 0f, w, 0f, w, h, world);
 		//createBorder(w, h, w, h, 0f, h, world);
-		createBorder(0f, 0f, w, 0f, w/2, h/2, world);
+		createBorder(0f, 0f, w, 0f, w, h, world);
+		createBorder(w, h, w, h, 0f, h, world);
 	}
 
 	@Override
