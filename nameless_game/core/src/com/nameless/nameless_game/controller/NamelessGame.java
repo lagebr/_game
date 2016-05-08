@@ -67,16 +67,12 @@ public class NamelessGame extends ApplicationAdapter {
 	private void handleInput() {
 		for (InputEvent event : inputProcessor.getActionQueue()) {
 			if (event.action == InputAction.LEFT && event.keyPressed == true) {
-				System.out.println("Left");
 				player.getBody().applyLinearImpulse(new Vector2(-1.0f, 0), player.getBody().getLocalCenter(), true);
 			} else if (event.action == InputAction.RIGHT && event.keyPressed == true) {
-				System.out.println("Right");
 				player.getBody().applyLinearImpulse(new Vector2(1.0f, 0), player.getBody().getLocalCenter(), true);
 			} else if (event.action == InputAction.UP && event.keyPressed == true) {
-				System.out.println("Up");
 				player.getBody().applyLinearImpulse(new Vector2(0, 1.0f), player.getBody().getLocalCenter(), true);
 			} else if (event.action == InputAction.DOWN && event.keyPressed == true) {
-				System.out.println("Down");
 				player.getBody().applyLinearImpulse(new Vector2(0, -1.0f), player.getBody().getLocalCenter(), true);
 			}
 		}
