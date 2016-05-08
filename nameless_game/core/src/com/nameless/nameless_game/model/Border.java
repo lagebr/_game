@@ -25,9 +25,12 @@ public class Border extends Entity {
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		
-		createBorder(0f, 0f, w, 0f, world);
-		createBorder(0f, 0f, 0f, h, world);
-
+		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
+		createBorder(0f, 0f, 0f, 0f, 0f, h, world);
+		createBorder(0f, h, 0f, h, w, h, world);
+		//createBorder(0f, 0f, w, 0f, w, h, world);
+		//createBorder(w, h, w, h, 0f, h, world);
+		createBorder(0f, 0f, w, 0f, w/2, h/2, world);
 	}
 
 	@Override
@@ -35,11 +38,11 @@ public class Border extends Entity {
 		return bodyEdgeScreen;
 	}
 	
-	private void createBorder(float x1, float y1, float x2, float y2, World world){
+	private void createBorder(float xBody, float yBody, float x1, float y1, float x2, float y2, World world){
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
-		bodyDef.position.set(0, 0);
+		bodyDef.position.set(xBody, yBody);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.filter.categoryBits = NPC_ENTITY;
 		fixtureDef.filter.maskBits = PLAYER_ENTITY;
