@@ -105,8 +105,11 @@ public class Entity {
 		fixtureDef.friction = 0.4f; // frit
 		fixtureDef.restitution = 0.6f; // bounce
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
-		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY; // this is what I
-															// collide with
+		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY; // this
+																				// is
+																				// what
+																				// I
+		// collide with
 		physicsBody.createFixture(fixtureDef);
 
 		rectShape.dispose(); // openGL
