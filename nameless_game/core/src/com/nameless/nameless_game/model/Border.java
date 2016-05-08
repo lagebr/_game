@@ -44,29 +44,6 @@ public class Border extends Entity {
 		return bodyEdgeScreen;
 	}
 
-	private void createBoxBorder(World world, float xBody, float yBody, float height, float width) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
-		bodyDef.position.set(xBody, yBody);
-		bodyDef.fixedRotation = true;
-		Body physicsBody = world.createBody(bodyDef);
-
-		PolygonShape rectShape = new PolygonShape();
-		rectShape.setAsBox(width / 2, height / 2);
-
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = rectShape;
-		fixtureDef.density = 0.5f; // hardy
-		fixtureDef.friction = 0.4f; // frit
-		fixtureDef.restitution = 0.6f; // bounce
-		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
-		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY; // this is what I
-															// collide with
-		physicsBody.createFixture(fixtureDef);
-
-		rectShape.dispose(); // openGL
-	}
-
 	private void createBorder(float xBody, float yBody, float x1, float y1, float x2, float y2, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
