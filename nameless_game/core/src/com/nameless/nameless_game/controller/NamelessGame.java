@@ -51,9 +51,9 @@ public class NamelessGame extends ApplicationAdapter {
 
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-			Texture hostileTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-			Hostile hostile = new Hostile(random.nextInt(600) + 100, random.nextInt(400) + 100, 100, 100,
-					hostileTexture, world);
+			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
+			Hostile hostile = new Hostile(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50, hostileTexture,
+					world);
 			entities.add(hostile);
 		}
 	}
@@ -62,8 +62,8 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
-		//renderer.render(entities);
-		renderer.renderDebug(world);
+		renderer.render(entities);
+		//renderer.renderDebug(world);
 
 		for (Entity entity : entities) {
 			entity.update(Gdx.graphics.getDeltaTime());
