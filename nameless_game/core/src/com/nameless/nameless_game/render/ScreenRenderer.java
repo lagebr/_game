@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,6 +19,7 @@ public class ScreenRenderer extends Renderer {
 	private SpriteBatch batch;
 
 	private Box2DDebugRenderer debugRenderer;
+	private FPSLogger logger = new FPSLogger();
 
 	/**
 	 * Draws all entities on screen using an ortho-camera.
@@ -85,6 +87,7 @@ public class ScreenRenderer extends Renderer {
 	 */
 	public void renderDebug(World world) {
 		debugRenderer.render(world, camera.combined.scale(meterToPixel(1), meterToPixel(1), meterToPixel(1)));
+		logger.log();
 	}
 
 	/**
