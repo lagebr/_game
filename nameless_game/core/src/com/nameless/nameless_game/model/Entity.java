@@ -1,13 +1,14 @@
 package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
  * Entity describes a base entity which has a physics body and a texture for
@@ -18,7 +19,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
  */
 public class Entity {
 	protected Body body;
-	protected Texture texture;
+	protected Sprite sprite;
+
 	public final static short PLAYER_ENTITY = 0x1; // 0001 FILTERING
 	public final static short NPC_ENTITY = 0x1 << 1; // 0010 or 0x2 in hex
 														// FILTERING
@@ -43,7 +45,7 @@ public class Entity {
 		body = createStaticBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
 
-		this.texture = texture;
+		sprite = new Sprite(texture, (int) width, (int) height);
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class Entity {
 	 *            The texture.
 	 */
 	public Entity(Texture texture) {
-		this.texture = texture;
+		sprite = new Sprite(texture);
 	}
 
 	/**
@@ -70,7 +72,10 @@ public class Entity {
 	 *            Time past since last frame.
 	 */
 	public void update(float deltaTime) {
-
+		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth()/2 ;
+		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight()/2;
+		
+		sprite.setPosition(x, y);
 	}
 
 	/**
@@ -98,18 +103,17 @@ public class Entity {
 
 		PolygonShape rectShape = new PolygonShape();
 		rectShape.setAsBox(width / 2, height / 2);
-		// physicsBody.createFixture(rectShape, 1.0f);
+
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = rectShape;
-		fixtureDef.density = 0.5f; // hardy
-		fixtureDef.friction = 0.4f; // frit
-		fixtureDef.restitution = 0.6f; // bounce
-		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
-		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY; // this
-																				// is
-																				// what
-																				// I
-		// collide with
+		fixtureDef.density = 0.5f;
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.6f;
+
+		// Collision masks
+		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
+		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
+
 		physicsBody.createFixture(fixtureDef);
 
 		rectShape.dispose(); // openGL
@@ -125,11 +129,11 @@ public class Entity {
 		this.body = body;
 	}
 
-	public Texture getTexture() {
-		return texture;
+	public Sprite getSprite() {
+		return sprite;
 	}
 
-	public void setTexture(Texture texture) {
-		this.texture = texture;
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
 	}
 }
