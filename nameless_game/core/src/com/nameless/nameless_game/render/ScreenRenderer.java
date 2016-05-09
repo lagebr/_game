@@ -1,7 +1,6 @@
 package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -36,7 +35,6 @@ public class ScreenRenderer extends Renderer {
 	 * @param height
 	 *            The height of the screen.
 	 */
-
 	public ScreenRenderer(float width, float height) {
 		camera = new PerspectiveCamera(67, width, height);
 
