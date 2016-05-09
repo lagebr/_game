@@ -34,6 +34,8 @@ public class Hostile extends Entity {
 
 	@Override
 	public void update(float deltaTime) {
+		super.update(deltaTime);
+		
 		float impulseX = ((float) random.nextInt(2000) - 1000) / 50000;
 		float impulseY = ((float) random.nextInt(2000) - 1000) / 50000;
 
