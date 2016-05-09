@@ -42,6 +42,8 @@ public class ScreenRenderer extends Renderer {
 		batch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
+
+		camera.zoom = 1.1f;
 	}
 
 	/**
@@ -56,6 +58,7 @@ public class ScreenRenderer extends Renderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 	}
 
 	/**
