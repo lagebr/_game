@@ -69,7 +69,7 @@ public class Hostile extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
-		bodyDef.fixedRotation = true;
+		bodyDef.fixedRotation = false;
 
 		Body physicsBody = world.createBody(bodyDef);
 
@@ -78,17 +78,13 @@ public class Hostile extends Entity {
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = rectShape;
-		fixtureDef.density = 0.5f; // hardy
-		fixtureDef.friction = 0.4f; // frit
-		fixtureDef.restitution = 0.6f; // bounce
-		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY; // this what I am
-		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY; // this
-																				// is
-																				// what
-																				// I
-		// collide with
-		physicsBody.createFixture(fixtureDef); // if activate makes Player run
-												// out of screen
+		fixtureDef.density = 10f;
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.6f;
+		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
+		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
+		
+		physicsBody.createFixture(fixtureDef);
 
 		rectShape.dispose(); // openGL
 

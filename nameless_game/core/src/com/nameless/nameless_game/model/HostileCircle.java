@@ -29,6 +29,6 @@ public class HostileCircle extends Hostile {
 
 		float forceY = (float)Math.sin((progress ) );
 		float forceX = (float)Math.cos((progress ));
-		body.applyLinearImpulse(new Vector2(forceX/100, forceY/100), body.getLocalCenter(), true);
+		body.applyLinearImpulse(new Vector2(forceX/100000, forceY/100000), body.getLocalCenter(), true);
 	}
 }
