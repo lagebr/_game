@@ -48,7 +48,6 @@ public class NamelessGame extends ApplicationAdapter {
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		player = new Player(75, 75, 60, playerTexture, world);
-		entities.add(player);
 
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
@@ -63,12 +62,14 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
+		player.update(Gdx.graphics.getDeltaTime());
 		for (Entity entity : entities) {
 			entity.update(Gdx.graphics.getDeltaTime());
 		}
-		
+
 		renderer.prepare(Color.BLACK);
 		renderer.render(entities);
+		renderer.render(player);
 		renderer.renderDebug(world);
 
 		// Look into why those are the parameters
