@@ -62,12 +62,12 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
-		renderer.render(entities);
-		//renderer.renderDebug(world);
-
 		for (Entity entity : entities) {
 			entity.update(Gdx.graphics.getDeltaTime());
 		}
+		
+		renderer.render(entities);
+		renderer.renderDebug(world);
 
 		// Look into why those are the parameters
 		world.step(1f / 60f, 6, 2); // {@link}
