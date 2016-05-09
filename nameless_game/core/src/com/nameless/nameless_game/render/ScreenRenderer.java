@@ -66,6 +66,18 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
+	 * Draws a single entity in one batch.
+	 * 
+	 * @param entity
+	 *            The entity to be drawn.
+	 */
+	public void render(Entity entity) {
+		batch.begin();
+		entity.getSprite().draw(batch);
+		batch.end();
+	}
+
+	/**
 	 * Draws all physics bodies.
 	 * 
 	 * @param world
