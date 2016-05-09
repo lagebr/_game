@@ -72,9 +72,9 @@ public class Entity {
 	 *            Time past since last frame.
 	 */
 	public void update(float deltaTime) {
-		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth()/2 ;
-		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight()/2;
-		
+		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
+		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
+
 		sprite.setPosition(x, y);
 	}
 
