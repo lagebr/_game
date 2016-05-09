@@ -12,7 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
- * @author lagebr
+ * @author Isaac Arvestad, Henrik Lagebrand
+ * @version 2015-05-09
  *
  */
 public class Border extends Entity {
