@@ -3,11 +3,15 @@ package com.nameless.nameless_game.render;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
@@ -21,29 +25,30 @@ import com.nameless.nameless_game.model.Entity;
 public class ScreenRenderer extends Renderer {
 	public static final int METER_TO_PIXEL = 100;
 
-	private OrthographicCamera camera;
+	private Camera camera;
 	private SpriteBatch batch;
 
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
 
 	/**
-	 * Draws all entities on screen using an ortho-camera.
+	 * Draws all entities on screen using an perspective camera.
 	 * 
 	 * @param width
 	 *            The width of the screen.
 	 * @param height
 	 *            The height of the screen.
 	 */
-	public ScreenRenderer(int width, int height) {
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, width, height);
+	public ScreenRenderer(float width, float height) {
+		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
 
-		camera.zoom = 1.1f;
+		camera.position.set(width / 2, height / 2 - 100, 700);
+		camera.lookAt(width / 2, height / 2, 0);
+		camera.far = 100000;
 	}
 
 	/**
@@ -124,7 +129,7 @@ public class ScreenRenderer extends Renderer {
 	 * 
 	 * @return camera
 	 */
-	public OrthographicCamera getCamera() {
+	public Camera getCamera() {
 		return camera;
 	}
 }
