@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -47,7 +48,6 @@ public class NamelessGame extends ApplicationAdapter {
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		player = new Player(75, 75, 60, playerTexture, world);
-		entities.add(player);
 
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
@@ -62,12 +62,15 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
-		renderer.render(entities);
-		//renderer.renderDebug(world);
-
+		player.update(Gdx.graphics.getDeltaTime());
 		for (Entity entity : entities) {
 			entity.update(Gdx.graphics.getDeltaTime());
 		}
+
+		renderer.prepare(Color.BLACK);
+		renderer.render(entities);
+		renderer.render(player);
+		renderer.renderDebug(world);
 
 		// Look into why those are the parameters
 		world.step(1f / 60f, 6, 2); // {@link}

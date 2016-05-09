@@ -68,14 +68,15 @@ public class Player extends Entity {
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = circle;
-		fixtureDef.density = 0.5f; // hardy
-		fixtureDef.friction = 0.4f; // frit
-		fixtureDef.restitution = 0.6f; // bounce
-		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY; // this what I am
-		fixtureDef.filter.maskBits = Entity.NPC_ENTITY; // this is what I
-														// collide with
-		physicsBody.createFixture(fixtureDef); // if activate makes Player run
-												// out of screen
+		fixtureDef.density = 0.5f;
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.6f;
+		
+		// Collision masks
+		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY;
+		fixtureDef.filter.maskBits = Entity.NPC_ENTITY;
+		
+		physicsBody.createFixture(fixtureDef);
 
 		circle.dispose(); // openGL
 
