@@ -12,6 +12,12 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
 
+/**
+ * ScreenRenderer provides functionality to draw to a LibGDX screen.
+ * 
+ * @author Isaac Arvestad, Henrik Lagebrand
+ * @version 2016-05-09
+ */
 public class ScreenRenderer extends Renderer {
 	public static final int METER_TO_PIXEL = 100;
 
