@@ -1,17 +1,14 @@
 package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 
 public class ScreenRenderer extends Renderer {
@@ -40,6 +37,20 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
+	 * Prepare clears the screen and updates the camera to prepare for a new
+	 * render frame.
+	 * 
+	 * @param color
+	 *            The background color.
+	 */
+	public void prepare(Color color) {
+		Gdx.gl.glClearColor(color.r, color.g, color.b, color.a);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		camera.update();
+	}
+
+	/**
 	 * Draws all entities to a black screen. All entities are drawn in the same
 	 * batch.
 	 * 
@@ -48,14 +59,11 @@ public class ScreenRenderer extends Renderer {
 	 */
 	@Override
 	public void render(ArrayList<Entity> entities) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 		batch.begin();
 		for (Entity entity : entities) {
 			entity.getSprite().draw(batch);
 		}
-		batch.end(); // openGL stuff
+		batch.end();
 	}
 
 	/**
@@ -65,11 +73,6 @@ public class ScreenRenderer extends Renderer {
 	 *            The world that the physics bodies belongs to.
 	 */
 	public void renderDebug(World world) {
-		//Gdx.gl.glClearColor(0, 0, 0, 1);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		camera.update();
-
 		debugRenderer.render(world, camera.combined.scale(meterToPixel(1), meterToPixel(1), meterToPixel(1)));
 	}
 
