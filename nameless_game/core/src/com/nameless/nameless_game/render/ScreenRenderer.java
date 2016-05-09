@@ -38,6 +38,7 @@ public class ScreenRenderer extends Renderer {
 	public ScreenRenderer(int width, int height) {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
+		//camera.zoom = 1.1f;
 
 		batch = new SpriteBatch();
 
