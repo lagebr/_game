@@ -26,8 +26,6 @@ public class HostileCircle extends Hostile {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		progress += 15.5 * deltaTime;
-		// X := originX + cos(angle)*radius;
-		// Y := originY + sin(angle)*radius;
 
 		float forceY = (float)Math.sin((progress ) );
 		float forceX = (float)Math.cos((progress ));
