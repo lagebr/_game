@@ -23,13 +23,20 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  */
 public class Hostile extends Entity {
 
-	private Random random = new Random();
+	private Random random = new Random(); // TODO Use LibGDX own random.
 
 	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(texture);
 
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
+	}
+	
+	/**
+	 * The empty constructor.
+	 */
+	public Hostile(){
+		// Intentionally left empty.
 	}
 
 	@Override
