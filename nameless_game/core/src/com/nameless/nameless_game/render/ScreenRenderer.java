@@ -37,8 +37,6 @@ public class ScreenRenderer extends Renderer {
 		batch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
-		
-		camera.zoom = 1.1f; // Zoomed out by 2x [FOR TESTING PURPOSES]
 	}
 
 	/**
@@ -55,9 +53,7 @@ public class ScreenRenderer extends Renderer {
 
 		batch.begin();
 		for (Entity entity : entities) {
-			batch.draw(entity.getTexture(),
-					meterToPixel(entity.getBody().getPosition().x) - entity.getTexture().getWidth() / 2,
-					meterToPixel(entity.getBody().getPosition().y) - entity.getTexture().getHeight() / 2);
+			entity.getSprite().draw(batch);
 		}
 		batch.end(); // openGL stuff
 	}
@@ -69,8 +65,8 @@ public class ScreenRenderer extends Renderer {
 	 *            The world that the physics bodies belongs to.
 	 */
 	public void renderDebug(World world) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClearColor(0, 0, 0, 1);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
 
