@@ -51,8 +51,7 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
-	 * Draws all entities to a black screen. All entities are drawn in the same
-	 * batch.
+	 * Draws entities. All entities are drawn in the same batch.
 	 * 
 	 * @param entities
 	 *            The entities to be drawn.
@@ -67,7 +66,7 @@ public class ScreenRenderer extends Renderer {
 	}
 
 	/**
-	 * Draws all physics bodies to a black screen.
+	 * Draws all physics bodies.
 	 * 
 	 * @param world
 	 *            The world that the physics bodies belongs to.
