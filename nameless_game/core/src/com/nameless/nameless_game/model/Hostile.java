@@ -3,9 +3,11 @@ package com.nameless.nameless_game.model;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -20,7 +22,6 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  *
  */
 public class Hostile extends Entity {
-
 	private Random random = new Random(); // TODO Use LibGDX own random.
 
 	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
@@ -35,6 +36,10 @@ public class Hostile extends Entity {
 	 */
 	public Hostile() {
 		// Intentionally left empty.
+	}
+
+	public Hostile(Texture texture) {
+		sprite = new Sprite(texture);
 	}
 
 	@Override
@@ -64,14 +69,13 @@ public class Hostile extends Entity {
 	 * @return the physics body
 	 * @warning DTESSTSTTSTST
 	 */
-	private static Body createDynamicBody(float x, float y, float width, float height, World world) {
+	public static Body createDynamicBody(float x, float y, float width, float height, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = false;
 		bodyDef.linearDamping = 0.5f;
 		bodyDef.angularDamping = 0.75f;
-		
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectShape = new PolygonShape();
@@ -84,10 +88,52 @@ public class Hostile extends Entity {
 		fixtureDef.restitution = 0.6f;
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
-		
+
 		physicsBody.createFixture(fixtureDef);
 
 		rectShape.dispose(); // openGL
+
+		return physicsBody;
+	}
+	
+	/**
+	 * createBody creates a rectangular, static physics body, adds it to the
+	 * physics world and returns it.
+	 * 
+	 * @param x
+	 *            The x center of the body in physics meters.
+	 * @param y
+	 *            The y center of the body in physics meters.
+	 * @param radius
+	 *            The radius of the circle in physics meters.
+	 * @param world
+	 *            the world to add the body to
+	 * @return the physics body
+	 */
+	public static Body createDynamicBody(float x, float y, float radius, World world) {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.position.set(x, y);
+		bodyDef.fixedRotation = true;
+		bodyDef.linearDamping = 0.75f;
+
+		Body physicsBody = world.createBody(bodyDef);
+
+		CircleShape circle = new CircleShape();
+		circle.setRadius(radius);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = circle;
+		fixtureDef.density = 1.5f;
+		fixtureDef.friction = 0.4f;
+		fixtureDef.restitution = 0.6f;
+		// Collision masks
+		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
+		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
+
+		physicsBody.createFixture(fixtureDef);
+
+		circle.dispose(); // openGL
 
 		return physicsBody;
 	}
