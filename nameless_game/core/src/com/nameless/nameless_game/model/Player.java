@@ -54,7 +54,7 @@ public class Player extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	private static Body createDynamicBody(float x, float y, float radius, World world) {
+	public static Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
