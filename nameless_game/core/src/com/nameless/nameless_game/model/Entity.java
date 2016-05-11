@@ -101,6 +101,7 @@ public class Entity {
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
 		bodyDef.linearDamping = 0.5f;
+		bodyDef.angularDamping = 0.75f;
 		
 		Body physicsBody = world.createBody(bodyDef);
 
