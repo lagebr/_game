@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.nameless.nameless_game.controller;
 
 import com.badlogic.gdx.utils.JsonReader;
