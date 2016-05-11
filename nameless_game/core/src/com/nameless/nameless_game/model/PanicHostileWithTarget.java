@@ -10,7 +10,7 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 /**
  * PanicHostileWithTarget is a hostile which moves slowly and randomly around
  * the map. If the hostile is within a certain range of the target however, it
- * will panic and move fast in a random direction.
+ * will panic and move fast in the opposite direction.
  * 
  * @author Isaac Arvestad
  * @version 2016-05-11
@@ -21,9 +21,10 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 
 	private float panicDistance;
 
-	public PanicHostileWithTarget(float x, float y, float width, float height, Texture texture, World world, Entity target) {
+	public PanicHostileWithTarget(float x, float y, float width, float height, Texture texture, World world,
+			Entity target) {
 		super(x, y, width, height, texture, world);
-		
+
 		this.target = target;
 		panicDistance = ScreenRenderer.pixelToMeter(200);
 	}
@@ -37,8 +38,10 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 		float distance = (float) Math.sqrt(dx * dx + dy * dy);
 
 		if (distance < panicDistance) {
-			float x = (float) (random.nextInt(2000) - 1000) / 500f;
-			float y = (float) (random.nextInt(2000) - 1000) / 500f;
+			// Normalize and multiply by an arbitrary scalar
+			float x = (float) (dx / Math.abs(dx) * 2);
+			float y = (float) (dy / Math.abs(dy) * 2);
+
 			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(), true);
 		} else {
 			float x = (float) (random.nextInt(2000) - 1000) / 5000f;
