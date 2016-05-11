@@ -59,6 +59,8 @@ public class Player extends Entity {
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
+		bodyDef.linearDamping = 0.75f;
+
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();

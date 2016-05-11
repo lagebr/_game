@@ -69,6 +69,8 @@ public class Hostile extends Entity {
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = false;
+		bodyDef.linearDamping = 0.5f;
+		
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectShape = new PolygonShape();

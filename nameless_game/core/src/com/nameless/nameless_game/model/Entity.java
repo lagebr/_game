@@ -100,6 +100,8 @@ public class Entity {
 		bodyDef.type = BodyType.StaticBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
+		bodyDef.linearDamping = 0.5f;
+		
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectShape = new PolygonShape();
