@@ -22,18 +22,20 @@ public class HostileCircle extends Hostile {
 		super(texture);
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(radius), world);
-		this.setBody(body);
-		
+		body.setFixedRotation(false);
+
 	}
 
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		progression += 5.5 * deltaTime;
-		
-		float forceY = (float) (progression * Math.sin((progression)));
-		float forceX = (float) (progression * Math.cos((progression)));
-		body.applyLinearImpulse(new Vector2(forceX/1000, forceY/1000), body.getLocalCenter(), true);
-		if (progression > 360) progression = 0;
+		// body.setLinearVelocity(1, 1);
+		progression += deltaTime;
+
+		float forceY = (float) (Math.sin((progression))) / 10;
+		float forceX = (float) (Math.cos((progression))) / 10;
+		body.applyLinearImpulse(new Vector2(forceX, 0), body.getLocalCenter(), true);
+		if (progression > 360)
+			progression = 0;
 	}
 }
