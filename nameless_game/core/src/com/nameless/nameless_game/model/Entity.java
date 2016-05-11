@@ -75,7 +75,7 @@ public class Entity {
 		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
 		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
-		sprite.rotate(body.getAngle());
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
 	}
 
