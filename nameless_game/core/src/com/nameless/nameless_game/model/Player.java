@@ -14,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.World;
  * 
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-05
- *
  */
 public class Player extends Entity {
 
@@ -60,7 +59,6 @@ public class Player extends Entity {
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
-
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();
@@ -71,11 +69,10 @@ public class Player extends Entity {
 		fixtureDef.density = 0.5f;
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.6f;
-		
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY;
 		fixtureDef.filter.maskBits = Entity.NPC_ENTITY;
-		
+
 		physicsBody.createFixture(fixtureDef);
 
 		circle.dispose(); // openGL

@@ -23,7 +23,6 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  * @version 2016-05-04
  */
 public class NamelessGame extends ApplicationAdapter {
-
 	GameInputProcessor inputProcessor;
 	ScreenRenderer renderer;
 	World world;
@@ -58,7 +57,10 @@ public class NamelessGame extends ApplicationAdapter {
 			entities.add(hostile);
 		}
 	}
-
+	
+	/**
+	 * Renders the graphics, bodies and handles input.
+	 */
 	@Override
 	public void render() {
 		handleInput();
@@ -73,9 +75,8 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.render(player);
 		renderer.renderDebug(world);
 
-		// Look into why those are the parameters
-		world.step(1f / 60f, 6, 2); // {@link}
-									// https://github.com/libgdx/libgdx/wiki/Box2d
+		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
+		world.step(1f / 60f, 6, 2); 
 	}
 
 	/**

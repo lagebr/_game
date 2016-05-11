@@ -29,18 +29,18 @@ public class Hostile extends Entity {
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
 	}
-	
+
 	/**
 	 * The empty constructor.
 	 */
-	public Hostile(){
+	public Hostile() {
 		// Intentionally left empty.
 	}
 
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		
+
 		float impulseX = ((float) random.nextInt(2000) - 1000) / 50000;
 		float impulseY = ((float) random.nextInt(2000) - 1000) / 50000;
 
@@ -62,13 +62,13 @@ public class Hostile extends Entity {
 	 * @param world
 	 *            the world to add the body to
 	 * @return the physics body
+	 * @warning DTESSTSTTSTST
 	 */
 	private static Body createDynamicBody(float x, float y, float width, float height, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = false;
-
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectShape = new PolygonShape();

@@ -20,10 +20,10 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class Entity {
 	protected Body body;
 	protected Sprite sprite;
-
-	public final static short PLAYER_ENTITY = 0x1; // 0001 FILTERING
-	public final static short NPC_ENTITY = 0x1 << 1; // 0010 or 0x2 in hex
-														// FILTERING
+	
+	// Filtering masks
+	public final static short PLAYER_ENTITY = 0x1;  
+	public final static short NPC_ENTITY = 0x1 << 1; 
 
 	/**
 	 * Creates an entity with a static physics body and a texture.
@@ -74,7 +74,7 @@ public class Entity {
 	public void update(float deltaTime) {
 		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
 		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
-		
+
 		sprite.rotate(body.getAngle());
 		sprite.setPosition(x, y);
 	}

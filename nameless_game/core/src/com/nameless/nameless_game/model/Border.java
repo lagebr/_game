@@ -22,10 +22,11 @@ public class Border extends Entity {
 	public Border(World world) {
 		super();
 
-		// Adjust borders according to screen size.
+		// Adjust borders according to screen size
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
-		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight()); // never forget
-		// The four walls
+		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight());
+		
+		// The four walls in the world
 		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
 		createBorder(0f, 0f, 0f, 0f, 0f, h, world);
 		createBorder(0f, 0f, w, 0f, w, h, world);
