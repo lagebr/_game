@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
+import com.nameless.nameless_game.model.HostileCircle;
 import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.ScreenRenderer;
@@ -56,6 +57,8 @@ public class NamelessGame extends ApplicationAdapter {
 					world, player);
 			entities.add(hostile);
 		}
+		Hostile hostileC = new HostileCircle(400, 400, 60, playerTexture, world);
+		entities.add(hostileC);
 	}
 	
 	/**
