@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
-import com.nameless.nameless_game.model.HostileCircle;
+import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
@@ -52,8 +52,8 @@ public class NamelessGame extends ApplicationAdapter {
 		Random random = new Random();
 		for (int i = 0; i < 5; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-			Hostile hostile = new HostileCircle(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50, hostileTexture,
-					world);
+			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50, hostileTexture,
+					world, player);
 			entities.add(hostile);
 		}
 	}
