@@ -43,9 +43,10 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super.update(deltaTime);
 		body.setAngularVelocity(angVelocity);
 		if (!isSleeping) {
+			
 			double dx = (body.getPosition().x - target.getBody().getPosition().x);
 			double dy = (body.getPosition().y - target.getBody().getPosition().y);
-			double v = Math.atan(dy / dx);
+			double v = Math.atan(dy / dx); 
 			chargeDist = Math.sqrt(dx*dx + dy*dy);
 			if (Math.abs(v - (float)(body.getAngle() % (2*MathUtils.PI))) < 5 * MathUtils.PI/180) {
 				// When target is in sight delay then charge
