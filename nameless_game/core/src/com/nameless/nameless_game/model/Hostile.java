@@ -75,7 +75,7 @@ public class Hostile extends Entity {
 		PolygonShape rectangle = new PolygonShape();
 		rectangle.setAsBox(width / 2, height / 2);
 
-		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 1.0f);
+		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 10.0f);
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
