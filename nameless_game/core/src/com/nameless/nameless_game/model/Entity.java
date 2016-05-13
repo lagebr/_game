@@ -69,7 +69,7 @@ public class Entity {
 	 * Updates the entities animation, and behavior.
 	 * 
 	 * @param deltaTime
-	 *            Time past since last frame.
+	 *            Time past since last frame in seconds.
 	 */
 	public void update(float deltaTime) {
 		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
