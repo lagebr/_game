@@ -20,10 +20,10 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class Entity {
 	protected Body body;
 	protected Sprite sprite;
-	
+
 	// Filtering masks
-	public final static short PLAYER_ENTITY = 0x1;  
-	public final static short NPC_ENTITY = 0x1 << 1; 
+	public final static short PLAYER_ENTITY = 0x1;
+	public final static short NPC_ENTITY = 0x1 << 1;
 
 	/**
 	 * Creates an entity with a static physics body and a texture.
@@ -96,23 +96,14 @@ public class Entity {
 	 * @return the physics body
 	 */
 	private Body createStaticBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
-		bodyDef.position.set(x, y);
-		bodyDef.fixedRotation = true;
-		bodyDef.linearDamping = 0.5f;
-		bodyDef.angularDamping = 0.75f;
-		
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody, true);
+
 		Body physicsBody = world.createBody(bodyDef);
 
-		PolygonShape rectShape = new PolygonShape();
-		rectShape.setAsBox(width / 2, height / 2);
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
 
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = rectShape;
-		fixtureDef.density = 0.5f;
-		fixtureDef.friction = 0.4f;
-		fixtureDef.restitution = 0.6f;
+		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 0.5f);
 
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
@@ -120,7 +111,7 @@ public class Entity {
 
 		physicsBody.createFixture(fixtureDef);
 
-		rectShape.dispose(); // openGL
+		rectangle.dispose(); // LibGDX
 
 		return physicsBody;
 	}
