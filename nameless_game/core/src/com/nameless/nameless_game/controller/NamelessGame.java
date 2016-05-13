@@ -42,7 +42,9 @@ public class NamelessGame extends ApplicationAdapter {
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		Player player = new Player(75, 75, 60, playerTexture, world);
 
-		level = new Level(player, world);
+		float levelWidth = (float) Gdx.graphics.getWidth();
+		float levelHeight = (float) Gdx.graphics.getHeight();
+		level = new Level(levelWidth, levelHeight, player, world);
 
 		Random random = new Random();
 		for (int i = 0; i < 5; i++) {
