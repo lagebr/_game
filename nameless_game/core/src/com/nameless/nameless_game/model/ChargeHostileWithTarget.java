@@ -45,15 +45,16 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super.update(deltaTime);
 		body.setAngularVelocity(angVelocity);
 		if (!isSleeping) {
-
-			double dx = (body.getPosition().x - target.getBody().getPosition().x);
-			double dy = (body.getPosition().y - target.getBody().getPosition().y);
-			double v = Math.atan(dy / dx);
+			// Cartesian with origo in bottom left of Borders.
+			double dx = body.getPosition().x - target.getBody().getPosition().x;
+			double dy = body.getPosition().y - target.getBody().getPosition().y;
+			
+			double v = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
-			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 5 * MathUtils.PI / 180) {
+			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
 				// When target is in sight delay then charge
 				isSleeping = true;
-				angVelocity = 0.01f;
+				angVelocity = 0.1f;
 				System.out.println((body.getAngle() * 180 / Math.PI) % 360);
 				System.out.println((v * 180 / Math.PI) % 360);
 			}
@@ -71,9 +72,9 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 	}
 
-	/** Charges hostile with impulse in current direction. */
+	/** Charges hostile with impulse in current direction, with a delay afterwards. */
 	private void charge() {
-		float c = .7f * (float) (chargeDist);
+		float c = 1.7f * (float) (chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
