@@ -51,20 +51,20 @@ public class Level {
 	}
 
 	/**
-	 * Attempts to add hostile to level. Hostile is only added if its' physics
+	 * Attempts to add an entity to level. Entity is only added if its' physics
 	 * world is the same as the level's physics world.
 	 * 
-	 * @param hostile
-	 *            The hostile to be added.
+	 * @param entity
+	 *            The entity to be added.
 	 * @return
 	 *         <ul>
-	 *         <li>True - hostile was successfully added.</li>
-	 *         <li>False - hostile was not added.</li>
+	 *         <li>True - entity was successfully added.</li>
+	 *         <li>False - entity was not added.</li>
 	 *         </ul>
 	 */
-	public boolean addHostile(Hostile hostile) {
-		if (hostile.getBody().getWorld().equals(world)) {
-			hostiles.add(hostile);
+	public boolean addEntity(Entity entity) {
+		if (entity.getBody().getWorld().equals(world)) {
+			entities.add(entity);
 			return true;
 		} else {
 			return false;
