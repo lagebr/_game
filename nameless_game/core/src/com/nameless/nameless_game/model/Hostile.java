@@ -102,22 +102,14 @@ public class Hostile extends Entity {
 	 * @return the physics body
 	 */
 	public static Body createDynamicBody(float x, float y, float radius, World world) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
-		bodyDef.fixedRotation = true;
-		bodyDef.linearDamping = 0.75f;
-
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
-
+		
 		CircleShape circle = new CircleShape();
 		circle.setRadius(radius);
 
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = circle;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 1f;
+		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 1.0f);
+				
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
