@@ -21,7 +21,7 @@ public class Player extends Entity {
 	private boolean leftRotate = false;
 	private boolean rightRotate = false;
 
-	private boolean isCharging = false;
+	private boolean isBoosting = false;
 
 	/**
 	 * The player entity model creates a player entity in the world, with a
@@ -57,20 +57,24 @@ public class Player extends Entity {
 		if (rightRotate) {
 			body.applyTorque(-1.0f, true);
 		}
+		
+		if (isBoosting) {
+			
+		}
 	}
 
 	/**
 	 * Applies a linear impulse to move the player forward. Only applies impulse
-	 * if player is not in charging state.
+	 * if player is not in boost state.
 	 * 
 	 * @return
 	 *         <ul>
 	 *         <li>True - impulse was successfully applied.
-	 *         <li>False - impulse was not added, player was in charging state.
+	 *         <li>False - impulse was not added, player was in boost state.
 	 *         </ul>
 	 */
 	public boolean impulseForward() {
-		if (isCharging == false) {
+		if (isBoosting == false) {
 			float xImpulse = (float) Math.cos((double) body.getAngle());
 			float yImpulse = (float) Math.sin((double) body.getAngle());
 
