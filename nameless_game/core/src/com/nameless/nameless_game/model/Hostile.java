@@ -67,35 +67,26 @@ public class Hostile extends Entity {
 	 * @param world
 	 *            the world to add the body to
 	 * @return the physics body
-	 * @warning DTESSTSTTSTST
 	 */
 	public static Body createDynamicBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
-		bodyDef.fixedRotation = false;
-		bodyDef.linearDamping = 0.5f;
-		bodyDef.angularDamping = 0.75f;
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
-		PolygonShape rectShape = new PolygonShape();
-		rectShape.setAsBox(width / 2, height / 2);
+		PolygonShape rectangle = new PolygonShape();
+		rectangle.setAsBox(width / 2, height / 2);
 
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = rectShape;
-		fixtureDef.density = 10f;
-		fixtureDef.friction = 0.4f;
-		fixtureDef.restitution = 0.6f;
+		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 1.0f);
+		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
 
 		physicsBody.createFixture(fixtureDef);
 
-		rectShape.dispose(); // openGL
+		rectangle.dispose(); // LibGDX
 
 		return physicsBody;
 	}
-	
+
 	/**
 	 * createBody creates a rectangular, static physics body, adds it to the
 	 * physics world and returns it.
