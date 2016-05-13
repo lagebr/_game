@@ -1,9 +1,5 @@
-/**
- * 
- */
 package com.nameless.nameless_game.model;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -13,21 +9,18 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
- * Spins and if Player is in it's path after a delay it'll launch after Player.
- * TODO
+ * Charger spins and if Player is within the direction of Charger it will charge
+ * towards after a slight delay.
  * 
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-09
  *
  */
 public class ChargeHostileWithTarget extends HostileWithTarget {
-	float screenWidth = Gdx.graphics.getWidth();
-	float screenHeight = Gdx.graphics.getHeight();
-
-	boolean isSleeping = false;
-
 	private double chargeDist = 0;
-
+	private double v = 0;
+	
+	boolean isSleeping = false;
 	private float timeSlept = 0;
 	private float napTime = 5f;
 	private float angVelocity = 1f;
@@ -49,7 +42,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			double dx = body.getPosition().x - target.getBody().getPosition().x;
 			double dy = body.getPosition().y - target.getBody().getPosition().y;
 			
-			double v = Math.atan2(dy, dx) + Math.PI;
+			v = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
 				// When target is in sight delay then charge
@@ -83,8 +76,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		Timer.schedule(new Task() {
 			@Override
 			public void run() {
+				// Waiting.
 			}
 		}, delay);
-
 	}
 }
