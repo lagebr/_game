@@ -53,7 +53,10 @@ public class PhysicsHelper {
 	 * @param type
 	 *            The body type.
 	 * @param fixedRotation
-	 *            True if body can rotate. False if body can not.
+	 *            <ul>
+	 *            	<li>True - body can not rotate</li>
+	 *            	<li>False - body can rotate</li>
+	 *            </ul>
 	 * @return The body definition.
 	 */
 	public static BodyDef createBodyDef(float x, float y, BodyType type, boolean fixedRotation) {
