@@ -45,7 +45,7 @@ public class NamelessGame extends ApplicationAdapter {
 		level = new Level(levelWidth, levelHeight, player, world);
 
 		Random random = new Random();
-		for (int i = 0; i < 0; i++) {
+		for (int i = 0; i < 2; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
 			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
 					hostileTexture, world, player);
@@ -70,7 +70,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.render(level.getEntities());
 		renderer.render(level.getPlayer());
-		renderer.renderDebug(level.getWorld());
+		//renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 		level.getWorld().step(1f / 60f, 6, 2);
