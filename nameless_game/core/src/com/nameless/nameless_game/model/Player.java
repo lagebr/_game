@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -19,7 +20,9 @@ public class Player extends Entity {
 
 	private boolean leftRotate = false;
 	private boolean rightRotate = false;
-	
+
+	private boolean isCharging = false;
+
 	/**
 	 * The player entity model creates a player entity in the world, with a
 	 * dynamic physics body.
@@ -46,16 +49,38 @@ public class Player extends Entity {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		
+
 		if (leftRotate) {
 			body.applyTorque(1.0f, true);
 		}
-		
+
 		if (rightRotate) {
 			body.applyTorque(-1.0f, true);
 		}
 	}
-	
+
+	/**
+	 * Applies a linear impulse to move the player forward. Only applies impulse
+	 * if player is not in charging state.
+	 * 
+	 * @return
+	 *         <ul>
+	 *         <li>True - impulse was successfully applied.
+	 *         <li>False - impulse was not added, player was in charging state.
+	 *         </ul>
+	 */
+	public boolean impulseForward() {
+		if (isCharging == false) {
+			float xImpulse = (float) Math.cos((double) body.getAngle());
+			float yImpulse = (float) Math.sin((double) body.getAngle());
+
+			body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * createBody creates a rectangular, static physics body, adds it to the
 	 * physics world and returns it.
@@ -73,7 +98,7 @@ public class Player extends Entity {
 	public static Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		bodyDef.angularDamping = 1.0f;
-		
+
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();

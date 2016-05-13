@@ -87,11 +87,7 @@ public class NamelessGame extends ApplicationAdapter {
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
 			} else if (event.action == InputAction.UP && event.keyPressed == true) {
-				float xImpulse = (float) Math.cos((double) level.getPlayer().getBody().getAngle());
-				float yImpulse = (float) Math.sin((double) level.getPlayer().getBody().getAngle());
-
-				level.getPlayer().getBody().applyLinearImpulse(new Vector2(xImpulse, yImpulse),
-						level.getPlayer().getBody().getWorldCenter(), true);
+				level.getPlayer().impulseForward();
 			}
 		}
 		inputProcessor.getActionQueue().clear();
