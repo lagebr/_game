@@ -23,6 +23,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	float screenHeight = Gdx.graphics.getHeight();
 
 	boolean isSleeping = false;
+	
+	private double chargeDist = 0;
 
 	private float timeSlept = 0;
 	private float napTime = 5f;
@@ -40,15 +42,17 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		body.setAngularVelocity(angVelocity);
-		System.out.println((body.getAngle()*180/Math.PI) % 360);
 		if (!isSleeping) {
-			double dx = target.getBody().getPosition().x - body.getPosition().x;
-			double dy = target.getBody().getPosition().y - body.getPosition().y;
+			double dx = (body.getPosition().x - target.getBody().getPosition().x);
+			double dy = (body.getPosition().y - target.getBody().getPosition().y);
 			double v = Math.atan(dy / dx);
-			if (Math.abs(v - (float)(body.getAngle() % 2*MathUtils.PI)) < 5 * MathUtils.PI/180) {
+			chargeDist = Math.sqrt(dx*dx + dy*dy);
+			if (Math.abs(v - (float)(body.getAngle() % (2*MathUtils.PI))) < 5 * MathUtils.PI/180) {
 				// When target is in sight delay then charge
 				isSleeping = true;
 				angVelocity = 0.01f;
+				System.out.println((body.getAngle()*180/Math.PI) % 360);
+				System.out.println((v*180/Math.PI) % 360);
 				}
 
 		} else {
@@ -66,7 +70,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	
 	/** Charges hostile with impulse in current direction. */
 	private void charge() {
-		float c = 10;
+		float c = .7f * (float)(chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
