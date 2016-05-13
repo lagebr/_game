@@ -18,7 +18,7 @@ public class GameInputProcessor extends InputAdapter {
 	// TODO Change from Map and List to IntArray from LibGDX
 	
 	// The mapping of keys (ie keycodes) to specific InputActions
-	private Map<Integer, InputAction> actionLookUp = new HashMap<Integer, InputAction>();
+	private static Map<Integer, InputAction> actionLookUp = new HashMap<Integer, InputAction>();
 	// The queue for the processed InputActions (ie InputEvents)
 	private List<InputEvent> actionQueue = new LinkedList<InputEvent>();
 
@@ -36,7 +36,11 @@ public class GameInputProcessor extends InputAdapter {
 		actionLookUp.put(Input.Keys.S, InputAction.RIGHT);
 		actionLookUp.put(Input.Keys.DOWN, InputAction.DOWN);
 	}
-	
+
+	public void setActionLookUp(Map<Integer, InputAction> actionLookUp) {
+		this.actionLookUp = actionLookUp;
+	}
+
 	/**
 	 * Processes the key input.
 	 */
