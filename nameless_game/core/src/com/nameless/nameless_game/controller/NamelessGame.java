@@ -76,7 +76,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.render(entities);
 		renderer.render(player);
-		//renderer.renderDebug(world);
+		renderer.renderDebug(world);
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 		world.step(1f / 60f, 6, 2); 
@@ -88,14 +88,14 @@ public class NamelessGame extends ApplicationAdapter {
 	 */
 	private void handleInput() {
 		for (InputEvent event : inputProcessor.getActionQueue()) {
-			if (event.action == InputAction.LEFT && event.keyPressed == true) {
-				player.getBody().applyLinearImpulse(new Vector2(-1.0f, 0), player.getBody().getLocalCenter(), true);
-			} else if (event.action == InputAction.RIGHT && event.keyPressed == true) {
-				player.getBody().applyLinearImpulse(new Vector2(1.0f, 0), player.getBody().getLocalCenter(), true);
+			if (event.action == InputAction.LEFT) {
+				player.setLeftRotate(event.keyPressed);
+			} else if (event.action == InputAction.RIGHT) {
+				player.setRightRotate(event.keyPressed);
 			} else if (event.action == InputAction.UP && event.keyPressed == true) {
-				player.getBody().applyLinearImpulse(new Vector2(0, 1.0f), player.getBody().getLocalCenter(), true);
-			} else if (event.action == InputAction.DOWN && event.keyPressed == true) {
-				player.getBody().applyLinearImpulse(new Vector2(0, -1.0f), player.getBody().getLocalCenter(), true);
+				float xImpulse = (float) Math.cos((double) player.getBody().getAngle());
+				float yImpulse = (float) Math.sin((double) player.getBody().getAngle());
+				player.getBody().applyLinearImpulse(new Vector2(xImpulse, yImpulse), player.getBody().getWorldCenter(), true);
 			}
 		}
 		inputProcessor.getActionQueue().clear();
