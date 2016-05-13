@@ -17,11 +17,11 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  * @version 2016-05-09
  *
  */
-public class HostileCircle extends Hostile {
+public class CircleHostile extends Hostile {
 	float screenWidth = Gdx.graphics.getWidth();
 	float screenHeight = Gdx.graphics.getHeight();
 	
-	public HostileCircle(float x, float y, float radius, Texture texture, World world) {
+	public CircleHostile(float x, float y, float radius, Texture texture, World world) {
 		super(texture);
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(radius), world);
