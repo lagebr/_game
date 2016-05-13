@@ -20,8 +20,6 @@ public class Border extends Entity {
 	private Body bodyEdgeScreen;
 
 	public Border(World world) {
-		super();
-
 		// Adjust borders according to screen size
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight());
