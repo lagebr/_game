@@ -13,6 +13,7 @@ import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
+import com.nameless.nameless_game.model.Level;
 import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.ScreenRenderer;
@@ -24,13 +25,10 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  * @version 2016-05-04
  */
 public class NamelessGame extends ApplicationAdapter {
-	GameInputProcessor inputProcessor;
-	ScreenRenderer renderer;
-	World world;
+	private GameInputProcessor inputProcessor;
+	private ScreenRenderer renderer;
 
-	Border border;
-	ArrayList<Entity> entities;
-	Player player;
+	private Level level;
 
 	@Override
 	public void create() {
@@ -38,29 +36,25 @@ public class NamelessGame extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(inputProcessor);
 
 		renderer = new ScreenRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		world = new World(new Vector2(0, 0), false);
-		entities = new ArrayList<Entity>();
 
-		border = new Border(world);
-
-		Texture entityTexture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-		Entity entity = new Entity(200, 400, 100, 100, entityTexture, world);
-		entities.add(entity);
+		World world = new World(new Vector2(0, 0), false);
 
 		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		player = new Player(75, 75, 60, playerTexture, world);
+		Player player = new Player(75, 75, 60, playerTexture, world);
+
+		level = new Level(player, world);
 
 		Random random = new Random();
 		for (int i = 0; i < 5; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50, hostileTexture,
-					world, player);
-			entities.add(hostile);
+			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
+					hostileTexture, world, player);
+			level.addEntity(hostile);
 		}
 		Hostile hostileC = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
-		entities.add(hostileC);
+		level.addEntity(hostileC);
 	}
-	
+
 	/**
 	 * Renders the graphics, bodies and handles input.
 	 */
@@ -68,18 +62,18 @@ public class NamelessGame extends ApplicationAdapter {
 	public void render() {
 		handleInput();
 
-		player.update(Gdx.graphics.getDeltaTime());
-		for (Entity entity : entities) {
+		level.getPlayer().update(Gdx.graphics.getDeltaTime());
+		for (Entity entity : level.getEntities()) {
 			entity.update(Gdx.graphics.getDeltaTime());
 		}
 
 		renderer.prepare(Color.BLACK);
-		renderer.render(entities);
-		renderer.render(player);
-		renderer.renderDebug(world);
+		renderer.render(level.getEntities());
+		renderer.render(level.getPlayer());
+		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
-		world.step(1f / 60f, 6, 2); 
+		level.getWorld().step(1f / 60f, 6, 2);
 	}
 
 	/**
@@ -89,13 +83,15 @@ public class NamelessGame extends ApplicationAdapter {
 	private void handleInput() {
 		for (InputEvent event : inputProcessor.getActionQueue()) {
 			if (event.action == InputAction.LEFT) {
-				player.setLeftRotate(event.keyPressed);
+				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
-				player.setRightRotate(event.keyPressed);
+				level.getPlayer().setRightRotate(event.keyPressed);
 			} else if (event.action == InputAction.UP && event.keyPressed == true) {
-				float xImpulse = (float) Math.cos((double) player.getBody().getAngle());
-				float yImpulse = (float) Math.sin((double) player.getBody().getAngle());
-				player.getBody().applyLinearImpulse(new Vector2(xImpulse, yImpulse), player.getBody().getWorldCenter(), true);
+				float xImpulse = (float) Math.cos((double) level.getPlayer().getBody().getAngle());
+				float yImpulse = (float) Math.sin((double) level.getPlayer().getBody().getAngle());
+
+				level.getPlayer().getBody().applyLinearImpulse(new Vector2(xImpulse, yImpulse),
+						level.getPlayer().getBody().getWorldCenter(), true);
 			}
 		}
 		inputProcessor.getActionQueue().clear();
