@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Level {
 	private World world;
 	private Player player;
+	private Border border;
 
 	private ArrayList<Hostile> hostiles;
 
@@ -27,7 +28,9 @@ public class Level {
 	public Level(Player player, World world) {
 		this.player = player;
 		this.world = world;
-
+		
+		border = new Border(world);
+		
 		hostiles = new ArrayList<Hostile>();
 	}
 
