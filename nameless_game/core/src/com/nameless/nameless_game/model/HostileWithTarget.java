@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -16,6 +17,10 @@ public abstract class HostileWithTarget extends Hostile {
 	
 	public HostileWithTarget(float x, float y, float width, float height, Texture texture, World world) {
 		super(x, y, width, height, texture, world);
+	}
+	
+	public HostileWithTarget(Texture texture) {
+		sprite = new Sprite(texture);
 	}
 	
 	public Entity getTarget() {

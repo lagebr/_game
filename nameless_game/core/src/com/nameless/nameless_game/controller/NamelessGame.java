@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Border;
-import com.nameless.nameless_game.model.CircleHostile;
+import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.PanicHostileWithTarget;
@@ -57,7 +57,7 @@ public class NamelessGame extends ApplicationAdapter {
 					world, player);
 			entities.add(hostile);
 		}
-		Hostile hostileC = new CircleHostile(400, 400, 60, playerTexture, world);
+		Hostile hostileC = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
 		entities.add(hostileC);
 	}
 	
