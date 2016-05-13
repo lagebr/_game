@@ -70,7 +70,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.render(level.getEntities());
 		renderer.render(level.getPlayer());
-		//renderer.renderDebug(level.getWorld());
+		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 		level.getWorld().step(1f / 60f, 6, 2);
