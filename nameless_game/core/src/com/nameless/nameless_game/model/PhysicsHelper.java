@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Shape;
 public class PhysicsHelper {
 
 	private static final float LINEAR_DAMPING = 0.75f;
+	private static final float ANGULAR_DAMPING = 0.75f;
 	private static final float FRICTION = 0.4f;
 	private static final float RESTITUTION = 0.6f;
 
@@ -42,7 +43,8 @@ public class PhysicsHelper {
 
 	/**
 	 * Creates a body definition with a given position and body type. Linear
-	 * damping is automatically set to 0.75f.
+	 * damping is automatically set to 0.75f. Angular damping is also set to
+	 * 0.75f.
 	 * 
 	 * @param x
 	 *            The x position.
@@ -60,6 +62,7 @@ public class PhysicsHelper {
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = fixedRotation;
 		bodyDef.linearDamping = LINEAR_DAMPING;
+		bodyDef.angularDamping = ANGULAR_DAMPING;
 
 		return bodyDef;
 	}
