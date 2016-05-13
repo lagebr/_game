@@ -30,4 +30,33 @@ public class Level {
 
 		hostiles = new ArrayList<Entity>();
 	}
+
+	public World getWorld() {
+		return world;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	/**
+	 * Attempts to add hostile to level. Hostile is only added if its' physics
+	 * world is the same as the level's physics world.
+	 * 
+	 * @param hostile
+	 *            The hostile to be added.
+	 * @return
+	 *         <ul>
+	 *         <li>True - hostile was successfully added.</li>
+	 *         <li>False - hostile was not added.</li>
+	 *         </ul>
+	 */
+	public boolean addHostile(Hostile hostile) {
+		if (hostile.getBody().getWorld().equals(world)) {
+			hostiles.add(hostile);
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
