@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
@@ -23,7 +25,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	float screenHeight = Gdx.graphics.getHeight();
 
 	boolean isSleeping = false;
-	
+
 	private double chargeDist = 0;
 
 	private float timeSlept = 0;
@@ -43,18 +45,18 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super.update(deltaTime);
 		body.setAngularVelocity(angVelocity);
 		if (!isSleeping) {
-			
+
 			double dx = (body.getPosition().x - target.getBody().getPosition().x);
 			double dy = (body.getPosition().y - target.getBody().getPosition().y);
-			double v = Math.atan(dy / dx); 
-			chargeDist = Math.sqrt(dx*dx + dy*dy);
-			if (Math.abs(v - (float)(body.getAngle() % (2*MathUtils.PI))) < 5 * MathUtils.PI/180) {
+			double v = Math.atan(dy / dx);
+			chargeDist = Math.sqrt(dx * dx + dy * dy);
+			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 5 * MathUtils.PI / 180) {
 				// When target is in sight delay then charge
 				isSleeping = true;
 				angVelocity = 0.01f;
-				System.out.println((body.getAngle()*180/Math.PI) % 360);
-				System.out.println((v*180/Math.PI) % 360);
-				}
+				System.out.println((body.getAngle() * 180 / Math.PI) % 360);
+				System.out.println((v * 180 / Math.PI) % 360);
+			}
 
 		} else {
 			timeSlept += deltaTime;
@@ -68,12 +70,20 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		}
 
 	}
-	
+
 	/** Charges hostile with impulse in current direction. */
 	private void charge() {
-		float c = .7f * (float)(chargeDist);
+		float c = .7f * (float) (chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
+		
+		float delay = 1f;
+		Timer.schedule(new Task() {
+			@Override
+			public void run() {
+			}
+		}, delay);
+
 	}
 }
