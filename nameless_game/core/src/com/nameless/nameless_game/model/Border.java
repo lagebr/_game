@@ -3,7 +3,6 @@
  */
 package com.nameless.nameless_game.model;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
@@ -17,7 +16,11 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  *
  */
 public class Border extends Entity {
-	private Body bodyEdgeScreen;
+	private static Body bodyEdgeScreen;
+
+	public Body getBodyEdgeScreen() {
+		return bodyEdgeScreen;
+	}
 
 	/**
 	 * Creates a border with the dimensions of the LibGDX screen.
@@ -40,9 +43,8 @@ public class Border extends Entity {
 		createBorder(0f, 0f, w, 0f, w, h, world);
 		createBorder(0f, 0f, 0f, h, w, h, world);
 	}
-
-	@Override
-	public Body getBody() {
+	
+	public static Body getBodyBorder() {
 		return bodyEdgeScreen;
 	}
 
@@ -77,6 +79,6 @@ public class Border extends Entity {
 		bodyEdgeScreen = world.createBody(bodyDef);
 		bodyEdgeScreen.createFixture(fixtureDef);
 
-		border.dispose(); // openGL stuff
+		border.dispose(); // LibGDX
 	}
 }
