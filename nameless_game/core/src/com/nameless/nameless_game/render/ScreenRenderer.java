@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -8,8 +9,10 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.model.Border;
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -26,6 +29,8 @@ public class ScreenRenderer extends Renderer {
 
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
+	
+	private ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
