@@ -22,13 +22,17 @@ public class Border extends Entity {
 	/**
 	 * Creates a border with the dimensions of the LibGDX screen.
 	 * 
+	 * @param width
+	 *            The width in pixels.
+	 * @param height
+	 *            The height in pixels.
 	 * @param world
 	 *            The physics world to add the borders to.
 	 */
-	public Border(World world) {
+	public Border(float width, float height, World world) {
 		// Adjust borders according to screen size
-		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
-		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight());
+		float w = ScreenRenderer.pixelToMeter(width);
+		float h = ScreenRenderer.pixelToMeter(height);
 
 		// The four walls in the world
 		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
