@@ -15,7 +15,7 @@ public class Level {
 	private Player player;
 	private Border border;
 
-	private ArrayList<Hostile> hostiles;
+	private ArrayList<Entity> entities;
 
 	/**
 	 * Constructs a level with a player and a physics world.
@@ -31,7 +31,7 @@ public class Level {
 		
 		border = new Border(world);
 		
-		hostiles = new ArrayList<Hostile>();
+		entities = new ArrayList<Entity>();
 	}
 
 	public World getWorld() {
@@ -46,8 +46,8 @@ public class Level {
 		return border;
 	}
 	
-	public ArrayList<Hostile> getHostiles() {
-		return hostiles;
+	public ArrayList<Entity> getEntities() {
+		return entities;
 	}
 
 	/**
