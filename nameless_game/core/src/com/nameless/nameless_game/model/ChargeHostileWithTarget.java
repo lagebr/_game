@@ -13,8 +13,8 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
- * Spins and if Player is in it's path after a delay it'll launch after Player.
- * TODO
+ * Charger spins and if Player is within the direction of Charger it will charge
+ * towards after a slight delay.
  * 
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-09
@@ -83,8 +83,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		Timer.schedule(new Task() {
 			@Override
 			public void run() {
+				// Waiting.
 			}
 		}, delay);
-
 	}
 }
