@@ -42,6 +42,10 @@ public class Level {
 		return player;
 	}
 	
+	public Border getBorder() {
+		return border;
+	}
+	
 	public ArrayList<Hostile> getHostiles() {
 		return hostiles;
 	}
