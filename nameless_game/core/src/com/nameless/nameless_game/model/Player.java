@@ -17,6 +17,9 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 public class Player extends Entity {
 
+	private boolean leftRotate = false;
+	private boolean rightRotate = false;
+	
 	/**
 	 * The player entity model creates a player entity in the world, with a
 	 * dynamic physics body.
@@ -40,6 +43,19 @@ public class Player extends Entity {
 				ScreenRenderer.pixelToMeter(radius), world);
 	}
 
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		
+		if (leftRotate) {
+			body.applyTorque(1.0f, true);
+		}
+		
+		if (rightRotate) {
+			body.applyTorque(-1.0f, true);
+		}
+	}
+	
 	/**
 	 * createBody creates a rectangular, static physics body, adds it to the
 	 * physics world and returns it.
@@ -55,8 +71,9 @@ public class Player extends Entity {
 	 * @return the physics body
 	 */
 	public static Body createDynamicBody(float x, float y, float radius, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, true);
-
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+		bodyDef.angularDamping = 1.0f;
+		
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();
@@ -72,5 +89,21 @@ public class Player extends Entity {
 		circle.dispose(); // LibGDX
 
 		return physicsBody;
+	}
+
+	public boolean leftRotate() {
+		return leftRotate;
+	}
+
+	public void setLeftRotate(boolean leftRotate) {
+		this.leftRotate = leftRotate;
+	}
+
+	public boolean rightRotate() {
+		return rightRotate;
+	}
+
+	public void setRightRotate(boolean rightRotate) {
+		this.rightRotate = rightRotate;
 	}
 }
