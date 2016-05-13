@@ -26,7 +26,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 	private float timeSlept = 0;
 	private float napTime = 5f;
-	private float angVelocity = .5f;
+	private float angVelocity = 1f;
 
 	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
 		super(texture);
@@ -40,14 +40,15 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		body.setAngularVelocity(angVelocity);
+		System.out.println((body.getAngle()*180/Math.PI) % 360);
 		if (!isSleeping) {
 			double dx = target.getBody().getPosition().x - body.getPosition().x;
 			double dy = target.getBody().getPosition().y - body.getPosition().y;
 			double v = Math.atan(dy / dx);
-			if (Math.abs(v - (float)(body.getAngle() % 2*MathUtils.PI)) < 4 * MathUtils.PI/180) {
+			if (Math.abs(v - (float)(body.getAngle() % 2*MathUtils.PI)) < 5 * MathUtils.PI/180) {
 				// When target is in sight delay then charge
 				isSleeping = true;
-				angVelocity = 0;
+				angVelocity = 0.01f;
 				}
 
 		} else {
