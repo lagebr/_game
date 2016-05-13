@@ -43,7 +43,7 @@ public class NamelessGame extends ApplicationAdapter {
 		level = new Level(player, world);
 
 		Random random = new Random();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 0; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
 			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
 					hostileTexture, world, player);
