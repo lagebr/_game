@@ -20,32 +20,36 @@ public class Level {
 	/**
 	 * Constructs a level with a player and a physics world.
 	 * 
+	 * @param width
+	 *            The width of the level in pixels.
+	 * @param height
+	 *            The height of the level in pixels.
 	 * @param player
 	 *            The player.
 	 * @param world
 	 *            The physics world.
 	 */
-	public Level(Player player, World world) {
+	public Level(float width, float height, Player player, World world) {
 		this.player = player;
 		this.world = world;
-		
-		border = new Border(world);
-		
+
+		border = new Border(width, height, world);
+
 		entities = new ArrayList<Entity>();
 	}
 
 	public World getWorld() {
 		return world;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public Border getBorder() {
 		return border;
 	}
-	
+
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
