@@ -19,13 +19,17 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class Border extends Entity {
 	private Body bodyEdgeScreen;
 
+	/**
+	 * Creates a border with the dimensions of the LibGDX screen.
+	 * 
+	 * @param world
+	 *            The physics world to add the borders to.
+	 */
 	public Border(World world) {
-		super();
-
 		// Adjust borders according to screen size
 		float w = ScreenRenderer.pixelToMeter(Gdx.graphics.getWidth());
 		float h = ScreenRenderer.pixelToMeter(Gdx.graphics.getHeight());
-		
+
 		// The four walls in the world
 		createBorder(0f, 0f, 0f, 0f, w, 0f, world);
 		createBorder(0f, 0f, 0f, 0f, 0f, h, world);
