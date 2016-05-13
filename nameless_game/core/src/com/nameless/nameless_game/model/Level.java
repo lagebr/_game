@@ -14,7 +14,7 @@ public class Level {
 	private World world;
 	private Player player;
 
-	private ArrayList<Entity> hostiles;
+	private ArrayList<Hostile> hostiles;
 
 	/**
 	 * Constructs a level with a player and a physics world.
@@ -28,7 +28,7 @@ public class Level {
 		this.player = player;
 		this.world = world;
 
-		hostiles = new ArrayList<Entity>();
+		hostiles = new ArrayList<Hostile>();
 	}
 
 	public World getWorld() {
@@ -37,6 +37,10 @@ public class Level {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public ArrayList<Hostile> getHostiles() {
+		return hostiles;
 	}
 
 	/**
