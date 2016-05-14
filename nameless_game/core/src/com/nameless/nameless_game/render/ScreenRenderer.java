@@ -131,7 +131,7 @@ public class ScreenRenderer extends Renderer {
 	public void renderDebug(World world) {
 		debugRenderer.render(world, camera.combined.scale(meterToPixel(1),
 				meterToPixel(1), meterToPixel(1)));
-		logger.log();
+		//logger.log();
 	}
 
 	/**
