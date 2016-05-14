@@ -1,6 +1,7 @@
 package com.nameless.nameless_game.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -66,6 +67,7 @@ public class NamelessGame extends ApplicationAdapter {
 			}
 			keySeqTextureList.add(texture);
 		}
+		Collections.shuffle(keySeqTextureList);
 	}
 
 	private void createCollisionListener() {

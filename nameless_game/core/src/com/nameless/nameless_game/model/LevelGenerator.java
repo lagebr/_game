@@ -31,6 +31,9 @@ public class LevelGenerator {
 			Hostile hostile = new PanicHostileWithTarget(x, y, 50, 50, texture, world, player);
 			level.addEntity(hostile);
 		}
+		Texture texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
+		Hostile charger = new ChargeHostileWithTarget(100, 400, 60, texture, world, player);
+		level.addEntity(charger);
 
 		return level;
 	}
