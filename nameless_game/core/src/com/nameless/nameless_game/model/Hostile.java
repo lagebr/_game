@@ -23,7 +23,9 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  */
 public class Hostile extends Entity {
 	private Random random = new Random(); // TODO Use LibGDX own random.
-
+	
+	protected HostileType type;
+	
 	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(texture);
 

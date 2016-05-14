@@ -17,7 +17,7 @@ public class Level {
 	private Border border;
 
 	private ArrayList<Entity> entities;
-	// The types needed to progress
+	
 	private Array<Entity> keyTypes;
 
 	/**

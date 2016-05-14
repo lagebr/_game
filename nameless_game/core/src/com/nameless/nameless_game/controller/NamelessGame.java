@@ -52,8 +52,8 @@ public class NamelessGame extends ApplicationAdapter {
 					hostileTexture, world, player);
 			level.addEntity(hostile);
 		}
-		Hostile hostileC = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
-		level.addEntity(hostileC);
+		Hostile hostileCharger = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
+		level.addEntity(hostileCharger);
 		
 		
 	}
