@@ -13,6 +13,7 @@ import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.Level;
+import com.nameless.nameless_game.model.LevelGenerator;
 import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.model.Player;
 import com.nameless.nameless_game.render.ScreenRenderer;
@@ -38,24 +39,10 @@ public class NamelessGame extends ApplicationAdapter {
 
 		World world = new World(new Vector2(0, 0), false);
 
-		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		Player player = new Player(75, 75, 60, playerTexture, world);
-
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
-		level = new Level(levelWidth, levelHeight, player, world);
-
-		Random random = new Random();
-		for (int i = 0; i < 2; i++) {
-			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
-					hostileTexture, world, player);
-			level.addEntity(hostile);
-		}
-		Hostile hostileC = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
-		level.addEntity(hostileC);
 		
-		
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
 	}
 
 	/**
@@ -73,7 +60,6 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.render(level.getEntities());
 		renderer.render(level.getPlayer());
-		renderer.render(level.getKeyTypes());
 		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
