@@ -2,7 +2,7 @@ package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -20,13 +20,13 @@ public abstract class Renderer {
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void render(ArrayList<Entity> entities);
-	
+	public abstract void renderEntities(ArrayList<Entity> entities);
+
 	/**
-	 * Draws all entities to screen.
+	 * Draws all sprites to screen.
 	 * 
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void render(Array<Entity> entities);
+	public abstract void renderSprite(ArrayList<Sprite> spriteList);
 }
