@@ -7,8 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -37,8 +38,8 @@ public class Hostile extends Entity {
 	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(texture);
 
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
+		//body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
+				//ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicBody(float x, float y, float width, float height, World world) {
+	public static Body createDynamicBody(float x, float y, float width, float height, World world, HostileType type) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
@@ -90,7 +91,8 @@ public class Hostile extends Entity {
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
 
-		physicsBody.createFixture(fixtureDef);
+		Fixture fixture = physicsBody.createFixture(fixtureDef);
+		fixture.setUserData(type);
 
 		rectangle.dispose(); // LibGDX
 
@@ -111,7 +113,7 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicBody(float x, float y, float radius, World world) {
+	public static Body createDynamicBody(float x, float y, float radius, World world, HostileType type) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 		
@@ -123,9 +125,10 @@ public class Hostile extends Entity {
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
-
-		physicsBody.createFixture(fixtureDef);
-
+		
+		Fixture fixture = physicsBody.createFixture(fixtureDef);
+		fixture.setUserData(type);
+		
 		circle.dispose(); // openGL
 
 		return physicsBody;
