@@ -21,12 +21,4 @@ public abstract class Renderer {
 	 *            The entities to be drawn.
 	 */
 	public abstract void render(ArrayList<Entity> entities);
-	
-	/**
-	 * Draws all entities to screen.
-	 * 
-	 * @param entities
-	 *            The entities to be drawn.
-	 */
-	public abstract void render(Array<Entity> entities);
 }

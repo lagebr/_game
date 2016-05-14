@@ -21,10 +21,4 @@ public class TextRenderer extends Renderer {
 		// TODO
 
 	}
-
-	@Override
-	public void render(Array<Entity> entities) {
-		// TODO Auto-generated method stub
-		
-	}
 }
