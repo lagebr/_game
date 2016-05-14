@@ -2,6 +2,8 @@ package com.nameless.nameless_game.model;
 
 import java.util.Random;
 
+import org.junit.experimental.theories.Theories;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -79,7 +81,7 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicBody(float x, float y, float width, float height, World world, HostileType type) {
+	public Body createDynamicBody(float x, float y, float width, float height, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
@@ -92,7 +94,7 @@ public class Hostile extends Entity {
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
 
 		Fixture fixture = physicsBody.createFixture(fixtureDef);
-		fixture.setUserData(type);
+		fixture.setUserData(this);
 
 		rectangle.dispose(); // LibGDX
 
@@ -113,7 +115,7 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicBody(float x, float y, float radius, World world, HostileType type) {
+	public Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 		
@@ -127,7 +129,7 @@ public class Hostile extends Entity {
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
 		
 		Fixture fixture = physicsBody.createFixture(fixtureDef);
-		fixture.setUserData(type);
+		fixture.setUserData(this);
 		
 		circle.dispose(); // openGL
 

@@ -29,7 +29,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 		type = HostileType.CHARGE;
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(radius), world, type);
+				ScreenRenderer.pixelToMeter(radius), world);
 		body.setFixedRotation(false);
 		this.target = target;
 

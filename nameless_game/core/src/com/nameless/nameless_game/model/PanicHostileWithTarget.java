@@ -32,7 +32,7 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 		type = HostileType.PANIC;
 		
 		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world, type);
+				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
 	}
 
 	@Override
