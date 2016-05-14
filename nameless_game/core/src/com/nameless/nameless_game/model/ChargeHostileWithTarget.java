@@ -32,6 +32,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				ScreenRenderer.pixelToMeter(radius), world);
 		body.setFixedRotation(false);
 		this.target = target;
+		type = HostileType.CHARGE;
 	}
 
 	@Override

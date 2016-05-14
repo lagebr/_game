@@ -90,6 +90,16 @@ public class ScreenRenderer extends Renderer {
 		
 		batch.end();
 	}
+	
+
+	@Override
+	public void renderSprite(ArrayList<Sprite> spriteList) {
+		batch.begin();
+		for (Sprite sprite : spriteList) {
+			sprite.draw(batch);
+		}
+		batch.end();
+	}
 
 	/**
 	 * Draws a single entity in one batch.
@@ -141,11 +151,5 @@ public class ScreenRenderer extends Renderer {
 	 */
 	public Camera getCamera() {
 		return camera;
-	}
-
-	@Override
-	public void renderSprite(ArrayList<Sprite> spriteList) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -1,11 +1,13 @@
 package com.nameless.nameless_game.controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.ChargeHostileWithTarget;
@@ -28,6 +30,8 @@ public class NamelessGame extends ApplicationAdapter {
 	private ScreenRenderer renderer;
 
 	private Level level;
+	
+	private ArrayList<Sprite> spriteList;
 
 	@Override
 	public void create() {
@@ -48,27 +52,29 @@ public class NamelessGame extends ApplicationAdapter {
 		Random random = new Random();
 		for (int i = 0; i < 2; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
+			Hostile hostilePanic = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
 					hostileTexture, world, player);
-			level.addEntity(hostile);
+			level.addEntity(hostilePanic);
 		}
 		Hostile hostileCharger = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
 		level.addEntity(hostileCharger);
 		
+		spriteList = new ArrayList<Sprite>(5);
 		for (HostileType keyValue : level.getKeyTypes()) {
+			Texture texture;
 			switch (keyValue) {
-				case CHARGE :
-					
+				case CHARGE:
+					texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 					break;
-				
 				case PANIC:
-					
+					texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
 					break;
-					
 				default :
-					// Do nothing.
+					texture = null;
 					break;
 			}
+			Sprite sprite = new Sprite(texture);
+			spriteList.add(sprite);
 		}
 	}
 
@@ -87,6 +93,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
+		renderer.renderSprite(spriteList);
 		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
@@ -103,7 +110,8 @@ public class NamelessGame extends ApplicationAdapter {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP && event.keyPressed == true) {
+			} else if (event.action == InputAction.UP
+					&& event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {
