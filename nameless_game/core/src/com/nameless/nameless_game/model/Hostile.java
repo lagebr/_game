@@ -26,6 +26,14 @@ public class Hostile extends Entity {
 	
 	protected HostileType type;
 	
+	public HostileType getType() {
+		return type;
+	}
+
+	public void setType(HostileType type) {
+		this.type = type;
+	}
+
 	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(texture);
 

@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
+import com.nameless.nameless_game.model.HostileType;
 import com.nameless.nameless_game.model.Level;
 import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.model.Player;
@@ -55,7 +55,21 @@ public class NamelessGame extends ApplicationAdapter {
 		Hostile hostileCharger = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
 		level.addEntity(hostileCharger);
 		
-		
+		for (HostileType keyValue : level.getKeyTypes()) {
+			switch (keyValue) {
+				case CHARGE :
+					
+					break;
+				
+				case PANIC:
+					
+					break;
+					
+				default :
+					// Do nothing.
+					break;
+			}
+		}
 	}
 
 	/**
@@ -71,9 +85,8 @@ public class NamelessGame extends ApplicationAdapter {
 		}
 
 		renderer.prepare(Color.BLACK);
-		renderer.render(level.getEntities());
+		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
-		renderer.render(level.getKeyTypes());
 		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d

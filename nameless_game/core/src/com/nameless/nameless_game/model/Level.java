@@ -18,6 +18,15 @@ public class Level {
 	private ArrayList<Entity> entities;
 
 	private ArrayList<HostileType> keyTypes;
+	
+	public ArrayList<HostileType> getKeyTypes() {
+		return keyTypes;
+	}
+
+	public void setKeyTypes(ArrayList<HostileType> keyTypes) {
+		this.keyTypes = keyTypes;
+	}
+
 	/**
 	 * Constructs a level with a player and a physics world.
 	 * 

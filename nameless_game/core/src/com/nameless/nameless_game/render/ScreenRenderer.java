@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -80,7 +81,7 @@ public class ScreenRenderer extends Renderer {
 	 *            The entities to be drawn.
 	 */
 	@Override
-	public void render(ArrayList<Entity> entities) {
+	public void renderEntities(ArrayList<Entity> entities) {
 		batch.begin();
 		batch.setShader(null);
 		for (Entity entity : entities) {
@@ -140,5 +141,11 @@ public class ScreenRenderer extends Renderer {
 	 */
 	public Camera getCamera() {
 		return camera;
+	}
+
+	@Override
+	public void renderSprite(ArrayList<Sprite> spriteList) {
+		// TODO Auto-generated method stub
+		
 	}
 }
