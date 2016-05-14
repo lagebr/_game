@@ -1,20 +1,14 @@
 package com.nameless.nameless_game.controller;
 
-import java.util.Random;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
-import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.HostileType;
 import com.nameless.nameless_game.model.Level;
-import com.nameless.nameless_game.model.PanicHostileWithTarget;
-import com.nameless.nameless_game.model.Player;
+import com.nameless.nameless_game.model.LevelGenerator;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
@@ -38,22 +32,10 @@ public class NamelessGame extends ApplicationAdapter {
 
 		World world = new World(new Vector2(0, 0), false);
 
-		Texture playerTexture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		Player player = new Player(75, 75, 60, playerTexture, world);
-
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
-		level = new Level(levelWidth, levelHeight, player, world);
 
-		Random random = new Random();
-		for (int i = 0; i < 2; i++) {
-			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
-					hostileTexture, world, player);
-			level.addEntity(hostile);
-		}
-		Hostile hostileCharger = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
-		level.addEntity(hostileCharger);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
 		
 		for (HostileType keyValue : level.getKeyTypes()) {
 			switch (keyValue) {
