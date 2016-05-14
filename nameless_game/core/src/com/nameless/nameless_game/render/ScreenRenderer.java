@@ -27,6 +27,7 @@ public class ScreenRenderer extends Renderer {
 
 	private Camera camera;
 	private SpriteBatch batch;
+	private SpriteBatch guiBatch;
 
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
@@ -47,6 +48,7 @@ public class ScreenRenderer extends Renderer {
 		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
+		guiBatch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
 
@@ -96,25 +98,30 @@ public class ScreenRenderer extends Renderer {
 		float offset = 50;
 		float wHalf = Gdx.graphics.getWidth() / 2;
 		float hFull = Gdx.graphics.getHeight();
-
-		batch.begin();
+		
+		// TODO Refine it
+		float start = wHalf - (offset * ((keySeqTextureList.size()-1 / 2) ));
 		// Centering
 		if (keySeqTextureList.size() % 2 == 1) {
-			float start = offset * (keySeqTextureList.size() - 1) / 2 - wHalf;
-			float x = start; // start point, origo bottom left corner of screen
+			float x = start; // start point, origo bottom left corner of window
+			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				batch.draw(texture, x, hFull - 25); // add width and height
-				x = x - offset;
+				guiBatch.draw(texture, x, hFull - 65); // add width and height
+				x = x + offset + texture.getWidth();
 			}
+			guiBatch.end();
+			
 		} else {
-			float start = wHalf - offset * (keySeqTextureList.size() / 2);
+			start = wHalf - offset * (keySeqTextureList.size() / 2);
 			float x = start;
+			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				batch.draw(texture, x, hFull - 25); // add width and height
+				guiBatch.draw(texture, x, hFull - 65); // add width and height
 				x = x - offset;
 			}
+			guiBatch.end();
 		}
-		batch.end();
+
 	}
 
 	/**
