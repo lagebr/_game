@@ -3,7 +3,6 @@ package com.nameless.nameless_game.model;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Level describes a level in the game.
@@ -17,9 +16,8 @@ public class Level {
 	private Border border;
 
 	private ArrayList<Entity> entities;
-	
-	private Array<Entity> keyTypes;
 
+	private ArrayList<HostileType> keyTypes;
 	/**
 	 * Constructs a level with a player and a physics world.
 	 * 
@@ -37,18 +35,8 @@ public class Level {
 		this.world = world;
 
 		border = new Border(width, height, world);
-
 		entities = new ArrayList<Entity>();
-		
-		keyTypes =  new Array<Entity>(5);
-	}
-
-	public Array<Entity> getKeyTypes() {
-		return keyTypes;
-	}
-
-	public void setKeyTypes(Array<Entity> keyTypes) {
-		this.keyTypes = keyTypes;
+		keyTypes = new ArrayList<HostileType>(5);;
 	}
 
 	public World getWorld() {
@@ -88,12 +76,13 @@ public class Level {
 			return false;
 		}
 	}
-	
+
 	private void getTypes() {
 		for (Entity entity : entities) {
-			if (!keyTypes.contains(entity, true)) {
-				keyTypes.add(entity);
-			}
+			if (entity instanceof Hostile)
+				if (!keyTypes.contains(((Hostile) entity).getType())) {
+					keyTypes.add(((Hostile) entity).getType());
+				}
 		}
 	}
 }
