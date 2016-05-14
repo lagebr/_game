@@ -18,18 +18,12 @@ public class LevelGenerator {
 
 	private static Random random = new Random();
 
-	/**
-	 * 
-	 */
-	public LevelGenerator() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static Level generateLevel(float width, float height, World world, int numHostiles) {
 		Player player = createPlayer(width / 2, height / 2, world);
 		Level level = new Level(width, height, player, world);
 
 		for (int i = 0; i < numHostiles; i++) {
+			/// Add spawn expections
 			float x = random.nextInt((int) width - 100) + 50;
 			float y = random.nextInt((int) height - 100) + 50;
 			

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -27,13 +26,14 @@ public class ScreenRenderer extends Renderer {
 
 	private Camera camera;
 	private SpriteBatch batch;
+	private SpriteBatch guiBatch;
 
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
 
 	private ShaderProgram shader;
-	String vertexShader;
-	String fragmentShader;
+	private String vertexShader;
+	private String fragmentShader;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -47,6 +47,7 @@ public class ScreenRenderer extends Renderer {
 		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
+		guiBatch = new SpriteBatch();
 
 		debugRenderer = new Box2DDebugRenderer();
 
@@ -93,21 +94,33 @@ public class ScreenRenderer extends Renderer {
 
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
-		batch.begin();
+		float offset = 50;
+		float wHalf = Gdx.graphics.getWidth() / 2;
+		float hFull = Gdx.graphics.getHeight();
+		
+		// TODO Refine it
+		float start = wHalf - (offset * ((keySeqTextureList.size()-1 / 2) ));
 		// Centering
 		if (keySeqTextureList.size() % 2 == 1) {
-			float g = Gdx.graphics.getWidth(); 
-			
-			
+			float x = start; // start point, origo bottom left corner of window
+			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				Sprite sprite = new Sprite(texture);
-				// 
+				guiBatch.draw(texture, x, hFull - 65); // add width and height
+				x = x + offset + texture.getWidth();
 			}
-		} else {
+			guiBatch.end();
 			
+		} else {
+			start = wHalf - offset * (keySeqTextureList.size() / 2);
+			float x = start;
+			guiBatch.begin();
+			for (Texture texture : keySeqTextureList) {
+				guiBatch.draw(texture, x, hFull - 65); // add width and height
+				x = x - offset;
+			}
+			guiBatch.end();
 		}
-		
-		batch.end();
+
 	}
 
 	/**
