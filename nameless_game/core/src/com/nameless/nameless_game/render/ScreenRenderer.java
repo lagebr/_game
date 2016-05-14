@@ -74,19 +74,6 @@ public class ScreenRenderer extends Renderer {
 	}
 	
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void render(Array<Entity> entities) {
-		batch.begin();
-		for (Entity entity : entities) {
-			entity.getSprite().draw(batch);
-		}
-		batch.end();
-		
-	}
-
-	/**
 	 * Draws entities. All entities are drawn in the same batch.
 	 * 
 	 * @param entities
