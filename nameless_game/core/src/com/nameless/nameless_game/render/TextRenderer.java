@@ -5,6 +5,7 @@ package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.utils.Array;
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -19,5 +20,11 @@ public class TextRenderer extends Renderer {
 	public void render(ArrayList<Entity> entities) {
 		// TODO
 
+	}
+
+	@Override
+	public void render(Array<Entity> entities) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.nameless.nameless_game.model.ChargeHostileWithTarget;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.Hostile;
@@ -45,7 +46,7 @@ public class NamelessGame extends ApplicationAdapter {
 		level = new Level(levelWidth, levelHeight, player, world);
 
 		Random random = new Random();
-		for (int i = 0; i < 0; i++) {
+		for (int i = 0; i < 2; i++) {
 			Texture hostileTexture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
 			Hostile hostile = new PanicHostileWithTarget(random.nextInt(600) + 100, random.nextInt(400) + 100, 50, 50,
 					hostileTexture, world, player);
@@ -53,6 +54,8 @@ public class NamelessGame extends ApplicationAdapter {
 		}
 		Hostile hostileC = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
 		level.addEntity(hostileC);
+		
+		
 	}
 
 	/**
@@ -70,6 +73,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.render(level.getEntities());
 		renderer.render(level.getPlayer());
+		renderer.render(level.getKeyTypes());
 		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d

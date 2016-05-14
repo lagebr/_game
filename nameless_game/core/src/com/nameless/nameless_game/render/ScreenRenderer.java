@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.model.Border;
+import com.badlogic.gdx.utils.Array;
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -30,8 +30,10 @@ public class ScreenRenderer extends Renderer {
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
 	
-	private ShapeRenderer shapeRenderer = new ShapeRenderer();
-
+	private ShaderProgram shader;
+    String vertexShader;
+    String fragmentShader;
+    
 	/**
 	 * Draws all entities on screen using an perspective camera.
 	 * 
@@ -50,6 +52,10 @@ public class ScreenRenderer extends Renderer {
 		camera.position.set(width / 2, height / 2 - 100, 700);
 		camera.lookAt(width / 2, height / 2, 0);
 		camera.far = 100000;
+		
+        vertexShader = Gdx.files.internal("vertex.glsl").readString();
+        fragmentShader = Gdx.files.internal("fragment.glsl").readString();
+        shader = new ShaderProgram(vertexShader,fragmentShader);
 	}
 
 	/**
@@ -66,6 +72,19 @@ public class ScreenRenderer extends Renderer {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void render(Array<Entity> entities) {
+		batch.begin();
+		for (Entity entity : entities) {
+			entity.getSprite().draw(batch);
+		}
+		batch.end();
+		
+	}
 
 	/**
 	 * Draws entities. All entities are drawn in the same batch.
@@ -76,9 +95,11 @@ public class ScreenRenderer extends Renderer {
 	@Override
 	public void render(ArrayList<Entity> entities) {
 		batch.begin();
+		batch.setShader(null);
 		for (Entity entity : entities) {
 			entity.getSprite().draw(batch);
 		}
+		
 		batch.end();
 	}
 
