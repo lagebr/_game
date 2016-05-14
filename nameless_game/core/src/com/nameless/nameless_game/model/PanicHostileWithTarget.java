@@ -23,12 +23,16 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 
 	public PanicHostileWithTarget(float x, float y, float width, float height, Texture texture, World world,
 			Entity target) {
-		super(x, y, width, height, texture, world);
+		//super(x, y, width, height, texture, world);
+		super(texture);
 
 		this.target = target;
 		panicDistance = ScreenRenderer.pixelToMeter(200);
 		
 		type = HostileType.PANIC;
+		
+		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
+				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world, type);
 	}
 
 	@Override

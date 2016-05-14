@@ -24,15 +24,15 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private float napTime = 5f;
 	private float angVelocity = 1f;
 
-	public ChargeHostileWithTarget(float x, float y, float radius,
-			Texture texture, World world, Entity target) {
+	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
 		super(texture);
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x),
-				ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(radius), world);
+
+		type = HostileType.CHARGE;
+		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
+				ScreenRenderer.pixelToMeter(radius), world, type);
 		body.setFixedRotation(false);
 		this.target = target;
-		type = HostileType.CHARGE;
+
 	}
 
 	@Override
@@ -47,8 +47,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			v = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			// Check (radians) if target is in within field of view
-			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6
-					* MathUtils.PI / 180) {
+			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 				angVelocity = 0.1f;
@@ -77,8 +76,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		float c = 1.7f * (float) (chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
-		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),
-				body.getWorldCenter(), true);
+		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
 
 		float delay = 1f;
 		Timer.schedule(new Task() {

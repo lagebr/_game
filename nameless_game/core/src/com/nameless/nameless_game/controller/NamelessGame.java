@@ -7,6 +7,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
 import com.nameless.nameless_game.model.HostileType;
@@ -25,7 +29,7 @@ public class NamelessGame extends ApplicationAdapter {
 	private ScreenRenderer renderer;
 
 	private Level level;
-	
+
 	private ArrayList<Texture> keySeqTextureList;
 
 	@Override
@@ -39,25 +43,59 @@ public class NamelessGame extends ApplicationAdapter {
 
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
-		
+
 		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
-		
+
+		createCollisionListener();
+
 		keySeqTextureList = new ArrayList<Texture>(5);
 		for (HostileType keyValue : level.getKeyTypes()) {
 			Texture texture;
 			switch (keyValue) {
-				case CHARGE:
-					texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-					break;
-				case PANIC:
-					texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-					break;
-				default :
-					texture = null;
-					break;
+			case CHARGE:
+				texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
+				break;
+			case PANIC:
+				texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
+				break;
+			default:
+				texture = null;
+				break;
 			}
 			keySeqTextureList.add(texture);
 		}
+	}
+
+	private void createCollisionListener() {
+		level.getWorld().setContactListener(new ContactListener() {
+
+			@Override
+			public void preSolve(Contact contact, Manifold oldManifold) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void postSolve(Contact contact, ContactImpulse impulse) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void endContact(Contact contact) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beginContact(Contact contact) {
+				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					System.out.println("Player collided!");
+				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					System.out.println("Player collided!");
+				}
+			}
+		});
 	}
 
 	/**
@@ -92,8 +130,7 @@ public class NamelessGame extends ApplicationAdapter {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP
-					&& event.keyPressed == true) {
+			} else if (event.action == InputAction.UP && event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {

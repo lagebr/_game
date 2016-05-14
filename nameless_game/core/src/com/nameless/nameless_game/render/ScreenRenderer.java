@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -33,8 +32,8 @@ public class ScreenRenderer extends Renderer {
 	private FPSLogger logger = new FPSLogger();
 
 	private ShaderProgram shader;
-	String vertexShader;
-	String fragmentShader;
+	private String vertexShader;
+	private String fragmentShader;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -145,7 +144,7 @@ public class ScreenRenderer extends Renderer {
 	public void renderDebug(World world) {
 		debugRenderer.render(world, camera.combined.scale(meterToPixel(1),
 				meterToPixel(1), meterToPixel(1)));
-		logger.log();
+		//logger.log();
 	}
 
 	/**

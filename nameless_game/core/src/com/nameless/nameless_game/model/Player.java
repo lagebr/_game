@@ -51,11 +51,11 @@ public class Player extends Entity {
 		super.update(deltaTime);
 
 		if (leftRotate) {
-			body.applyTorque(1.0f, true);
+			body.applyTorque(3.0f, true);
 		}
 
 		if (rightRotate) {
-			body.applyTorque(-1.0f, true);
+			body.applyTorque(-3.0f, true);
 		}
 		
 		if (isBoosting) {
@@ -104,7 +104,8 @@ public class Player extends Entity {
 	 */
 	public static Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
-		bodyDef.angularDamping = 1.0f;
+		bodyDef.angularDamping = 5.0f;
+		bodyDef.linearDamping = 1.0f;
 
 		Body physicsBody = world.createBody(bodyDef);
 
@@ -112,6 +113,7 @@ public class Player extends Entity {
 		circle.setRadius(radius);
 
 		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 0.5f);
+		fixtureDef.friction = 0.0f;
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY;
 		fixtureDef.filter.maskBits = Entity.NPC_ENTITY;
