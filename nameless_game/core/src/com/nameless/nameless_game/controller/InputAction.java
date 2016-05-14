@@ -7,5 +7,5 @@ package com.nameless.nameless_game.controller;
  * @version 2016-05-04
  */
 public enum InputAction {
-	UP, DOWN, LEFT, RIGHT;
+	UP, DOWN, LEFT, RIGHT, BOOST;
 }
