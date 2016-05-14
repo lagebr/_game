@@ -28,7 +28,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super(texture);
 
 		type = HostileType.CHARGE;
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
+		body = createDynamicCircleBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(radius), world);
 		body.setFixedRotation(false);
 		this.target = target;
