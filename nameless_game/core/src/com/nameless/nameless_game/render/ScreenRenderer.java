@@ -93,20 +93,27 @@ public class ScreenRenderer extends Renderer {
 
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
+		float offset = 50;
+		float wHalf = Gdx.graphics.getWidth() / 2;
+		float hFull = Gdx.graphics.getHeight();
+
 		batch.begin();
 		// Centering
 		if (keySeqTextureList.size() % 2 == 1) {
-			float g = Gdx.graphics.getWidth(); 
-			
-			
+			float start = offset * (keySeqTextureList.size() - 1) / 2 - wHalf;
+			float x = start; // start point, origo bottom left corner of screen
 			for (Texture texture : keySeqTextureList) {
-				Sprite sprite = new Sprite(texture);
-				// 
+				batch.draw(texture, x, hFull - 25); // add width and height
+				x = x - offset;
 			}
 		} else {
-			
+			float start = wHalf - offset * (keySeqTextureList.size() / 2);
+			float x = start;
+			for (Texture texture : keySeqTextureList) {
+				batch.draw(texture, x, hFull - 25); // add width and height
+				x = x - offset;
+			}
 		}
-		
 		batch.end();
 	}
 
