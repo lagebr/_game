@@ -98,7 +98,7 @@ public class Hostile extends Entity {
 	}
 
 	/**
-	 * createBody creates a rectangular, static physics body, adds it to the
+	 * createBody creates a circular, dynamic physics body, adds it to the
 	 * physics world and returns it.
 	 * 
 	 * @param x
