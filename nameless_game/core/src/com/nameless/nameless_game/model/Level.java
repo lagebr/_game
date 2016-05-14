@@ -18,7 +18,7 @@ public class Level {
 	private ArrayList<Entity> entities;
 
 	private ArrayList<HostileType> keyTypes;
-	
+
 	public ArrayList<HostileType> getKeyTypes() {
 		return keyTypes;
 	}
@@ -79,19 +79,17 @@ public class Level {
 	public boolean addEntity(Entity entity) {
 		if (entity.getBody().getWorld().equals(world)) {
 			entities.add(entity);
-			getTypes();
+			getTypes(entity);
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private void getTypes() {
-		for (Entity entity : entities) {
-			if (entity instanceof Hostile)
-				if (!keyTypes.contains(((Hostile) entity).getType())) {
-					keyTypes.add(((Hostile) entity).getType());
-				}
-		}
+	private void getTypes(Entity entity) {
+		if (entity instanceof Hostile)
+			if (!keyTypes.contains(((Hostile) entity).getType())) {
+				keyTypes.add(((Hostile) entity).getType());
+			}
 	}
 }
