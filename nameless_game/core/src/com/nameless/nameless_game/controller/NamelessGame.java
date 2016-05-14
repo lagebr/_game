@@ -31,7 +31,7 @@ public class NamelessGame extends ApplicationAdapter {
 
 	private Level level;
 	
-	private ArrayList<Sprite> spriteList;
+	private ArrayList<Texture> keySeqTextureList;
 
 	@Override
 	public void create() {
@@ -59,7 +59,7 @@ public class NamelessGame extends ApplicationAdapter {
 		Hostile hostileCharger = new ChargeHostileWithTarget(400, 400, 60, playerTexture, world, player);
 		level.addEntity(hostileCharger);
 		
-		spriteList = new ArrayList<Sprite>(5);
+		keySeqTextureList = new ArrayList<Texture>(5);
 		for (HostileType keyValue : level.getKeyTypes()) {
 			Texture texture;
 			switch (keyValue) {
@@ -73,8 +73,7 @@ public class NamelessGame extends ApplicationAdapter {
 					texture = null;
 					break;
 			}
-			Sprite sprite = new Sprite(texture);
-			spriteList.add(sprite);
+			keySeqTextureList.add(texture);
 		}
 	}
 
@@ -93,7 +92,7 @@ public class NamelessGame extends ApplicationAdapter {
 		renderer.prepare(Color.BLACK);
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
-		renderer.renderSprite(spriteList);
+		
 		renderer.renderDebug(level.getWorld());
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d

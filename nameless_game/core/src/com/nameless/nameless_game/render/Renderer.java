@@ -2,7 +2,7 @@ package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.Texture;
 import com.nameless.nameless_game.model.Entity;
 
 /**
@@ -28,5 +28,5 @@ public abstract class Renderer {
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void renderSprite(ArrayList<Sprite> spriteList);
+	public abstract void renderKeySeq(ArrayList<Texture> keySeqTextureList);
 }
