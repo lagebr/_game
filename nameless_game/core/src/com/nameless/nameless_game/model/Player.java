@@ -59,7 +59,10 @@ public class Player extends Entity {
 		}
 		
 		if (isBoosting) {
+			float xForce = 10 * (float) Math.cos((double) body.getAngle());
+			float yForce = 10 * (float) Math.sin((double) body.getAngle());
 			
+			body.applyForceToCenter(xForce,  yForce, true);
 		}
 	}
 
@@ -134,5 +137,13 @@ public class Player extends Entity {
 
 	public void setRightRotate(boolean rightRotate) {
 		this.rightRotate = rightRotate;
+	}
+
+	public boolean isBoosting() {
+		return isBoosting;
+	}
+
+	public void setBoosting(boolean isBoosting) {
+		this.isBoosting = isBoosting;
 	}
 }

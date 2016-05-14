@@ -88,6 +88,12 @@ public class NamelessGame extends ApplicationAdapter {
 				level.getPlayer().setRightRotate(event.keyPressed);
 			} else if (event.action == InputAction.UP && event.keyPressed == true) {
 				level.getPlayer().impulseForward();
+			} else if (event.action == InputAction.BOOST) {
+				if (event.keyPressed == true) {
+					level.getPlayer().setBoosting(true);
+				} else {
+					level.getPlayer().setBoosting(false);
+				}
 			}
 		}
 		inputProcessor.getActionQueue().clear();
