@@ -13,9 +13,11 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.HostileType;
 import com.nameless.nameless_game.model.Level;
 import com.nameless.nameless_game.model.LevelGenerator;
+import com.nameless.nameless_game.model.PanicHostileWithTarget;
 import com.nameless.nameless_game.render.ScreenRenderer;
 
 /**
@@ -68,32 +70,31 @@ public class NamelessGame extends ApplicationAdapter {
 
 	private void createCollisionListener() {
 		level.getWorld().setContactListener(new ContactListener() {
-
 			@Override
-			public void preSolve(Contact contact, Manifold oldManifold) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void postSolve(Contact contact, ContactImpulse impulse) {
-				// TODO Auto-generated method stub
-
+			public void beginContact(Contact contact) {
+				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureB().getUserData() instanceof Hostile) {
+						Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
+						System.out.println(hostileB.getType().toString());
+					}
+				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureA().getUserData() instanceof Hostile) {
+						Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
+						System.out.println(hostileA.getType().toString());
+					}
+				}
 			}
 
 			@Override
 			public void endContact(Contact contact) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
-			public void beginContact(Contact contact) {
-				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					System.out.println("Player collided!");
-				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					System.out.println("Player collided!");
-				}
+			public void preSolve(Contact contact, Manifold oldManifold) {
+			}
+
+			@Override
+			public void postSolve(Contact contact, ContactImpulse impulse) {
 			}
 		});
 	}
