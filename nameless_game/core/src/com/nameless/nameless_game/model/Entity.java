@@ -20,6 +20,8 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class Entity {
 	protected Body body;
 	protected Sprite sprite;
+	
+	private boolean flaggedForDeletion = false;
 
 	// Filtering masks
 	public final static short PLAYER_ENTITY = 0x1;
@@ -130,5 +132,13 @@ public class Entity {
 
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
+	}
+
+	public boolean isFlaggedForDeletion() {
+		return flaggedForDeletion;
+	}
+
+	public void setFlaggedForDeletion(boolean flaggedForDeletion) {
+		this.flaggedForDeletion = flaggedForDeletion;
 	}
 }
