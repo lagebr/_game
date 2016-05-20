@@ -79,14 +79,15 @@ public class Level {
 	public boolean addEntity(Entity entity) {
 		if (entity.getBody().getWorld().equals(world)) {
 			entities.add(entity);
-			getTypes(entity);
+			addTypes(entity);
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-	private void getTypes(Entity entity) {
+	
+	/* Helper method. Keeps a list of unique hostile types.*/
+	private void addTypes(Entity entity) {
 		if (entity instanceof Hostile)
 			if (!keyTypes.contains(((Hostile) entity).getType())) {
 				keyTypes.add(((Hostile) entity).getType());

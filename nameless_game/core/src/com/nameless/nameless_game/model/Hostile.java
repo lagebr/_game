@@ -26,9 +26,9 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  */
 public class Hostile extends Entity {
 	private Random random = new Random(); // TODO Use LibGDX own random.
-	
+
 	protected HostileType type;
-	
+
 	public HostileType getType() {
 		return type;
 	}
@@ -37,11 +37,14 @@ public class Hostile extends Entity {
 		this.type = type;
 	}
 
-	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
+	public Hostile(float x, float y, float width, float height, Texture texture,
+			World world) {
 		super(texture);
 
-		//body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				//ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
+		body = createDynamicBody(ScreenRenderer.pixelToMeter(x),
+				ScreenRenderer.pixelToMeter(y),
+				ScreenRenderer.pixelToMeter(width),
+				ScreenRenderer.pixelToMeter(height), world);
 	}
 
 	/**
@@ -62,7 +65,8 @@ public class Hostile extends Entity {
 		float impulseX = ((float) random.nextInt(2000) - 1000) / 50000;
 		float impulseY = ((float) random.nextInt(2000) - 1000) / 50000;
 
-		body.applyLinearImpulse(new Vector2(impulseX, impulseY), body.getLocalCenter(), true);
+		body.applyLinearImpulse(new Vector2(impulseX, impulseY),
+				body.getLocalCenter(), true);
 	}
 
 	/**
@@ -81,8 +85,10 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public Body createDynamicBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+	public Body createDynamicBody(float x, float y, float width, float height,
+			World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
+				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectangle = new PolygonShape();
@@ -115,22 +121,23 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public Body createDynamicBody(float x, float y, float radius, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+	public Body createDynamicCircleBody(float x, float y, float radius, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
+				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
-		
+
 		CircleShape circle = new CircleShape();
 		circle.setRadius(radius);
 
 		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 1.0f);
-				
+
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
-		
+
 		Fixture fixture = physicsBody.createFixture(fixtureDef);
-		fixture.setUserData(this);
-		
+		fixture.setUserData(this); // this = method caller
+
 		circle.dispose(); // openGL
 
 		return physicsBody;

@@ -94,6 +94,7 @@ public class ScreenRenderer extends Renderer {
 
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
+		float iconSize = 45;
 		float offset = 50;
 		float wHalf = Gdx.graphics.getWidth() / 2;
 		float hFull = Gdx.graphics.getHeight();
@@ -105,7 +106,7 @@ public class ScreenRenderer extends Renderer {
 			float x = start; // start point, origo bottom left corner of window
 			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				guiBatch.draw(texture, x, hFull - 65); // add width and height
+			guiBatch.draw(texture, x, hFull - 65,  iconSize, iconSize); // add width and height
 				x = x + offset + texture.getWidth();
 			}
 			guiBatch.end();
@@ -115,7 +116,7 @@ public class ScreenRenderer extends Renderer {
 			float x = start;
 			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				guiBatch.draw(texture, x, hFull - 65); // add width and height
+				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add width and height
 				x = x - offset;
 			}
 			guiBatch.end();
