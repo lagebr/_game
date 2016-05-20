@@ -76,11 +76,13 @@ public class NamelessGame extends ApplicationAdapter {
 					if (contact.getFixtureB().getUserData() instanceof Hostile) {
 						Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
 						System.out.println(hostileB.getType().toString());
+						hostileB.setFlaggedForDeletion(true);
 					}
 				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureA().getUserData() instanceof Hostile) {
 						Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
 						System.out.println(hostileA.getType().toString());
+						hostileA.setFlaggedForDeletion(true);
 					}
 				}
 			}
@@ -119,6 +121,18 @@ public class NamelessGame extends ApplicationAdapter {
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 		level.getWorld().step(1f / 60f, 6, 2);
+		
+		for (int i = 0; i < level.getEntities().size() - 1; i++) {
+			Entity entity = level.getEntities().get(i);
+			if (entity.isFlaggedForDeletion()) {
+				level.getWorld().destroyBody(entity.getBody());
+				entity.getBody().setUserData(null);
+				entity.setBody(null);
+				entity.setSprite(null);
+				level.getEntities().remove(i);
+				entity = null;
+			}
+		}
 	}
 
 	/**
