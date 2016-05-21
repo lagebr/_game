@@ -98,25 +98,31 @@ public class ScreenRenderer extends Renderer {
 		float offset = 50;
 		float wHalf = Gdx.graphics.getWidth() / 2;
 		float hFull = Gdx.graphics.getHeight();
-		
+
 		// TODO Refine it
-		float start = wHalf - (offset * ((keySeqTextureList.size()-1 / 2) ));
+		float start = wHalf - (offset * ((keySeqTextureList.size() - 1 / 2)));
 		// Centering
 		if (keySeqTextureList.size() % 2 == 1) {
 			float x = start; // start point, origo bottom left corner of window
 			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-			guiBatch.draw(texture, x, hFull - 65,  iconSize, iconSize); // add width and height
+				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add
+																			// width
+																			// and
+																			// height
 				x = x + offset + texture.getWidth();
 			}
 			guiBatch.end();
-			
+
 		} else {
 			start = wHalf - offset * (keySeqTextureList.size() / 2);
 			float x = start;
 			guiBatch.begin();
 			for (Texture texture : keySeqTextureList) {
-				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add width and height
+				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add
+																			// width
+																			// and
+																			// height
 				x = x - offset;
 			}
 			guiBatch.end();
@@ -145,7 +151,7 @@ public class ScreenRenderer extends Renderer {
 	public void renderDebug(World world) {
 		debugRenderer.render(world, camera.combined.scale(meterToPixel(1),
 				meterToPixel(1), meterToPixel(1)));
-		//logger.log();
+		// logger.log();
 	}
 
 	/**

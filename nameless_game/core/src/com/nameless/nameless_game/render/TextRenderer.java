@@ -26,6 +26,6 @@ public class TextRenderer extends Renderer {
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

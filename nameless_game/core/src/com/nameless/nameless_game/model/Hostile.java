@@ -25,7 +25,7 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  *
  */
 public class Hostile extends Entity {
-	private Random random = new Random(); // TODO Use LibGDX own random.
+	private Random random = new Random();
 
 	protected HostileType type;
 
@@ -121,7 +121,8 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public Body createDynamicCircleBody(float x, float y, float radius, World world) {
+	public Body createDynamicCircleBody(float x, float y, float radius,
+			World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
 				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);

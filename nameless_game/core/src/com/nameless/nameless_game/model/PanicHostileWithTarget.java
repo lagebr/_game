@@ -21,18 +21,19 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 
 	private float panicDistance;
 
-	public PanicHostileWithTarget(float x, float y, float width, float height, Texture texture, World world,
-			Entity target) {
-		//super(x, y, width, height, texture, world);
+	public PanicHostileWithTarget(float x, float y, float width, float height,
+			Texture texture, World world, Entity target) {
 		super(texture);
 
 		this.target = target;
 		panicDistance = ScreenRenderer.pixelToMeter(200);
-		
+
 		type = HostileType.PANIC;
-		
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
+
+		body = createDynamicBody(ScreenRenderer.pixelToMeter(x),
+				ScreenRenderer.pixelToMeter(y),
+				ScreenRenderer.pixelToMeter(width),
+				ScreenRenderer.pixelToMeter(height), world);
 	}
 
 	@Override
@@ -48,11 +49,13 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 			float x = (float) (dx / Math.abs(dx) * 2);
 			float y = (float) (dy / Math.abs(dy) * 2);
 
-			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(), true);
+			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(),
+					true);
 		} else {
 			float x = (float) (random.nextInt(2000) - 1000) / 5000f;
 			float y = (float) (random.nextInt(2000) - 1000) / 5000f;
-			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(), true);
+			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(),
+					true);
 		}
 	}
 }

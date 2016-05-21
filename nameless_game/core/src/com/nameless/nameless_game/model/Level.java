@@ -28,6 +28,36 @@ public class Level {
 	}
 
 	/**
+	 * Attempts to add an entity to level. Entity is only added if its' physics
+	 * world is the same as the level's physics world.
+	 * 
+	 * @param entity
+	 *            The entity to be added.
+	 * @return
+	 *         <ul>
+	 *         <li>True - entity was successfully added.</li>
+	 *         <li>False - entity was not added.</li>
+	 *         </ul>
+	 */
+	public boolean addEntity(Entity entity) {
+		if (entity.getBody().getWorld().equals(world)) {
+			entities.add(entity);
+			addTypes(entity);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/* Helper method. Keeps a list of unique hostile types. */
+	private void addTypes(Entity entity) {
+		if (entity instanceof Hostile)
+			if (!keyTypes.contains(((Hostile) entity).getType())) {
+				keyTypes.add(((Hostile) entity).getType());
+			}
+	}
+
+	/**
 	 * Constructs a level with a player and a physics world.
 	 * 
 	 * @param width
@@ -64,33 +94,4 @@ public class Level {
 		return entities;
 	}
 
-	/**
-	 * Attempts to add an entity to level. Entity is only added if its' physics
-	 * world is the same as the level's physics world.
-	 * 
-	 * @param entity
-	 *            The entity to be added.
-	 * @return
-	 *         <ul>
-	 *         <li>True - entity was successfully added.</li>
-	 *         <li>False - entity was not added.</li>
-	 *         </ul>
-	 */
-	public boolean addEntity(Entity entity) {
-		if (entity.getBody().getWorld().equals(world)) {
-			entities.add(entity);
-			addTypes(entity);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	/* Helper method. Keeps a list of unique hostile types.*/
-	private void addTypes(Entity entity) {
-		if (entity instanceof Hostile)
-			if (!keyTypes.contains(((Hostile) entity).getType())) {
-				keyTypes.add(((Hostile) entity).getType());
-			}
-	}
 }

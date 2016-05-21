@@ -40,14 +40,16 @@ public class NamelessGame extends ApplicationAdapter {
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
-		renderer = new ScreenRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		renderer = new ScreenRenderer(Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight());
 
 		World world = new World(new Vector2(0, 0), false);
 
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
-		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world,
+				10);
 
 		createCollisionListener();
 
@@ -55,15 +57,17 @@ public class NamelessGame extends ApplicationAdapter {
 		for (HostileType keyValue : level.getKeyTypes()) {
 			Texture texture;
 			switch (keyValue) {
-			case CHARGE:
-				texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-				break;
-			case PANIC:
-				texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-				break;
-			default:
-				texture = null;
-				break;
+				case CHARGE :
+					texture = new Texture(
+							Gdx.files.internal("PlayerCircle120x120.png"));
+					break;
+				case PANIC :
+					texture = new Texture(
+							Gdx.files.internal("GreenSquare50x50.png"));
+					break;
+				default :
+					texture = null;
+					break;
 			}
 			keySeqTextureList.add(texture);
 		}
@@ -74,15 +78,21 @@ public class NamelessGame extends ApplicationAdapter {
 		level.getWorld().setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
-				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureB().getUserData() instanceof Hostile) {
-						Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
+				if (contact.getFixtureA()
+						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureB()
+							.getUserData() instanceof Hostile) {
+						Hostile hostileB = (Hostile) contact.getFixtureB()
+								.getUserData();
 						System.out.println(hostileB.getType().toString());
 						hostileB.setFlaggedForDeletion(true);
 					}
-				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureA().getUserData() instanceof Hostile) {
-						Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
+				} else if (contact.getFixtureB()
+						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureA()
+							.getUserData() instanceof Hostile) {
+						Hostile hostileA = (Hostile) contact.getFixtureA()
+								.getUserData();
 						System.out.println(hostileA.getType().toString());
 						hostileA.setFlaggedForDeletion(true);
 					}
@@ -114,7 +124,7 @@ public class NamelessGame extends ApplicationAdapter {
 		for (Entity entity : level.getEntities()) {
 			entity.update(Gdx.graphics.getDeltaTime());
 		}
-		
+
 		renderer.prepare(Color.BLACK);
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
@@ -123,7 +133,7 @@ public class NamelessGame extends ApplicationAdapter {
 
 		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 		level.getWorld().step(1f / 60f, 6, 2);
-		
+
 		for (int i = 0; i < level.getEntities().size() - 1; i++) {
 			Entity entity = level.getEntities().get(i);
 			if (entity.isFlaggedForDeletion()) {
@@ -147,7 +157,8 @@ public class NamelessGame extends ApplicationAdapter {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP && event.keyPressed == true) {
+			} else if (event.action == InputAction.UP
+					&& event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {
