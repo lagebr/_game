@@ -1,6 +1,6 @@
 package com.nameless.nameless_game.controller;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 
 /**
  * NamelessGame is the main controller for the game. Handles input and updates.
@@ -8,14 +8,30 @@ import com.badlogic.gdx.ApplicationAdapter;
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-04
  */
-public class NamelessGame extends ApplicationAdapter {
+public class NamelessGame extends Game {
+
 	@Override
 	public void create() {
-
+		startMainMenu();
 	}
 
 	@Override
 	public void render() {
+		super.render(); // This renders currently selected screen.
+	}
 
+	/**
+	 * Goes to main menu by switching the screen to a new instance of
+	 * MenuController.
+	 */
+	public void startMainMenu() {
+		this.setScreen(new MenuController(this));
+	}
+
+	/**
+	 * Starts game by switching the screen to a new instance of GameController.
+	 */
+	public void startGame() {
+		this.setScreen(new GameController(this));
 	}
 }
