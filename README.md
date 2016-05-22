@@ -1,9 +1,3 @@
-### Current game as of 2016-05-20
-![](current_game_2016_05_20.png)
-
-### Game as of 2016-05-08
-![Alt text](namelessGIF.gif)
-
 ### Installation (Desktop)
 TBA
 
@@ -16,3 +10,9 @@ XX is a beautiful game made in Oracle's Java, with The Internet™ features by t
 XX is 2D topdown game, where you are a blob in an unknown space. You are to survive by propelling yourself forward, and steering out of danger's way. There are unfamiliar shapes which are hostile to you. They move in predictable patterns in the space. You're boxed in, use your boosted mode to knock out the hostiles.
 
 ![Alt text](prototype.JPG)
+
+### Current game as of 2016-05-20
+![](current_game_2016_05_20.png)
+
+### Game as of 2016-05-08
+![Alt text](namelessGIF.gif)
