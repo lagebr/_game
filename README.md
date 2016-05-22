@@ -1,6 +1,9 @@
 ### Current game as of 2016-05-20
 ![](current_game_2016_05_20.png)
 
+### Game as of 2016-05-08
+![Alt text](namelessGIF.mov)
+
 ### Installation (Desktop)
 TBA
 
