@@ -3,6 +3,7 @@ package com.nameless.nameless_game.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 
 /**
  * MenuController is responsible for updating the main menu and drawing it to
@@ -33,7 +34,12 @@ public class MenuController implements Screen {
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		if (Gdx.app.getInput().isKeyPressed(Input.Keys.SPACE)) {
+
+		}
 	}
 
 	@Override
