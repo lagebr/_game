@@ -17,12 +17,12 @@ import com.nameless.nameless_game.render.ScreenRenderer;
  */
 public class ChargeHostileWithTarget extends HostileWithTarget {
 	private double chargeDist = 0;
-	private double v = 0;
+	private double angle = 0;
 
 	boolean isSleeping = false;
 	private float timeSlept = 0;
-	private float napTime = 5f;
-	private float angVelocity = 1f;
+	private float napTime = 2.0f;
+	private float angVelocity = 2f;
 
 	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
 		super(texture);
@@ -44,16 +44,16 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			double dx = body.getPosition().x - target.getBody().getPosition().x;
 			double dy = body.getPosition().y - target.getBody().getPosition().y;
 
-			v = Math.atan2(dy, dx) + Math.PI;
+			angle = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			// Check (radians) if target is in within field of view
-			if (Math.abs(v - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
+			if (Math.abs(angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 				angVelocity = 0.1f;
 				// TODO removing testing code below
 				System.out.println((body.getAngle() * 180 / Math.PI) % 360);
-				System.out.println((v * 180 / Math.PI) % 360);
+				System.out.println((angle * 180 / Math.PI) % 360);
 			}
 
 		} else {
