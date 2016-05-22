@@ -43,11 +43,11 @@ public class MenuController implements Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		font.setColor(Color.BLACK);
+		font.setColor(Color.WHITE);
 		font.draw(batch, "Press <SPACE> to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		batch.end();
 
