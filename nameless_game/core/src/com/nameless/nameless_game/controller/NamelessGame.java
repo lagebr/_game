@@ -5,6 +5,9 @@ import com.badlogic.gdx.Game;
 /**
  * NamelessGame is the main controller for the game. Handles input and updates.
  * 
+ * Used {@link https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game}
+ * as a reference when creating menu system.
+ * 
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-04
  */
