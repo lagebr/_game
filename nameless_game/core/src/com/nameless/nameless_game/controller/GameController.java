@@ -36,6 +36,8 @@ public class GameController implements Screen {
 
 	private ArrayList<Texture> keySeqTextureList;
 
+	private NamelessGame game;
+
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
 	 * is used when game should pause or exit to main menu. Initializes game.
@@ -43,6 +45,8 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		this.game = game;
+
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
@@ -82,15 +86,21 @@ public class GameController implements Screen {
 			public void beginContact(Contact contact) {
 				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureB().getUserData() instanceof Hostile) {
-						Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
-						System.out.println(hostileB.getType().toString());
-						hostileB.setFlaggedForDeletion(true);
+						if (level.getPlayer().isBoosting() == false) {
+							game.startMainMenu();
+						} else {
+							Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
+							hostileB.setFlaggedForDeletion(true);
+						}
 					}
 				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureA().getUserData() instanceof Hostile) {
-						Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
-						System.out.println(hostileA.getType().toString());
-						hostileA.setFlaggedForDeletion(true);
+						if (level.getPlayer().isBoosting() == false) {
+							game.startMainMenu();
+						} else {
+							Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
+							hostileA.setFlaggedForDeletion(true);
+						}
 					}
 				}
 			}
