@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.width = 1024;
 		config.height = 768;
 		config.foregroundFPS = 60;
+		config.resizable = false;
 		new LwjglApplication(new NamelessGame(), config);
 	}
 }
