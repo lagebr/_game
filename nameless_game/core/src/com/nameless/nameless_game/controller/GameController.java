@@ -128,7 +128,7 @@ public class GameController implements Screen {
 				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureB().getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
-							game.startMainMenu();
+							game.startGameOver();
 						} else {
 							Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
 							hostileB.setFlaggedForDeletion(true);
@@ -138,7 +138,7 @@ public class GameController implements Screen {
 				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureA().getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
-							game.startMainMenu();
+							game.startGameOver();
 						} else {
 							Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
 							hostileA.setFlaggedForDeletion(true);
