@@ -51,7 +51,7 @@ public class GameController implements Screen {
 	 */
 	public GameController(NamelessGame game) {
 		isPreparing = true;
-		timeCount = 0;
+		timeCount = 3;
 
 		this.game = game;
 
@@ -97,6 +97,12 @@ public class GameController implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
+		renderer.prepare(Color.BLACK);
+		renderer.renderEntities(level.getEntities());
+		renderer.render(level.getPlayer());
+		renderer.renderKeySeq(keySeqTextureList);
+		renderer.renderDebug(level.getWorld());
+		
 		if (!isPreparing) {
 			handleInput();
 
@@ -105,11 +111,7 @@ public class GameController implements Screen {
 				entity.update(Gdx.graphics.getDeltaTime());
 			}
 
-			renderer.prepare(Color.BLACK);
-			renderer.renderEntities(level.getEntities());
-			renderer.render(level.getPlayer());
-			renderer.renderKeySeq(keySeqTextureList);
-			renderer.renderDebug(level.getWorld());
+			
 
 			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 			level.getWorld().step(1f / 60f, 6, 2);
@@ -126,8 +128,11 @@ public class GameController implements Screen {
 				}
 			}
 		} else {
-			timeCount += delta;
-			
+			timeCount -= delta;
+			renderer.renderCountDown((int)timeCount);
+			if (timeCount < 0) {
+			 isPreparing = false;	
+			}
 		}
 	}
 
