@@ -39,7 +39,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				ScreenGameRenderer.pixelToMeter(radius), world);
 
 		body.setFixedRotation(false);
-
+		updateSpritePosition();
 	}
 
 	@Override
