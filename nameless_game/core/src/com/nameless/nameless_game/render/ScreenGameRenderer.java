@@ -28,6 +28,8 @@ public class ScreenGameRenderer extends GameRenderer {
 	private Camera camera;
 	private SpriteBatch batch;
 	private SpriteBatch guiBatch;
+	
+	private Texture background;
 
 	private Box2DDebugRenderer debugRenderer;
 	private FPSLogger logger = new FPSLogger();
@@ -65,6 +67,8 @@ public class ScreenGameRenderer extends GameRenderer {
 		vertexShader = Gdx.files.internal("vertex.glsl").readString();
 		fragmentShader = Gdx.files.internal("fragment.glsl").readString();
 		shader = new ShaderProgram(vertexShader, fragmentShader);
+		
+		background = new Texture(Gdx.files.internal("simple_background.png"));
 	}
 
 	/**
@@ -82,6 +86,15 @@ public class ScreenGameRenderer extends GameRenderer {
 		batch.setProjectionMatrix(camera.combined);
 	}
 
+	public void renderBackground() {
+		float x = (float) -background.getWidth() / 2 + (float) Gdx.graphics.getWidth() / 2;
+		float y = (float) -background.getHeight() / 2 + (float) Gdx.graphics.getHeight() / 2;
+		
+		batch.begin();
+		batch.draw(background, x, y);
+		batch.end();
+	}
+	
 	/**
 	 * Draws entities. All entities are drawn in the same batch.
 	 * 

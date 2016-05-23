@@ -121,10 +121,11 @@ public class GameController implements Screen {
 		}
 
 		renderer.prepare(Color.BLACK);
+		renderer.renderBackground();
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
-		renderer.renderDebug(level.getWorld());
+		//renderer.renderDebug(level.getWorld());
 
 		if (!isPreparing) {
 			handleInput();
