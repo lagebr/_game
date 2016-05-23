@@ -3,7 +3,7 @@ package com.nameless.nameless_game.render;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Hostile;
 
 /**
  * Renderer is an abstract class which describes how a renderer should look
@@ -20,7 +20,7 @@ public abstract class GameRenderer {
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void renderEntities(ArrayList<Entity> entities);
+	public abstract void renderHostiles(ArrayList<Hostile> hostiles);
 
 	/**
 	 * Draws all sprites to screen.

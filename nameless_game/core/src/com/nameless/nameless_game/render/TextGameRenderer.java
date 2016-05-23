@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Hostile;
 
 /**
  * A text renderer for testing purposes.
@@ -17,15 +18,16 @@ import com.nameless.nameless_game.model.Entity;
  */
 public class TextGameRenderer extends GameRenderer {
 
-	@Override
-	public void renderEntities(ArrayList<Entity> entities) {
-		// TODO
-
-	}
 
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void renderHostiles(ArrayList<Hostile> hostiles) {
+		// TODO Auto-generated method stub
+		
 	}
 }
