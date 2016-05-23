@@ -75,7 +75,7 @@ public class Level {
 
 		border = new Border(width, height, world);
 		entities = new ArrayList<Entity>();
-		keyTypes = new ArrayList<HostileType>(5);;
+		keyTypes = new ArrayList<HostileType>(5);
 	}
 
 	public World getWorld() {

@@ -61,7 +61,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				isSleeping = true;
 
 				napTime = 1/4*(target.getBody().getPosition()
-						.dst(body.getPosition()) * -2.8f
+						.dst(body.getPosition()) * -1.9f
 						+ (float) Math.sqrt(width * width + height * height));
 				angVelocity = 0.01f;
 				// TODO removing testing code below
@@ -86,7 +86,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	 * afterwards.
 	 */
 	private void charge() {
-		float c = 1.7f * (float) (chargeDist);
+		float c = 1.1f * (float) (chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),

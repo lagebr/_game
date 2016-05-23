@@ -2,6 +2,7 @@ package com.nameless.nameless_game.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -28,6 +29,8 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @version 2016-05-22
  */
 public class GameController implements Screen {
+	
+	private Random random;
 
 	private GameInputProcessor inputProcessor;
 	private ScreenGameRenderer renderer;
@@ -40,6 +43,8 @@ public class GameController implements Screen {
 
 	private ArrayList<HostileType> keySeqProgression;
 
+	private ArrayList<HostileType> keyTypesLevelList;
+
 	private boolean isPreparing;
 	private float timeCount;
 
@@ -50,6 +55,8 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		random = new Random();
+		
 		isPreparing = true;
 		timeCount = 4;
 
@@ -70,9 +77,16 @@ public class GameController implements Screen {
 				10);
 
 		createCollisionListener();
-
+		
+		keyTypesLevelList = level.getKeyTypes();
+		while (keyTypesLevelList.size() < 5) {
+			keyTypesLevelList.add(keyTypesLevelList.get(random.nextInt(keyTypesLevelList.size())));
+		}
+		
+		Collections.shuffle(keyTypesLevelList);
+		
 		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType keyValue : level.getKeyTypes()) {
+		for (HostileType keyValue : keyTypesLevelList) {
 			Texture texture;
 			switch (keyValue) {
 				case CHARGE :
@@ -89,9 +103,8 @@ public class GameController implements Screen {
 			}
 			keySeqTextureList.add(texture);
 		}
-
-		keySeqProgression = new ArrayList<HostileType>();
-		keySeqProgression = (ArrayList<HostileType>) level.getKeyTypes()
+		
+		keySeqProgression = (ArrayList<HostileType>) keyTypesLevelList
 				.clone();
 	}
 
