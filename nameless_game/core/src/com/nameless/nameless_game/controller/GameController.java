@@ -111,6 +111,11 @@ public class GameController implements Screen {
 		if (!isPreparing) {
 			handleInput();
 			
+			level.getPlayer().update(Gdx.graphics.getDeltaTime());
+			for (Entity entity : level.getEntities()) {
+				entity.update(Gdx.graphics.getDeltaTime());
+			}
+
 			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 			level.getWorld().step(1f / 60f, 6, 2);
 
