@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.nameless.nameless_game.render.MainMenuRenderer;
 
 /**
  * MenuController is responsible for updating the main menu and drawing it to
@@ -19,8 +20,7 @@ public class MenuController implements Screen {
 
 	private NamelessGame game;
 
-	private SpriteBatch batch;
-	private BitmapFont font;
+	private MainMenuRenderer renderer;
 
 	/**
 	 * Creates a menu controller with a reference to NamelessGame. The reference
@@ -31,8 +31,7 @@ public class MenuController implements Screen {
 	public MenuController(NamelessGame game) {
 		this.game = game;
 
-		batch = new SpriteBatch();
-		font = new BitmapFont();
+		renderer = new MainMenuRenderer();
 	}
 
 	@Override
@@ -43,15 +42,9 @@ public class MenuController implements Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.begin();
-		font.setColor(Color.WHITE);
-		font.draw(batch, "Press <SPACE> to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		batch.end();
-
-		if (Gdx.app.getInput().isKeyPressed(Input.Keys.SPACE)) {
+		renderer.render();
+		
+		if (Gdx.app.getInput().isKeyPressed(Input.Keys.P)) {
 			game.startGame();
 		}
 	}

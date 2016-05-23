@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -34,6 +35,9 @@ public class ScreenGameRenderer extends GameRenderer {
 	private ShaderProgram shader;
 	private String vertexShader;
 	private String fragmentShader;
+	
+	private int countDown = 1;
+	private BitmapFont font;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -44,6 +48,9 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The height of the screen.
 	 */
 	public ScreenGameRenderer(float width, float height) {
+		batch = new SpriteBatch();
+		font = new BitmapFont();
+		
 		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
@@ -128,6 +135,18 @@ public class ScreenGameRenderer extends GameRenderer {
 			guiBatch.end();
 		}
 
+	}
+	
+	public void renderCountDown(int time) {
+		batch.begin();
+		font.setColor(Color.WHITE);
+		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		batch.end();
+		if (time % 1 > 0) {
+			time -= 1;
+		}
+		
+		
 	}
 
 	/**
