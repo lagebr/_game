@@ -44,6 +44,7 @@ public class Player extends Entity {
 
 		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
+		updateSpritePosition();
 	}
 
 	@Override

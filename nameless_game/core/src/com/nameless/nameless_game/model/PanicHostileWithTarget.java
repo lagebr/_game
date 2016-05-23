@@ -34,6 +34,7 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(width),
 				ScreenGameRenderer.pixelToMeter(height), world);
+		updateSpritePosition();
 	}
 
 	@Override

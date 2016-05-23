@@ -20,7 +20,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
 public class Entity {
 	protected Body body;
 	protected Sprite sprite;
-	
+
 	private boolean flaggedForDeletion = false;
 
 	// Filtering masks
@@ -48,6 +48,7 @@ public class Entity {
 				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
 
 		sprite = new Sprite(texture, (int) width, (int) height);
+		updateSpritePosition();
 	}
 
 	/**
@@ -74,6 +75,13 @@ public class Entity {
 	 *            Time past since last frame in seconds.
 	 */
 	public void update(float deltaTime) {
+		updateSpritePosition();
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	protected void updateSpritePosition() {
 		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
 		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
