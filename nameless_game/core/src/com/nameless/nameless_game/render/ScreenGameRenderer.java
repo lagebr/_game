@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.model.Entity;
+import com.nameless.nameless_game.model.Hostile;
 
 /**
  * ScreenRenderer provides functionality to draw to a LibGDX screen.
@@ -89,11 +90,11 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The entities to be drawn.
 	 */
 	@Override
-	public void renderEntities(ArrayList<Entity> entities) {
+	public void renderHostiles(ArrayList<Hostile> hostiles) {
 		batch.begin();
 		batch.setShader(null);
-		for (Entity entity : entities) {
-			entity.getSprite().draw(batch);
+		for (Hostile hostile : hostiles) {
+			hostile.getSprite().draw(batch);
 		}
 
 		batch.end();

@@ -15,7 +15,7 @@ public class Level {
 	private Player player;
 	private Border border;
 
-	private ArrayList<Entity> entities;
+	private ArrayList<Hostile> hostiles;
 
 	private ArrayList<HostileType> keyTypes;
 
@@ -39,10 +39,10 @@ public class Level {
 	 *         <li>False - entity was not added.</li>
 	 *         </ul>
 	 */
-	public boolean addEntity(Entity entity) {
-		if (entity.getBody().getWorld().equals(world)) {
-			entities.add(entity);
-			addTypes(entity);
+	public boolean addEntity(Hostile hostile) {
+		if (hostile.getBody().getWorld().equals(world)) {
+			hostiles.add(hostile);
+			addTypes(hostile);
 			return true;
 		} else {
 			return false;
@@ -50,11 +50,10 @@ public class Level {
 	}
 
 	/* Helper method. Keeps a list of unique hostile types. */
-	private void addTypes(Entity entity) {
-		if (entity instanceof Hostile)
-			if (!keyTypes.contains(((Hostile) entity).getType())) {
-				keyTypes.add(((Hostile) entity).getType());
-			}
+	private void addTypes(Hostile hostile) {
+		if (!keyTypes.contains((hostile).getType())) {
+			keyTypes.add(( hostile).getType());
+		}
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class Level {
 		this.world = world;
 
 		border = new Border(width, height, world);
-		entities = new ArrayList<Entity>();
+		hostiles = new ArrayList<Hostile>();
 		keyTypes = new ArrayList<HostileType>(5);
 	}
 
@@ -90,8 +89,8 @@ public class Level {
 		return border;
 	}
 
-	public ArrayList<Entity> getEntities() {
-		return entities;
+	public ArrayList<Hostile> getHostiles() {
+		return hostiles;
 	}
 
 }

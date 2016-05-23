@@ -115,13 +115,13 @@ public class GameController implements Screen {
 	public void render(float delta) {
 		if (!isPreparing) {
 			level.getPlayer().update(Gdx.graphics.getDeltaTime());
-			for (Entity entity : level.getEntities()) {
+			for (Entity entity : level.getHostiles()) {
 				entity.update(Gdx.graphics.getDeltaTime());
 			}
 		}
 
 		renderer.prepare(Color.BLACK);
-		renderer.renderEntities(level.getEntities());
+		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
 		renderer.renderDebug(level.getWorld());
@@ -131,14 +131,14 @@ public class GameController implements Screen {
 			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 			level.getWorld().step(1f / 60f, 6, 2);
 
-			for (int i = 0; i < level.getEntities().size() - 1; i++) {
-				Entity entity = level.getEntities().get(i);
+			for (int i = 0; i < level.getHostiles().size() - 1; i++) {
+				Entity entity = level.getHostiles().get(i);
 				if (entity.isFlaggedForDeletion()) {
 					level.getWorld().destroyBody(entity.getBody());
 					entity.getBody().setUserData(null);
 					entity.setBody(null);
 					entity.setSprite(null);
-					level.getEntities().remove(i);
+					level.getHostiles().remove(i);
 					entity = null;
 				}
 			}
