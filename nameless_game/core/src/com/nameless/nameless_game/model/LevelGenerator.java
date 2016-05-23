@@ -50,8 +50,8 @@ public class LevelGenerator {
 	}
 
 	private static Player createPlayer(float x, float y, World world) {
-		Texture texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-		return new Player(x, y, 60, texture, world);
+		Texture texture = new Texture(Gdx.files.internal("PlayerCircle90x90.png"));
+		return new Player(x, y, 45, texture, world);
 	}
 
 	/**

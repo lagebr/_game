@@ -113,8 +113,8 @@ public class Player extends Entity {
 		CircleShape circle = new CircleShape();
 		circle.setRadius(radius);
 
-		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 0.5f);
-		fixtureDef.friction = 0.0f;
+		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 0.85f);
+		fixtureDef.friction = 0.0f; 
 		// Collision masks
 		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY;
 		fixtureDef.filter.maskBits = Entity.NPC_ENTITY;
