@@ -60,9 +60,11 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 
-				napTime = 1/4*(target.getBody().getPosition()
-						.dst(body.getPosition()) * -1.9f
-						+ (float) Math.sqrt(width * width + height * height));
+				napTime = 1 / 4
+						* (target.getBody().getPosition()
+								.dst(body.getPosition()) * -1.9f
+								+ (float) Math
+										.sqrt(width * width + height * height));
 				angVelocity = 0.01f;
 				// TODO removing testing code below
 				// System.out.println((body.getAngle() * 180 / Math.PI) % 360);
@@ -86,7 +88,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	 * afterwards.
 	 */
 	private void charge() {
-		float c = 1.1f * (float) (chargeDist);
+		float c = (float) Math.log(((double) chargeDist));
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),

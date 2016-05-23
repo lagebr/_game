@@ -43,8 +43,6 @@ public class GameController implements Screen {
 
 	private ArrayList<HostileType> keySeqProgression;
 
-	private ArrayList<HostileType> keyTypesLevelList;
-
 	private boolean isPreparing;
 	private float timeCount;
 
@@ -78,34 +76,13 @@ public class GameController implements Screen {
 
 		createCollisionListener();
 		
-		keyTypesLevelList = level.getKeyTypes();
-		while (keyTypesLevelList.size() < 5) {
-			keyTypesLevelList.add(keyTypesLevelList.get(random.nextInt(keyTypesLevelList.size())));
-		}
-		
-		Collections.shuffle(keyTypesLevelList);
+		keySeqProgression = level.getKeySeq();
 		
 		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType keyValue : keyTypesLevelList) {
-			Texture texture;
-			switch (keyValue) {
-				case CHARGE :
-					texture = new Texture(
-							Gdx.files.internal("PlayerCircle120x120.png"));
-					break;
-				case PANIC :
-					texture = new Texture(
-							Gdx.files.internal("GreenSquare50x50.png"));
-					break;
-				default :
-					texture = null;
-					break;
-			}
-			keySeqTextureList.add(texture);
+		for (HostileType hostileType : level.getKeySeq()) {
+			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
+			//keySeqTextureList.add(new Texture(Gdx.files.internal("GreenSquare50x50.png")));
 		}
-		
-		keySeqProgression = (ArrayList<HostileType>) keyTypesLevelList
-				.clone();
 	}
 
 	/**
