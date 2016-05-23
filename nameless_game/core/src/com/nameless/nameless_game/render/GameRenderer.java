@@ -12,7 +12,7 @@ import com.nameless.nameless_game.model.Entity;
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-04
  */
-public abstract class Renderer {
+public abstract class GameRenderer {
 
 	/**
 	 * Draws all entities to screen.
