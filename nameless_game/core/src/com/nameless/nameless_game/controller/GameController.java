@@ -51,7 +51,7 @@ public class GameController implements Screen {
 	 */
 	public GameController(NamelessGame game) {
 		isPreparing = true;
-		timeCount = 3;
+		timeCount = 4;
 
 		this.game = game;
 
