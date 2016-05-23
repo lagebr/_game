@@ -33,8 +33,9 @@ public class MainMenuRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
+		batch.begin();	
 		font.setColor(Color.WHITE);
+		font.draw(batch, "Welcome to <nameless game>.", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 1/2 + 50);
 		font.draw(batch, "Press <P> to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		batch.end();
 	}
