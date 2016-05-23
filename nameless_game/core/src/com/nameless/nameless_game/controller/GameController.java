@@ -39,6 +39,8 @@ public class GameController implements Screen {
 	private NamelessGame game;
 
 	private ArrayList<HostileType> keySeqProgression;
+	
+	private boolean isPreparing = true;
 
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
@@ -84,6 +86,40 @@ public class GameController implements Screen {
 		keySeqProgression = new ArrayList<HostileType>();
 		keySeqProgression = (ArrayList<HostileType>) level.getKeyTypes().clone();
 	}
+	
+	/**
+	 * Renders the graphics, bodies and handles input.
+	 */
+	@Override
+	public void render(float delta) {
+		handleInput();
+
+		level.getPlayer().update(Gdx.graphics.getDeltaTime());
+		for (Entity entity : level.getEntities()) {
+			entity.update(Gdx.graphics.getDeltaTime());
+		}
+
+		renderer.prepare(Color.BLACK);
+		renderer.renderEntities(level.getEntities());
+		renderer.render(level.getPlayer());
+		renderer.renderKeySeq(keySeqTextureList);
+		renderer.renderDebug(level.getWorld());
+
+		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
+		level.getWorld().step(1f / 60f, 6, 2);
+
+		for (int i = 0; i < level.getEntities().size() - 1; i++) {
+			Entity entity = level.getEntities().get(i);
+			if (entity.isFlaggedForDeletion()) {
+				level.getWorld().destroyBody(entity.getBody());
+				entity.getBody().setUserData(null);
+				entity.setBody(null);
+				entity.setSprite(null);
+				level.getEntities().remove(i);
+				entity = null;
+			}
+		}
+	}
 
 	private void createCollisionListener() {
 		level.getWorld().setContactListener(new ContactListener() {
@@ -126,39 +162,6 @@ public class GameController implements Screen {
 		});
 	}
 
-	/**
-	 * Renders the graphics, bodies and handles input.
-	 */
-	@Override
-	public void render(float delta) {
-		handleInput();
-
-		level.getPlayer().update(Gdx.graphics.getDeltaTime());
-		for (Entity entity : level.getEntities()) {
-			entity.update(Gdx.graphics.getDeltaTime());
-		}
-
-		renderer.prepare(Color.BLACK);
-		renderer.renderEntities(level.getEntities());
-		renderer.render(level.getPlayer());
-		renderer.renderKeySeq(keySeqTextureList);
-		renderer.renderDebug(level.getWorld());
-
-		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
-		level.getWorld().step(1f / 60f, 6, 2);
-
-		for (int i = 0; i < level.getEntities().size() - 1; i++) {
-			Entity entity = level.getEntities().get(i);
-			if (entity.isFlaggedForDeletion()) {
-				level.getWorld().destroyBody(entity.getBody());
-				entity.getBody().setUserData(null);
-				entity.setBody(null);
-				entity.setSprite(null);
-				level.getEntities().remove(i);
-				entity = null;
-			}
-		}
-	}
 
 	/**
 	 * Receives all input events in the input processors event queue, processes
@@ -187,12 +190,17 @@ public class GameController implements Screen {
 	 * Listens and reacts to player boosting enemies to death.
 	 */
 	private void keySeqListener(Hostile hostile) {
-		int last = keySeqProgression.size() - 1;
-		if (hostile.getType() == keySeqProgression.get(last)) {
-			System.out.println("ENEMY SLAIN");
-			keySeqProgression.remove(last);
-		} else {
-			System.out.println("FAILURE");
+		if (keySeqProgression.size() != 0) {
+			if (hostile.getType() == keySeqProgression.get(0)) {
+				System.out.println("ENEMY SLAIN");
+				keySeqProgression.remove(0);
+				keySeqTextureList.remove(0);
+				if (keySeqProgression.size() == 0) {
+					game.startMainMenu();
+				}
+			} else {
+				System.out.println("FAILURE");
+			}
 		}
 	}
 
