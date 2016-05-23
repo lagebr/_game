@@ -97,16 +97,16 @@ public class GameController implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
+		level.getPlayer().update(Gdx.graphics.getDeltaTime());
+		for (Entity entity : level.getEntities()) {
+			entity.update(Gdx.graphics.getDeltaTime());
+		}
+		
 		renderer.prepare(Color.BLACK);
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
 		renderer.renderDebug(level.getWorld());
-		
-		level.getPlayer().update(Gdx.graphics.getDeltaTime());
-		for (Entity entity : level.getEntities()) {
-			entity.update(Gdx.graphics.getDeltaTime());
-		}
 		
 		if (!isPreparing) {
 			handleInput();
