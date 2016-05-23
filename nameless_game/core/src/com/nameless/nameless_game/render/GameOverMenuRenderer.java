@@ -28,6 +28,7 @@ public class GameOverMenuRenderer {
 
 		batch.begin();
 		font.setColor(Color.WHITE);
+		font.draw(batch, "GAME OVER", Gdx.graphics.getWidth()/2 , Gdx.graphics.getHeight() * 2/3);
 		font.draw(batch, "Press <P> to play again", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		font.draw(batch, "Press <S> to go to main menu", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 100);
 		batch.end();
