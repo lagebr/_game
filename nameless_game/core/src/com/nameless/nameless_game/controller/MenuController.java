@@ -48,10 +48,10 @@ public class MenuController implements Screen {
 
 		batch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(batch, "Press <SPACE> to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		font.draw(batch, "Press <P> to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		batch.end();
 
-		if (Gdx.app.getInput().isKeyPressed(Input.Keys.SPACE)) {
+		if (Gdx.app.getInput().isKeyPressed(Input.Keys.P)) {
 			game.startGame();
 		}
 	}

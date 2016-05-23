@@ -18,7 +18,7 @@ import com.nameless.nameless_game.model.Hostile;
 import com.nameless.nameless_game.model.HostileType;
 import com.nameless.nameless_game.model.Level;
 import com.nameless.nameless_game.model.LevelGenerator;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * GameController is responsible for updating the game and drawing it to screen
@@ -30,7 +30,7 @@ import com.nameless.nameless_game.render.ScreenRenderer;
 public class GameController implements Screen {
 
 	private GameInputProcessor inputProcessor;
-	private ScreenRenderer renderer;
+	private ScreenGameRenderer renderer;
 
 	private Level level;
 
@@ -39,8 +39,9 @@ public class GameController implements Screen {
 	private NamelessGame game;
 
 	private ArrayList<HostileType> keySeqProgression;
-	
-	private boolean isPreparing = true;
+
+	private boolean isPreparing;
+	private float timeCount;
 
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
@@ -49,12 +50,15 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		isPreparing = true;
+		timeCount = 0;
+
 		this.game = game;
 
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
-		renderer = new ScreenRenderer(Gdx.graphics.getWidth(),
+		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 
 		World world = new World(new Vector2(0, 0), false);
@@ -91,38 +95,43 @@ public class GameController implements Screen {
 		keySeqProgression = (ArrayList<HostileType>) level.getKeyTypes()
 				.clone();
 	}
-	
+
 	/**
 	 * Renders the graphics, bodies and handles input.
 	 */
 	@Override
 	public void render(float delta) {
-		handleInput();
+		if (!isPreparing) {
+			handleInput();
 
-		level.getPlayer().update(Gdx.graphics.getDeltaTime());
-		for (Entity entity : level.getEntities()) {
-			entity.update(Gdx.graphics.getDeltaTime());
-		}
-
-		renderer.prepare(Color.BLACK);
-		renderer.renderEntities(level.getEntities());
-		renderer.render(level.getPlayer());
-		renderer.renderKeySeq(keySeqTextureList);
-		renderer.renderDebug(level.getWorld());
-
-		// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
-		level.getWorld().step(1f / 60f, 6, 2);
-
-		for (int i = 0; i < level.getEntities().size() - 1; i++) {
-			Entity entity = level.getEntities().get(i);
-			if (entity.isFlaggedForDeletion()) {
-				level.getWorld().destroyBody(entity.getBody());
-				entity.getBody().setUserData(null);
-				entity.setBody(null);
-				entity.setSprite(null);
-				level.getEntities().remove(i);
-				entity = null;
+			level.getPlayer().update(Gdx.graphics.getDeltaTime());
+			for (Entity entity : level.getEntities()) {
+				entity.update(Gdx.graphics.getDeltaTime());
 			}
+
+			renderer.prepare(Color.BLACK);
+			renderer.renderEntities(level.getEntities());
+			renderer.render(level.getPlayer());
+			renderer.renderKeySeq(keySeqTextureList);
+			renderer.renderDebug(level.getWorld());
+
+			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
+			level.getWorld().step(1f / 60f, 6, 2);
+
+			for (int i = 0; i < level.getEntities().size() - 1; i++) {
+				Entity entity = level.getEntities().get(i);
+				if (entity.isFlaggedForDeletion()) {
+					level.getWorld().destroyBody(entity.getBody());
+					entity.getBody().setUserData(null);
+					entity.setBody(null);
+					entity.setSprite(null);
+					level.getEntities().remove(i);
+					entity = null;
+				}
+			}
+		} else {
+			timeCount += delta;
+			
 		}
 	}
 
@@ -172,7 +181,6 @@ public class GameController implements Screen {
 			}
 		});
 	}
-
 
 	/**
 	 * Receives all input events in the input processors event queue, processes
