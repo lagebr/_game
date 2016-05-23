@@ -58,8 +58,7 @@ public class GameController implements Screen {
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
-		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		World world = new World(new Vector2(0, 0), false);
 
@@ -97,20 +96,22 @@ public class GameController implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
-		level.getPlayer().update(Gdx.graphics.getDeltaTime());
-		for (Entity entity : level.getEntities()) {
-			entity.update(Gdx.graphics.getDeltaTime());
+		if (!isPreparing) {
+			level.getPlayer().update(Gdx.graphics.getDeltaTime());
+			for (Entity entity : level.getEntities()) {
+				entity.update(Gdx.graphics.getDeltaTime());
+			}
 		}
-		
+
 		renderer.prepare(Color.BLACK);
 		renderer.renderEntities(level.getEntities());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
 		renderer.renderDebug(level.getWorld());
-		
+
 		if (!isPreparing) {
 			handleInput();
-			
+
 			level.getPlayer().update(Gdx.graphics.getDeltaTime());
 			for (Entity entity : level.getEntities()) {
 				entity.update(Gdx.graphics.getDeltaTime());
@@ -132,9 +133,9 @@ public class GameController implements Screen {
 			}
 		} else {
 			timeCount -= delta;
-			renderer.renderCountDown((int)timeCount);
+			renderer.renderCountDown((int) timeCount);
 			if (timeCount < 0) {
-			 isPreparing = false;	
+				isPreparing = false;
 			}
 		}
 	}

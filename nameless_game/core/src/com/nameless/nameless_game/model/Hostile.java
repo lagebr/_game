@@ -45,6 +45,7 @@ public class Hostile extends Entity {
 				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(width),
 				ScreenGameRenderer.pixelToMeter(height), world);
+		updateSpritePosition();
 	}
 
 	/**
