@@ -132,7 +132,7 @@ public class GameController implements Screen {
 			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 			level.getWorld().step(1f / 60f, 6, 2);
 
-			for (int i = 0; i < level.getHostiles().size() - 1; i++) {
+			for (int i = 0; i < level.getHostiles().size(); i++) {
 				Entity entity = level.getHostiles().get(i);
 				if (entity.isFlaggedForDeletion()) {
 					level.getWorld().destroyBody(entity.getBody());
