@@ -28,10 +28,13 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super(texture);
 
 		type = HostileType.CHARGE;
+		this.target = target;
+		
 		body = createDynamicCircleBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
 				ScreenRenderer.pixelToMeter(radius), world);
 		body.setFixedRotation(false);
-		this.target = target;
+		
+		
 
 	}
 
@@ -52,8 +55,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				isSleeping = true;
 				angVelocity = 0.1f;
 				// TODO removing testing code below
-				System.out.println((body.getAngle() * 180 / Math.PI) % 360);
-				System.out.println((angle * 180 / Math.PI) % 360);
+				//System.out.println((body.getAngle() * 180 / Math.PI) % 360);
+				//System.out.println((angle * 180 / Math.PI) % 360);
 			}
 
 		} else {

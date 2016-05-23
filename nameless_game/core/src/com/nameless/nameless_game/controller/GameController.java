@@ -199,12 +199,15 @@ public class GameController implements Screen {
 	 * Listens and reacts to player boosting enemies to death.
 	 */
 	private void keySeqListener(Hostile hostile) {
-		int last = keySeqProgression.size() - 1;
-		if (hostile.getType() == keySeqProgression.get(last)) {
-			System.out.println("ENEMY SLAIN");
-			keySeqProgression.remove(last);
-		} else {
-			System.out.println("FAILURE");
+		int last = 0;
+		if (keySeqProgression.size() != 0) {
+			if (hostile.getType() == keySeqProgression.get(last)) {
+				System.out.println("ENEMY SLAIN");
+				keySeqProgression.remove(last);
+				keySeqTextureList.remove(last);
+			} else {
+				System.out.println("FAILURE");
+			}
 		}
 	}
 
