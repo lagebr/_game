@@ -22,6 +22,8 @@ public class GameOverMenuController implements Screen {
 	 */
 	public GameOverMenuController(NamelessGame game) {
 		this.game = game;
+		
+		renderer = new GameOverMenuRenderer();
 	}
 
 	@Override
