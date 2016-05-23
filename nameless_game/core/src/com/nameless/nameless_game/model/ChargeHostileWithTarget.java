@@ -1,5 +1,6 @@
 package com.nameless.nameless_game.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -24,15 +25,19 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private float napTime = 2.0f;
 	private float angVelocity = 2f;
 
+	private float width = Gdx.graphics.getWidth();
+	private float height = Gdx.graphics.getHeight();
+
 	public ChargeHostileWithTarget(float x, float y, float radius,
 			Texture texture, World world, Entity target) {
 		super(texture);
 		this.target = target;
 		type = HostileType.CHARGE;
-		
-		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+
+		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
-		
+
 		body.setFixedRotation(false);
 
 	}
@@ -54,7 +59,11 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 							* MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
-				angVelocity = 0.1f;
+
+				napTime = 1/4*(target.getBody().getPosition()
+						.dst(body.getPosition()) * -2.8f
+						+ (float) Math.sqrt(width * width + height * height));
+				angVelocity = 0.01f;
 				// TODO removing testing code below
 				// System.out.println((body.getAngle() * 180 / Math.PI) % 360);
 				// System.out.println((angle * 180 / Math.PI) % 360);
