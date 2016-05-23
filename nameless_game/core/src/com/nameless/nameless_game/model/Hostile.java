@@ -2,8 +2,6 @@ package com.nameless.nameless_game.model;
 
 import java.util.Random;
 
-import org.junit.experimental.theories.Theories;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;

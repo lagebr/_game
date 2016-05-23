@@ -65,7 +65,8 @@ public class GameController implements Screen {
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
-		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world,
+				10);
 
 		createCollisionListener();
 
@@ -73,22 +74,24 @@ public class GameController implements Screen {
 		for (HostileType keyValue : level.getKeyTypes()) {
 			Texture texture;
 			switch (keyValue) {
-			case CHARGE:
-				texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
-				break;
-			case PANIC:
-				texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
-				break;
-			default:
-				texture = null;
-				break;
+				case CHARGE :
+					texture = new Texture(
+							Gdx.files.internal("PlayerCircle120x120.png"));
+					break;
+				case PANIC :
+					texture = new Texture(
+							Gdx.files.internal("GreenSquare50x50.png"));
+					break;
+				default :
+					texture = null;
+					break;
 			}
 			keySeqTextureList.add(texture);
 		}
-		Collections.shuffle(keySeqTextureList);
 
 		keySeqProgression = new ArrayList<HostileType>();
-		keySeqProgression = (ArrayList<HostileType>) level.getKeyTypes().clone();
+		keySeqProgression = (ArrayList<HostileType>) level.getKeyTypes()
+				.clone();
 	}
 
 	/**
@@ -111,11 +114,6 @@ public class GameController implements Screen {
 
 		if (!isPreparing) {
 			handleInput();
-
-			level.getPlayer().update(Gdx.graphics.getDeltaTime());
-			for (Entity entity : level.getEntities()) {
-				entity.update(Gdx.graphics.getDeltaTime());
-			}
 
 			// @see {@link} https://github.com/libgdx/libgdx/wiki/Box2d
 			level.getWorld().step(1f / 60f, 6, 2);
@@ -144,22 +142,28 @@ public class GameController implements Screen {
 		level.getWorld().setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
-				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureB().getUserData() instanceof Hostile) {
+				if (contact.getFixtureA()
+						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureB()
+							.getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
 							game.startGameOver();
 						} else {
-							Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
+							Hostile hostileB = (Hostile) contact.getFixtureB()
+									.getUserData();
 							hostileB.setFlaggedForDeletion(true);
 							keySeqListener(hostileB);
 						}
 					}
-				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureA().getUserData() instanceof Hostile) {
+				} else if (contact.getFixtureB()
+						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureA()
+							.getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
 							game.startGameOver();
 						} else {
-							Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
+							Hostile hostileA = (Hostile) contact.getFixtureA()
+									.getUserData();
 							hostileA.setFlaggedForDeletion(true);
 							keySeqListener(hostileA);
 						}
@@ -191,7 +195,8 @@ public class GameController implements Screen {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP && event.keyPressed == true) {
+			} else if (event.action == InputAction.UP
+					&& event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {
