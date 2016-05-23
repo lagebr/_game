@@ -3,6 +3,7 @@ package com.nameless.nameless_game.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.nameless.nameless_game.render.GameOverMenuRenderer;
 
 /**
  * GameOverMenuController is responsible for the game over screen.
