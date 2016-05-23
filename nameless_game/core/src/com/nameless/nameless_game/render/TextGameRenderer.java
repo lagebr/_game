@@ -15,7 +15,7 @@ import com.nameless.nameless_game.model.Entity;
  * @author Isaac Arvestad, Henrik Lagebrand
  *
  */
-public class TextRenderer extends Renderer {
+public class TextGameRenderer extends GameRenderer {
 
 	@Override
 	public void renderEntities(ArrayList<Entity> entities) {

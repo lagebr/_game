@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * The entity model for the hostile entities in the game world.
@@ -41,10 +41,10 @@ public class Hostile extends Entity {
 			World world) {
 		super(texture);
 
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x),
-				ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width),
-				ScreenRenderer.pixelToMeter(height), world);
+		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width),
+				ScreenGameRenderer.pixelToMeter(height), world);
 	}
 
 	/**

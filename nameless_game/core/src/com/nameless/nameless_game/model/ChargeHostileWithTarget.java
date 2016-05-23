@@ -24,17 +24,23 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private float napTime = 2.0f;
 	private float angVelocity = 2f;
 
-	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
+	public ChargeHostileWithTarget(float x, float y, float radius,
+			Texture texture, World world, Entity target) {
 		super(texture);
-
-		type = HostileType.CHARGE;
 		this.target = target;
+<<<<<<< HEAD
 		
 		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
+=======
+		type = HostileType.CHARGE;
+
+		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(radius), world);
+
+>>>>>>> a2b41b5e61839d60151f83183143e0baf080db48
 		body.setFixedRotation(false);
-		
-		
 
 	}
 
@@ -50,13 +56,15 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			angle = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			// Check (radians) if target is in within field of view
-			if (Math.abs(angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
+			if (Math.abs(
+					angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6
+							* MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 				angVelocity = 0.1f;
 				// TODO removing testing code below
-				//System.out.println((body.getAngle() * 180 / Math.PI) % 360);
-				//System.out.println((angle * 180 / Math.PI) % 360);
+				// System.out.println((body.getAngle() * 180 / Math.PI) % 360);
+				// System.out.println((angle * 180 / Math.PI) % 360);
 			}
 
 		} else {
@@ -79,7 +87,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		float c = 1.7f * (float) (chargeDist);
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
-		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
+		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),
+				body.getWorldCenter(), true);
 
 		float delay = 1f;
 		Timer.schedule(new Task() {

@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * PanicHostileWithTarget is a hostile which moves slowly and randomly around
@@ -26,14 +26,14 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 		super(texture);
 
 		this.target = target;
-		panicDistance = ScreenRenderer.pixelToMeter(200);
+		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 
 		type = HostileType.PANIC;
 
-		body = createDynamicBody(ScreenRenderer.pixelToMeter(x),
-				ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width),
-				ScreenRenderer.pixelToMeter(height), world);
+		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width),
+				ScreenGameRenderer.pixelToMeter(height), world);
 	}
 
 	@Override

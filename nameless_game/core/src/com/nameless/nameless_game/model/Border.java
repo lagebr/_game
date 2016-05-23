@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * @author Isaac Arvestad, Henrik Lagebrand
@@ -34,8 +34,8 @@ public class Border extends Entity {
 	 */
 	public Border(float width, float height, World world) {
 		// Adjust borders according to screen size
-		float w = ScreenRenderer.pixelToMeter(width);
-		float h = ScreenRenderer.pixelToMeter(height);
+		float w = ScreenGameRenderer.pixelToMeter(width);
+		float h = ScreenGameRenderer.pixelToMeter(height);
 
 		// The four walls in the world
 		createBorder(0f, 0f, 0f, 0f, w, 0f, world);

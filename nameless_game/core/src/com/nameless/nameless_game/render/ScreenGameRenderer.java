@@ -21,7 +21,7 @@ import com.nameless.nameless_game.model.Entity;
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-09
  */
-public class ScreenRenderer extends Renderer {
+public class ScreenGameRenderer extends GameRenderer {
 	public static final int METER_TO_PIXEL = 100;
 
 	private Camera camera;
@@ -43,7 +43,7 @@ public class ScreenRenderer extends Renderer {
 	 * @param height
 	 *            The height of the screen.
 	 */
-	public ScreenRenderer(float width, float height) {
+	public ScreenGameRenderer(float width, float height) {
 		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
