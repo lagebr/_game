@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * Charger spins and if Player is within the direction of Charger it will charge
@@ -28,8 +28,8 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		super(texture);
 
 		type = HostileType.CHARGE;
-		body = createDynamicCircleBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(radius), world);
+		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(radius), world);
 		body.setFixedRotation(false);
 		this.target = target;
 

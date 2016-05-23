@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.nameless.nameless_game.render.ScreenRenderer;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * Entity describes a base entity which has a physics body and a texture for
@@ -44,8 +44,8 @@ public class Entity {
 	 *            Physics world to add body to.
 	 */
 	public Entity(float x, float y, float width, float height, Texture texture, World world) {
-		body = createStaticBody(ScreenRenderer.pixelToMeter(x), ScreenRenderer.pixelToMeter(y),
-				ScreenRenderer.pixelToMeter(width), ScreenRenderer.pixelToMeter(height), world);
+		body = createStaticBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
 
 		sprite = new Sprite(texture, (int) width, (int) height);
 	}
@@ -74,8 +74,8 @@ public class Entity {
 	 *            Time past since last frame in seconds.
 	 */
 	public void update(float deltaTime) {
-		float x = ScreenRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
-		float y = ScreenRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
 		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
