@@ -131,29 +131,27 @@ public class GameController implements Screen {
 		level.getWorld().setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
-				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureB().getUserData() instanceof Hostile) {
-						Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
-						if (hostileB.getType().equals(level.getKey())) {
-							hostileB.setFlaggedForDeletion(true);
+				if (contact.getFixtureA().getFilterData().categoryBits != Entity.PLAYER_ENTITY
+						&& contact.getFixtureB().getFilterData().categoryBits != Entity.PLAYER_ENTITY) {
+					return; // If neither entity in collision is player we can
+							// ignore the collision.
+				}
 
-							numWins += 1;
-							level.generateNewKey();
-						} else {
-							game.startGameOver();
-						}
-					}
-				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureA().getUserData() instanceof Hostile) {
-						Hostile hostileA = (Hostile) contact.getFixtureB().getUserData();
-						if (hostileA.getType().equals(level.getKey())) {
-							hostileA.setFlaggedForDeletion(true);
+				Hostile hostile = null;
+				if (contact.getFixtureA().getUserData() instanceof Hostile) {
+					hostile = (Hostile) contact.getFixtureA().getUserData();
+				} else if (contact.getFixtureB().getUserData() instanceof Hostile) {
+					hostile = (Hostile) contact.getFixtureB().getUserData();
+				}
 
-							numWins += 1;
-							level.generateNewKey();
-						} else {
-							game.startGameOver();
-						}
+				if (hostile != null) {
+					if (hostile.getType().equals(level.getKey())) {
+						hostile.setFlaggedForDeletion(true);
+
+						numWins += 1;
+						level.generateNewKey();
+					} else {
+						game.startGameOver();
 					}
 				}
 			}
