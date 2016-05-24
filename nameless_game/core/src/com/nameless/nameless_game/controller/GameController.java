@@ -29,8 +29,9 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @version 2016-05-22
  */
 public class GameController implements Screen {
-	
-	private static final Color BACKGROUND_COLOR = new Color(0f, 178f/256f, 72f/256f, 1f);
+
+	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f,
+			72f / 256f, 1f);
 	private Random random;
 
 	private GameInputProcessor inputProcessor;
@@ -39,7 +40,7 @@ public class GameController implements Screen {
 	private Level level;
 
 	private ArrayList<Texture> keySeqTextureList;
-	
+
 	private NamelessGame game;
 
 	private ArrayList<HostileType> keySeqProgression;
@@ -105,14 +106,14 @@ public class GameController implements Screen {
 				entity.update(Gdx.graphics.getDeltaTime());
 			}
 		}
-			
+
 		renderer.prepare(BACKGROUND_COLOR);
 		renderer.renderBackground();
 		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
 		renderer.renderWinCount(numWins);
-		//renderer.renderDebug(level.getWorld());
+		// renderer.renderDebug(level.getWorld());
 
 		if (!isPreparing) {
 			handleInput();
