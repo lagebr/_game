@@ -81,7 +81,7 @@ public class LevelGenerator {
 	 *            The target, if hostile needs a target.
 	 * @return The created hostile.
 	 */
-	private static Hostile createRandomHostile(Vector2 location, World world, Player player) {
+	public static Hostile createRandomHostile(Vector2 location, World world, Player player) {
 		int number = random.nextInt(100);
 
 		if (number < 70) { // 70% probability
