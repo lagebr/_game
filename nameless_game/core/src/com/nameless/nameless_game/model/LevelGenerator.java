@@ -33,26 +33,12 @@ public class LevelGenerator {
 		Level level = new Level(width, height, player, world);
 
 		for (int i = 0; i < numHostiles; i++) {
-			/// Add spawn expections
 			Vector2 location = getValidLocation(50, 50, width - 50, height - 50, locations);
 			locations.add(location);
 
-			if (random.nextBoolean() == true) {
-				Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
-				Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
-				level.addHostile(hostile);
-			} else {
-				Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
-				Hostile hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
-				level.addHostile(hostile);
-			}
+			Hostile hostile = createRandomHostile(location, world, player);
+			level.addHostile(hostile);
 		}
-
-		Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
-		Vector2 chargerLocation = getValidLocation(50, 50, width - 50, height - 50, locations);
-		locations.add(chargerLocation);
-		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
-		level.addHostile(charger);
 
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
@@ -61,7 +47,7 @@ public class LevelGenerator {
 		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
 		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
 		level.setKeyTextureLookUp(textureLookUp);
-		
+
 		level.generateNewKey();
 
 		return level;
@@ -70,6 +56,47 @@ public class LevelGenerator {
 	private static Player createPlayer(float x, float y, World world) {
 		Texture texture = new Texture(Gdx.files.internal("PlayerCircle90x90.png"));
 		return new Player(x, y, 45, texture, world);
+	}
+
+	/**
+	 * Creates a random hostile at a given location.
+	 * 
+	 * <li>
+	 * <ul>
+	 * PanicHostileWithTarget - 70% probability
+	 * </ul>
+	 * <ul>
+	 * TriangleHostileWithTarget - 20% probability
+	 * </ul>
+	 * <ul>
+	 * ChargeHostileWithTarget - 10% probability
+	 * </ul>
+	 * </li>
+	 * 
+	 * @param location
+	 *            The location.
+	 * @param world
+	 *            The physics world to add the hostile to.
+	 * @param player
+	 *            The target, if hostile needs a target.
+	 * @return The created hostile.
+	 */
+	private static Hostile createRandomHostile(Vector2 location, World world, Player player) {
+		int number = random.nextInt(100);
+
+		if (number < 70) { // 70% probability
+			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
+			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
+			return hostile;
+		} else if (number < 90) { // 90% - 70% = 20% probability
+			Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
+			Hostile hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
+			return hostile;
+		} else { // 100% - 90% = 10% probability
+			Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
+			Hostile hostile = new ChargeHostileWithTarget(location.x, location.y, 60, texture, world, player);
+			return hostile;
+		}
 	}
 
 	/**
