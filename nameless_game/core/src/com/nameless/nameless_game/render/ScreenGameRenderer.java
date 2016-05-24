@@ -145,9 +145,6 @@ public class ScreenGameRenderer extends GameRenderer {
 
 	private float centering(ArrayList<Texture> keySeqTextureList,
 			float offset) {
-		float iconSize = 45;
-		float wHalf = Gdx.graphics.getWidth() / 2;
-		float hFull = Gdx.graphics.getHeight();
 		float start;
 
 		if (keySeqTextureList.size() % 2 == 1) {
