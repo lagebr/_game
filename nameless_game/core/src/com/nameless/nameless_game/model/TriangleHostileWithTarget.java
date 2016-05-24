@@ -31,6 +31,21 @@ public class TriangleHostileWithTarget extends HostileWithTarget {
 		updateSpritePosition();
 	}
 
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+
+		double dx = body.getPosition().x - target.getBody().getPosition().x;
+		double dy = body.getPosition().y - target.getBody().getPosition().y;
+
+		float x = (float) (-dx / Math.abs(dx) * 0.05);
+		float y = (float) (-dy / Math.abs(dy) * 0.05);
+
+		body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(), true);
+
+		updateSpritePosition();
+	}
+
 	/**
 	 * Creates a dynamic triangle body.
 	 * 
