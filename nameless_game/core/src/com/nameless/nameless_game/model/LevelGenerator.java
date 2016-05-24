@@ -53,6 +53,7 @@ public class LevelGenerator {
 		for (int i = 0; i < 5; i++) {
 			list.add(level.getHostiles().get(i).getType());
 		}
+		
 		level.setKeyTypes(list);
 		
 		HashMap<HostileType, Texture> textureLookUp;

@@ -29,7 +29,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @version 2016-05-22
  */
 public class GameController implements Screen {
-	
+
 	private Random random;
 
 	private GameInputProcessor inputProcessor;
@@ -45,8 +45,12 @@ public class GameController implements Screen {
 
 	private boolean isPreparing;
 	private float timeCount;
-	
+
 	private int numWins;
+
+	private boolean isFlashRefreshed;
+
+	private float timeLapse;
 
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
@@ -55,10 +59,11 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		isFlashRefreshed = false;
 		numWins = 0;
-		
+
 		random = new Random();
-		
+
 		isPreparing = true;
 		timeCount = 4;
 
@@ -79,9 +84,14 @@ public class GameController implements Screen {
 				10);
 
 		createCollisionListener();
-		
+
 		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
-		
+
+		generateTextureList(keySeqProgression);
+
+	}
+
+	public void generateTextureList(ArrayList<HostileType> keySeqProgression) {
 		keySeqTextureList = new ArrayList<Texture>(5);
 		for (HostileType hostileType : keySeqProgression) {
 			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
@@ -100,13 +110,23 @@ public class GameController implements Screen {
 			}
 		}
 
-		renderer.prepare(Color.BLACK);
-		renderer.renderBackground();
-		renderer.renderHostiles(level.getHostiles());
-		renderer.render(level.getPlayer());
-		renderer.renderKeySeq(keySeqTextureList);
-		renderer.renderWinCount(numWins);
-		//renderer.renderDebug(level.getWorld());
+		if (!isFlashRefreshed) {
+			renderer.prepare(Color.BLACK);
+			renderer.renderBackground();
+			renderer.renderHostiles(level.getHostiles());
+			renderer.render(level.getPlayer());
+			renderer.renderKeySeq(keySeqTextureList);
+			renderer.renderWinCount(numWins);
+			// renderer.renderDebug(level.getWorld());
+		} else {
+			timeLapse += delta;
+
+			renderer.prepare(Color.WHITE);
+
+			if (timeLapse > 0.09f) {
+				isFlashRefreshed = false;
+			}
+		}
 
 		if (!isPreparing) {
 			handleInput();
@@ -209,7 +229,7 @@ public class GameController implements Screen {
 	 */
 	private void keySeqListener(Hostile hostile) {
 		if (keySeqProgression.size() != 0) {
-			if (hostile.getType() == keySeqProgression.get(0)) {
+			if (hostile.getType().equals(keySeqProgression.get(0))) {
 				System.out.println("ENEMY SLAIN");
 				keySeqProgression.remove(0);
 				keySeqTextureList.remove(0);
@@ -219,8 +239,31 @@ public class GameController implements Screen {
 				}
 			} else {
 				System.out.println("FAILURE");
+				refreshKeySeq();
 			}
 		}
+	}
+
+	public void refreshKeySeq() {
+		ArrayList<HostileType> list = new ArrayList<HostileType>();
+		Collections.shuffle(level.getHostiles());
+		for (int i = 0; i < 5; i++) {
+			if (!level.getHostiles().get(i).isFlaggedForDeletion()) {
+				list.add(level.getHostiles().get(i).getType());
+			}
+			if (level.getHostiles().size() - 1 == i)
+				break;
+		}
+
+		level.setKeyTypes(list);
+
+		generateTextureList(list);
+
+		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
+
+		isFlashRefreshed = true;
+
+		renderer.resetKeySeq();
 	}
 
 	@Override
