@@ -221,11 +221,10 @@ public class GameController implements Screen {
 				keySeqTextureList.remove(0);
 				if (keySeqProgression.size() == 0) {
 					numWins++;
-					game.startMainMenu();
+					refreshKeySeq();
 				}
 			} else {
-				System.out.println("FAILURE");
-				refreshKeySeq();
+				game.startGameOver();
 			}
 		}
 	}
