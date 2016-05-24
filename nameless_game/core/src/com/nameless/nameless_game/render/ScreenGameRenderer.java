@@ -29,7 +29,7 @@ public class ScreenGameRenderer extends GameRenderer {
 	private Camera camera;
 	private SpriteBatch batch;
 	private SpriteBatch guiBatch;
-	
+
 	private Texture background;
 
 	private Box2DDebugRenderer debugRenderer;
@@ -41,8 +41,12 @@ public class ScreenGameRenderer extends GameRenderer {
 
 	private int countDown = 1;
 	private BitmapFont font;
-	
+
 	private float start;
+	float wHalf;
+	float hFull;
+
+	private boolean isReset;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -53,8 +57,11 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The height of the screen.
 	 */
 	public ScreenGameRenderer(float width, float height) {
+		wHalf = Gdx.graphics.getWidth() / 2;
+		hFull = Gdx.graphics.getHeight();
 		start = 0f;
-		
+		isReset = true;
+
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 
@@ -65,15 +72,16 @@ public class ScreenGameRenderer extends GameRenderer {
 
 		debugRenderer = new Box2DDebugRenderer();
 
-		camera.position.set(width / 2, height / 2 - 100, 700);
+		camera.position.set(width / 2, height / 2, 700);
 		camera.lookAt(width / 2, height / 2, 0);
 		camera.far = 100000;
 
 		vertexShader = Gdx.files.internal("vertex.glsl").readString();
 		fragmentShader = Gdx.files.internal("fragment.glsl").readString();
 		shader = new ShaderProgram(vertexShader, fragmentShader);
-		
-		background = new Texture(Gdx.files.internal("simple_background.png"));
+
+		background = new Texture(
+				Gdx.files.internal("simple_white_background.png"));
 	}
 
 	/**
@@ -92,14 +100,16 @@ public class ScreenGameRenderer extends GameRenderer {
 	}
 
 	public void renderBackground() {
-		float x = (float) -background.getWidth() / 2 + (float) Gdx.graphics.getWidth() / 2;
-		float y = (float) -background.getHeight() / 2 + (float) Gdx.graphics.getHeight() / 2;
-		
+		float x = (float) -background.getWidth() / 2
+				+ (float) Gdx.graphics.getWidth() / 2;
+		float y = (float) -background.getHeight() / 2
+				+ (float) Gdx.graphics.getHeight() / 2;
+
 		batch.begin();
 		batch.draw(background, x, y);
 		batch.end();
 	}
-	
+
 	/**
 	 * Draws entities. All entities are drawn in the same batch.
 	 * 
@@ -120,31 +130,26 @@ public class ScreenGameRenderer extends GameRenderer {
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		float offset = 50;
-		float wHalf = Gdx.graphics.getWidth() / 2;
-		float hFull = Gdx.graphics.getHeight();
 		int iconSize = 45;
-		
-		if (start == 0) { 
+
+		if (isReset) {
 			start = centering(keySeqTextureList, offset);
 		}
 		float x = start;
 		guiBatch.begin();
 		for (Texture texture : keySeqTextureList) {
 			guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize);
-			x = x + offset + texture.getWidth();
+			x = x + offset + 65;
 		}
 		guiBatch.end();
 	}
 
 	private float centering(ArrayList<Texture> keySeqTextureList,
 			float offset) {
-		float iconSize = 45;
-		float wHalf = Gdx.graphics.getWidth() / 2;
-		float hFull = Gdx.graphics.getHeight();
 		float start;
 
 		if (keySeqTextureList.size() % 2 == 1) {
-			start = wHalf - (offset * ((keySeqTextureList.size() - 1 / 2)));
+			start = wHalf - offset * (keySeqTextureList.size() - 1 / 2);
 		} else {
 			start = wHalf - offset * (keySeqTextureList.size() / 2);
 		}
@@ -161,6 +166,19 @@ public class ScreenGameRenderer extends GameRenderer {
 		if (time % 1 > 0) {
 			time -= 1;
 		}
+	}
+
+	public void renderWinCount(int wins) {
+		guiBatch.begin();
+		font.setColor(Color.WHITE);
+		font.draw(guiBatch, String.valueOf(wins),
+				(Gdx.graphics.getWidth() - 65),
+				(Gdx.graphics.getHeight() - 65));
+		guiBatch.end();
+	}
+
+	public void resetKeySeq() {
+		isReset = true;
 	}
 
 	/**

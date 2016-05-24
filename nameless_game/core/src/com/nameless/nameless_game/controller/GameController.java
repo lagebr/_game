@@ -29,7 +29,9 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @version 2016-05-22
  */
 public class GameController implements Screen {
-	
+
+	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f,
+			72f / 256f, 1f);
 	private Random random;
 
 	private GameInputProcessor inputProcessor;
@@ -46,6 +48,8 @@ public class GameController implements Screen {
 	private boolean isPreparing;
 	private float timeCount;
 
+	private int numWins;
+
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
 	 * is used when game should pause or exit to main menu. Initializes game.
@@ -53,8 +57,10 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		numWins = 0;
+
 		random = new Random();
-		
+
 		isPreparing = true;
 		timeCount = 4;
 
@@ -75,11 +81,16 @@ public class GameController implements Screen {
 				10);
 
 		createCollisionListener();
-		
-		keySeqProgression = level.getKeySeq();
-		
+
+		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
+
+		generateTextureList(keySeqProgression);
+
+	}
+
+	public void generateTextureList(ArrayList<HostileType> keySeqProgression) {
 		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType hostileType : level.getKeySeq()) {
+		for (HostileType hostileType : keySeqProgression) {
 			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
 		}
 	}
@@ -96,12 +107,13 @@ public class GameController implements Screen {
 			}
 		}
 
-		renderer.prepare(Color.BLACK);
+		renderer.prepare(BACKGROUND_COLOR);
 		renderer.renderBackground();
 		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
-		//renderer.renderDebug(level.getWorld());
+		renderer.renderWinCount(numWins);
+		// renderer.renderDebug(level.getWorld());
 
 		if (!isPreparing) {
 			handleInput();
@@ -204,17 +216,38 @@ public class GameController implements Screen {
 	 */
 	private void keySeqListener(Hostile hostile) {
 		if (keySeqProgression.size() != 0) {
-			if (hostile.getType() == keySeqProgression.get(0)) {
+			if (hostile.getType().equals(keySeqProgression.get(0))) {
 				System.out.println("ENEMY SLAIN");
 				keySeqProgression.remove(0);
 				keySeqTextureList.remove(0);
 				if (keySeqProgression.size() == 0) {
-					game.startMainMenu();
+					numWins++;
+					refreshKeySeq();
 				}
 			} else {
-				System.out.println("FAILURE");
+				game.startGameOver();
 			}
 		}
+	}
+
+	public void refreshKeySeq() {
+		ArrayList<HostileType> list = new ArrayList<HostileType>();
+		Collections.shuffle(level.getHostiles());
+		for (int i = 0; i < 1; i++) {
+			if (!level.getHostiles().get(i).isFlaggedForDeletion()) {
+				list.add(level.getHostiles().get(i).getType());
+			}
+			if (level.getHostiles().size() - 1 == i)
+				break;
+		}
+
+		level.setKeyTypes(list);
+
+		generateTextureList(list);
+
+		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
+
+		renderer.resetKeySeq();
 	}
 
 	@Override

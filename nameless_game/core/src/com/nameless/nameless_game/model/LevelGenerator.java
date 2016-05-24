@@ -37,12 +37,12 @@ public class LevelGenerator {
 			Vector2 location = getValidLocation(50, 50, width - 50, height - 50, locations);
 			locations.add(location);
 
-			Texture texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
+			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
 			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
 			level.addHostile(hostile);
 		}
 
-		Texture texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
+		Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
 		Vector2 chargerLocation = getValidLocation(50, 50, width - 50, height - 50, locations);
 		locations.add(chargerLocation);
 		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
@@ -50,17 +50,18 @@ public class LevelGenerator {
 		
 		ArrayList<HostileType> list = new ArrayList<HostileType>();
 		Collections.shuffle(level.getHostiles());
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			list.add(level.getHostiles().get(i).getType());
 		}
+		
 		level.setKeyTypes(list);
 		
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
 		textureLookUp.put(HostileType.PANIC,
-				new Texture(Gdx.files.internal("GreenSquare50x50.png")));
+				new Texture(Gdx.files.internal("simple_square.png")));
 		textureLookUp.put(HostileType.CHARGE,
-				new Texture(Gdx.files.internal("PlayerCircle120x120.png")));
+				new Texture(Gdx.files.internal("charge_hostile.png")));
 		level.setTextureLookUp(textureLookUp);
 		
 		return level;
