@@ -81,7 +81,6 @@ public class GameController implements Screen {
 		keySeqTextureList = new ArrayList<Texture>(5);
 		for (HostileType hostileType : level.getKeySeq()) {
 			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
-			//keySeqTextureList.add(new Texture(Gdx.files.internal("GreenSquare50x50.png")));
 		}
 	}
 

@@ -39,6 +39,8 @@ public class ScreenGameRenderer extends GameRenderer {
 
 	private int countDown = 1;
 	private BitmapFont font;
+	
+	private float start;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -49,6 +51,8 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The height of the screen.
 	 */
 	public ScreenGameRenderer(float width, float height) {
+		start = 0f;
+		
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 
@@ -106,9 +110,11 @@ public class ScreenGameRenderer extends GameRenderer {
 		float wHalf = Gdx.graphics.getWidth() / 2;
 		float hFull = Gdx.graphics.getHeight();
 		int iconSize = 45;
-
-		// TODO Refine it
-		float x = centering(keySeqTextureList, offset);
+		
+		if (start == 0) { 
+			start = centering(keySeqTextureList, offset);
+		}
+		float x = start;
 		guiBatch.begin();
 		for (Texture texture : keySeqTextureList) {
 			guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize);
