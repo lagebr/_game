@@ -37,9 +37,15 @@ public class LevelGenerator {
 			Vector2 location = getValidLocation(50, 50, width - 50, height - 50, locations);
 			locations.add(location);
 
-			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
-			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
-			level.addHostile(hostile);
+			if (random.nextBoolean() == true) {
+				Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
+				Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
+				level.addHostile(hostile);
+			} else {
+				Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
+				Hostile hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
+				level.addHostile(hostile);
+			}
 		}
 
 		Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
@@ -47,23 +53,23 @@ public class LevelGenerator {
 		locations.add(chargerLocation);
 		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
 		level.addHostile(charger);
-		
+
 		ArrayList<HostileType> list = new ArrayList<HostileType>();
 		Collections.shuffle(level.getHostiles());
 		for (int i = 0; i < 1; i++) {
 			list.add(level.getHostiles().get(i).getType());
 		}
-		
+
 		level.setKeyTypes(list);
-		
+
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
-		textureLookUp.put(HostileType.PANIC,
-				new Texture(Gdx.files.internal("simple_square.png")));
-		textureLookUp.put(HostileType.CHARGE,
-				new Texture(Gdx.files.internal("charge_hostile.png")));
+		textureLookUp.put(HostileType.PANIC, new Texture(Gdx.files.internal("simple_square.png")));
+		textureLookUp.put(HostileType.CHARGE, new Texture(Gdx.files.internal("charge_hostile.png")));
+		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
+		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
 		level.setTextureLookUp(textureLookUp);
-		
+
 		return level;
 	}
 
