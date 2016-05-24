@@ -199,8 +199,7 @@ public class GameController implements Screen {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP
-					&& event.keyPressed == true) {
+			} else if (event.action == InputAction.UP && event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {
