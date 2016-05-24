@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * A procedural level generator to add seemingly infinite variety. Included in
@@ -124,6 +125,39 @@ public class LevelGenerator {
 		Vector2 location = createRandomLocation(50, 50, width - 50, height - 50);
 		while (isLocationValid(location, locations) == false && iterations < 50) {
 			location = createRandomLocation(50, 50, width - 50, height - 50);
+
+			iterations += 1;
+		}
+
+		return location;
+	}
+
+	/**
+	 * Tries to find a valid location where valid is defined as any location
+	 * more than 300 pixels away from the player. If the method fails to find a
+	 * valid location 50 times, a non-valid location will be returned.
+	 * 
+	 * Location will be inside the rectangle formed by x, y, width and height
+	 * where x and y are in the lower left corner.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param player
+	 * @return The created location.
+	 */
+	public static Vector2 getValidNewLocation(float x, float y, float width, float height, Player player) {
+		Vector2 location = createRandomLocation(x, x, width - x, height - y);
+
+		float playerX = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().x);
+		float playerY = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().y);
+		Vector2 playerLocation = new Vector2(playerX, playerY);
+
+		int iterations = 0;
+
+		while (playerLocation.dst(location) > 300 && iterations < 50) {
+			location = createRandomLocation(x, y, width - x, height - y);
 
 			iterations += 1;
 		}
