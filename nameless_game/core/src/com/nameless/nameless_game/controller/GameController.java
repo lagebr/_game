@@ -30,8 +30,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  */
 public class GameController implements Screen {
 
-	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f,
-			72f / 256f, 1f);
+	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f, 72f / 256f, 1f);
 	private Random random;
 
 	private GameInputProcessor inputProcessor;
@@ -39,11 +38,7 @@ public class GameController implements Screen {
 
 	private Level level;
 
-	private ArrayList<Texture> keySeqTextureList;
-
 	private NamelessGame game;
-
-	private ArrayList<HostileType> keySeqProgression;
 
 	private boolean isPreparing;
 	private float timeCount;
@@ -69,8 +64,7 @@ public class GameController implements Screen {
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
-		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		World world = new World(new Vector2(0, 0), false);
 
@@ -79,19 +73,12 @@ public class GameController implements Screen {
 
 		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 2);
 
+
 		createCollisionListener();
-
-		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
-
-		generateTextureList(keySeqProgression);
-
 	}
 
-	public void generateTextureList(ArrayList<HostileType> keySeqProgression) {
-		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType hostileType : keySeqProgression) {
-			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
-		}
+	private Texture getKeyTexture(HostileType key) {
+		return level.getKeyTexture(key);
 	}
 
 	/**
@@ -110,7 +97,7 @@ public class GameController implements Screen {
 		renderer.renderBackground();
 		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
-		renderer.renderKeySeq(keySeqTextureList);
+		renderer.renderKey(getKeyTexture(level.getKey()));
 		renderer.renderWinCount(numWins);
 		// renderer.renderDebug(level.getWorld());
 
@@ -145,33 +132,27 @@ public class GameController implements Screen {
 		level.getWorld().setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
-				if (contact.getFixtureA()
-						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureB()
-							.getUserData() instanceof Hostile) {
-						Hostile hostileB = (Hostile) contact.getFixtureB()
-								.getUserData();
-						if (hostileB.getType()
-								== ((level.getKeySeq().get(0)))) {
-							hostileB.setFlaggedForDeletion(true);
-								//keySeqListener(hostileB);
-						} else {
-							game.startGameOver();
-						}
-					}
-				} else if (contact.getFixtureB()
-						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureA()
-							.getUserData() instanceof Hostile) {
-						Hostile hostileA = (Hostile) contact.getFixtureB()
-								.getUserData();
-						if (hostileA.getType()
-								 == ((level.getKeySeq().get(0)))) {
-							hostileA.setFlaggedForDeletion(true);
-							//keySeqListener(hostileA);
-						} else {
-							game.startGameOver();
-						}
+				if (contact.getFixtureA().getFilterData().categoryBits != Entity.PLAYER_ENTITY
+						&& contact.getFixtureB().getFilterData().categoryBits != Entity.PLAYER_ENTITY) {
+					return; // If neither entity in collision is player we can
+							// ignore the collision.
+				}
+
+				Hostile hostile = null;
+				if (contact.getFixtureA().getUserData() instanceof Hostile) {
+					hostile = (Hostile) contact.getFixtureA().getUserData();
+				} else if (contact.getFixtureB().getUserData() instanceof Hostile) {
+					hostile = (Hostile) contact.getFixtureB().getUserData();
+				}
+
+				if (hostile != null) {
+					if (hostile.getType().equals(level.getKey())) {
+						hostile.setFlaggedForDeletion(true);
+
+						numWins += 1;
+						level.generateNewKey();
+					} else {
+						game.startGameOver(numWins);
 					}
 				}
 			}
@@ -200,8 +181,7 @@ public class GameController implements Screen {
 				level.getPlayer().setLeftRotate(event.keyPressed);
 			} else if (event.action == InputAction.RIGHT) {
 				level.getPlayer().setRightRotate(event.keyPressed);
-			} else if (event.action == InputAction.UP
-					&& event.keyPressed == true) {
+			} else if (event.action == InputAction.UP && event.keyPressed == true) {
 				level.getPlayer().impulseForward();
 			} else if (event.action == InputAction.BOOST) {
 				if (event.keyPressed == true) {
@@ -212,38 +192,6 @@ public class GameController implements Screen {
 			}
 		}
 		inputProcessor.getActionQueue().clear();
-	}
-
-	/**
-	 * Listens and reacts to player boosting enemies to death.
-	 */
-	private void keySeqListener(Hostile hostile) {
-		System.out.println("ENEMY SLAIN");
-		keySeqProgression.remove(0);
-		keySeqTextureList.remove(0);
-		numWins++;
-		refreshKeySeq();
-
-	}
-
-	public void refreshKeySeq() {
-		ArrayList<HostileType> list = new ArrayList<HostileType>(1);
-		Collections.shuffle(level.getHostiles());
-		for (int i = 0; i < 1; i++) {
-			if (!level.getHostiles().get(i).isFlaggedForDeletion()) {
-				list.add(level.getHostiles().get(i).getType());
-			}
-			if (level.getHostiles().size() - 1 == i)
-				break;
-		}
-
-		level.setKeyTypes(list);
-
-		generateTextureList(list);
-
-		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
-
-		renderer.resetKeySeq();
 	}
 
 	@Override

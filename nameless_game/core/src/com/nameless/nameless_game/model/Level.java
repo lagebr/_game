@@ -1,10 +1,9 @@
 package com.nameless.nameless_game.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -15,30 +14,45 @@ import com.badlogic.gdx.physics.box2d.World;
  * @version 2016-05-13
  */
 public class Level {
+	private Random random = new Random();
+
 	private World world;
 	private Player player;
 	private Border border;
 
 	private ArrayList<Hostile> hostiles;
 
-	private ArrayList<HostileType> keySeq;
+	private HostileType key;
 
-	private HashMap<HostileType, Texture> textureLookUp;
+	private HashMap<HostileType, Texture> keyTextureLookUp;
 
-	public HashMap<HostileType, Texture> getTextureLookUp() {
-		return textureLookUp;
+	public Texture getKeyTexture(HostileType key) {
+		return keyTextureLookUp.get(key);
 	}
 
-	public void setTextureLookUp(HashMap<HostileType, Texture> textureLookUp) {
-		this.textureLookUp = textureLookUp;
+	public void setKeyTextureLookUp(HashMap<HostileType, Texture> keyTextureLookUp) {
+		this.keyTextureLookUp = keyTextureLookUp;
 	}
 
-	public ArrayList<HostileType> getKeySeq() {
-		return keySeq;
+	public HostileType getKey() {
+		return key;
 	}
 
-	public void setKeyTypes(ArrayList<HostileType> keyTypes) {
-		this.keySeq = keyTypes;
+	public void setKey(HostileType key) {
+		this.key = key;
+	}
+
+	/**
+	 * Attempts to generate a new key. If the hostile chosen is flagged for
+	 * deletion, a new hostile is chosen recursively.
+	 */
+	public void generateNewKey() {
+		int index = random.nextInt(hostiles.size());
+		if (hostiles.get(index).isFlaggedForDeletion() == false) {
+			key = hostiles.get(index).type;
+		} else {
+			generateNewKey();
+		}
 	}
 
 	/**
@@ -56,17 +70,10 @@ public class Level {
 	public boolean addHostile(Hostile hostile) {
 		if (hostile.getBody().getWorld().equals(world)) {
 			hostiles.add(hostile);
-			addTypes(hostile);
+
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-	/* Helper method. Keeps a list of unique hostile types. */
-	private void addTypes(Hostile hostile) {
-		if (!keySeq.contains((hostile).getType())) {
-			keySeq.add((hostile).getType());
 		}
 	}
 
@@ -88,7 +95,6 @@ public class Level {
 
 		border = new Border(width, height, world);
 		hostiles = new ArrayList<Hostile>();
-		keySeq = new ArrayList<HostileType>(5);
 	}
 
 	public World getWorld() {

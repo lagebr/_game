@@ -80,8 +80,7 @@ public class ScreenGameRenderer extends GameRenderer {
 		fragmentShader = Gdx.files.internal("fragment.glsl").readString();
 		shader = new ShaderProgram(vertexShader, fragmentShader);
 
-		background = new Texture(
-				Gdx.files.internal("simple_white_background.png"));
+		background = new Texture(Gdx.files.internal("simple_white_background.png"));
 	}
 
 	/**
@@ -100,10 +99,8 @@ public class ScreenGameRenderer extends GameRenderer {
 	}
 
 	public void renderBackground() {
-		float x = (float) -background.getWidth() / 2
-				+ (float) Gdx.graphics.getWidth() / 2;
-		float y = (float) -background.getHeight() / 2
-				+ (float) Gdx.graphics.getHeight() / 2;
+		float x = (float) -background.getWidth() / 2 + (float) Gdx.graphics.getWidth() / 2;
+		float y = (float) -background.getHeight() / 2 + (float) Gdx.graphics.getHeight() / 2;
 
 		batch.begin();
 		batch.draw(background, x, y);
@@ -127,6 +124,20 @@ public class ScreenGameRenderer extends GameRenderer {
 		batch.end();
 	}
 
+	/**
+	 * Renders the current hostile type key.
+	 * 
+	 * @param keyTexture
+	 *            The texture of the current key to be drawn.
+	 */
+	public void renderKey(Texture keyTexture) {
+		int iconSize = 45;
+
+		guiBatch.begin();
+		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 65, iconSize, iconSize);
+		guiBatch.end();
+	}
+
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		float offset = 50;
@@ -144,8 +155,7 @@ public class ScreenGameRenderer extends GameRenderer {
 		guiBatch.end();
 	}
 
-	private float centering(ArrayList<Texture> keySeqTextureList,
-			float offset) {
+	private float centering(ArrayList<Texture> keySeqTextureList, float offset) {
 		float start;
 
 		if (keySeqTextureList.size() % 2 == 1) {
@@ -160,8 +170,7 @@ public class ScreenGameRenderer extends GameRenderer {
 	public void renderCountDown(int time) {
 		batch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2,
-				Gdx.graphics.getHeight() / 2);
+		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		batch.end();
 		if (time % 1 > 0) {
 			time -= 1;
@@ -171,9 +180,7 @@ public class ScreenGameRenderer extends GameRenderer {
 	public void renderWinCount(int wins) {
 		guiBatch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(guiBatch, String.valueOf(wins),
-				(Gdx.graphics.getWidth() - 65),
-				(Gdx.graphics.getHeight() - 65));
+		font.draw(guiBatch, String.valueOf(wins), (Gdx.graphics.getWidth() - 65), (Gdx.graphics.getHeight() - 65));
 		guiBatch.end();
 	}
 
@@ -200,8 +207,7 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The world that the physics bodies belongs to.
 	 */
 	public void renderDebug(World world) {
-		debugRenderer.render(world, camera.combined.scale(meterToPixel(1),
-				meterToPixel(1), meterToPixel(1)));
+		debugRenderer.render(world, camera.combined.scale(meterToPixel(1), meterToPixel(1), meterToPixel(1)));
 		// logger.log();
 	}
 

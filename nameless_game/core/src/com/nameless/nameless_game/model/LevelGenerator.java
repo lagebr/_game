@@ -54,21 +54,15 @@ public class LevelGenerator {
 		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
 		level.addHostile(charger);
 
-		ArrayList<HostileType> list = new ArrayList<HostileType>();
-		Collections.shuffle(level.getHostiles());
-		for (int i = 0; i < 1; i++) {
-			list.add(level.getHostiles().get(i).getType());
-		}
-
-		level.setKeyTypes(list);
-
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
 		textureLookUp.put(HostileType.PANIC, new Texture(Gdx.files.internal("simple_square.png")));
 		textureLookUp.put(HostileType.CHARGE, new Texture(Gdx.files.internal("charge_hostile.png")));
 		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
 		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
-		level.setTextureLookUp(textureLookUp);
+		level.setKeyTextureLookUp(textureLookUp);
+		
+		level.generateNewKey();
 
 		return level;
 	}
