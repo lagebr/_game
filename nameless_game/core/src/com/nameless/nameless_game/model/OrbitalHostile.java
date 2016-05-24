@@ -12,14 +12,12 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author Henrik Lagebrand, Isaac Arvestad
  */
 public class OrbitalHostile extends Hostile {
-	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2,
-			Gdx.graphics.getHeight());
+	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
 
 	/**
 	 * 
 	 */
-	public OrbitalHostile(float x, float y, float width, float height,
-			Texture texture, World world) {
+	public OrbitalHostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(x, y, width, height, texture, world);
 	}
 
@@ -34,13 +32,7 @@ public class OrbitalHostile extends Hostile {
 		float m2 = 4f; // "planet"
 		Vector2 m1_pos = body.getPosition();
 		float r = m1_pos.dst(center); // calculate distance
-		float a = (G * m1 * m2)/ (r*r);
-		//body.setLinearVelocity(v);
-		
-		
-		
-		
-		
-		
+		float a = (G * m1 * m2) / (r * r);
+		// body.setLinearVelocity(v);
 	}
 }

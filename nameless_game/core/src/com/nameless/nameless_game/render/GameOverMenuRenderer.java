@@ -38,8 +38,8 @@ public class GameOverMenuRenderer {
 
 		batch.begin();
 		batch.draw(background, 0, 0);
-		font.draw(batch, "You got " + score + " points!",
-				Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
+		font.draw(batch, "You got " + score + " points!", Gdx.graphics.getWidth() / 2 - 50,
+				Gdx.graphics.getHeight() / 2);
 		batch.end();
 	}
 }

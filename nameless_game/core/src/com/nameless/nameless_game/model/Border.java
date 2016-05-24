@@ -45,7 +45,7 @@ public class Border extends Entity {
 		createBorder(0f, 0f, w, 0f, w, h, world);
 		createBorder(0f, 0f, 0f, h, w, h, world);
 	}
-	
+
 	public static Body getBodyBorder() {
 		return bodyEdgeScreen;
 	}

@@ -39,12 +39,10 @@ public class Player extends Entity {
 	 *            The world to add the body to
 	 * @return the physics body
 	 */
-	public Player(float x, float y, float radius, Texture texture,
-			World world) {
+	public Player(float x, float y, float radius, Texture texture, World world) {
 		super(texture);
 
-		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x),
-				ScreenGameRenderer.pixelToMeter(y),
+		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
 		updateSpritePosition();
 	}
@@ -84,8 +82,7 @@ public class Player extends Entity {
 			float xImpulse = (float) Math.cos((double) body.getAngle());
 			float yImpulse = (float) Math.sin((double) body.getAngle());
 
-			body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),
-					body.getWorldCenter(), true);
+			body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
 			return true;
 		} else {
 			return false;
@@ -106,10 +103,8 @@ public class Player extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicBody(float x, float y, float radius,
-			World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
-				BodyType.DynamicBody, false);
+	public static Body createDynamicBody(float x, float y, float radius, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		bodyDef.angularDamping = 5.0f;
 		bodyDef.linearDamping = 1.0f;
 

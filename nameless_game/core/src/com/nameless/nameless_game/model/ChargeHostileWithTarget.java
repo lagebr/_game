@@ -28,14 +28,12 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private float width = Gdx.graphics.getWidth();
 	private float height = Gdx.graphics.getHeight();
 
-	public ChargeHostileWithTarget(float x, float y, float radius,
-			Texture texture, World world, Entity target) {
+	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
 		super(texture);
 		this.target = target;
 		type = HostileType.CHARGE;
 
-		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x),
-				ScreenGameRenderer.pixelToMeter(y),
+		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
 
 		body.setFixedRotation(false);
@@ -45,9 +43,9 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		
+
 		body.setAngularVelocity(angVelocity);
-		
+
 		if (!isSleeping) {
 			// Cartesian with origo in bottom left of Borders.
 			double dx = body.getPosition().x - target.getBody().getPosition().x;
@@ -56,23 +54,18 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			angle = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			// Check (radians) if target is in within field of view
-			if (Math.abs(
-					angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6
-							* MathUtils.PI / 180) {
+			if (Math.abs(angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 
-				napTime = 1 / 4
-						* (target.getBody().getPosition()
-								.dst(body.getPosition()) * -1.9f
-								+ (float) Math
-										.sqrt(width * width + height * height));
+				napTime = 1 / 4 * (target.getBody().getPosition().dst(body.getPosition()) * -1.9f
+						+ (float) Math.sqrt(width * width + height * height));
 				angVelocity = 0.01f;
 			}
 
 		} else {
 			timeSlept += deltaTime;
-			
+
 			if (timeSlept > napTime) {
 				charge();
 				// After charge return to start state
@@ -91,8 +84,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 		float c = (float) Math.log(((double) chargeDist));
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
-		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),
-				body.getWorldCenter(), true);
+		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
 
 		float delay = 1f;
 		Timer.schedule(new Task() {
