@@ -34,7 +34,7 @@ public class LevelGenerator {
 		Level level = new Level(width, height, player, world);
 
 		for (int i = 0; i < numHostiles; i++) {
-			Vector2 location = getValidLocation(50, 50, width - 50, height - 50, locations);
+			Vector2 location = getValidLocation(50, 50, width - 100, height - 100, locations);
 			locations.add(location);
 
 			Hostile hostile = createRandomHostile(location, world, player);
@@ -122,9 +122,9 @@ public class LevelGenerator {
 	private static Vector2 getValidLocation(float x, float y, float width, float height, ArrayList<Vector2> locations) {
 		int iterations = 0;
 
-		Vector2 location = createRandomLocation(x, y, width - x, height - y);
+		Vector2 location = createRandomLocation(x, y, width, height);
 		while (isLocationValid(location, locations) == false && iterations < 50) {
-			location = createRandomLocation(50, 50, width - 50, height - 50);
+			location = createRandomLocation(x, y, width, height);
 
 			iterations += 1;
 		}
@@ -148,7 +148,7 @@ public class LevelGenerator {
 	 * @return The created location.
 	 */
 	public static Vector2 getValidNewLocation(float x, float y, float width, float height, Player player) {
-		Vector2 location = createRandomLocation(x, y, width - x, height - y);
+		Vector2 location = createRandomLocation(x, y, width, height);
 
 		float playerX = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().x);
 		float playerY = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().y);
@@ -156,8 +156,8 @@ public class LevelGenerator {
 
 		int iterations = 0;
 
-		while (playerLocation.dst(location) > 300 && iterations < 50) {
-			location = createRandomLocation(x, y, width - x, height - y);
+		while (playerLocation.dst(location) < 300 && iterations < 50) {
+			location = createRandomLocation(x, y, width, height);
 
 			iterations += 1;
 		}
