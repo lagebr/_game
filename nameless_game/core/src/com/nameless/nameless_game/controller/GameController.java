@@ -77,8 +77,7 @@ public class GameController implements Screen {
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
-		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world,
-				10);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 2);
 
 		createCollisionListener();
 
@@ -137,7 +136,7 @@ public class GameController implements Screen {
 			if (timeCount < 0) {
 				isPreparing = false;
 				// Clear InputEvents from during the preparation
-				inputProcessor.getActionQueue().clear(); 
+				inputProcessor.getActionQueue().clear();
 			}
 		}
 	}
@@ -150,26 +149,28 @@ public class GameController implements Screen {
 						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureB()
 							.getUserData() instanceof Hostile) {
-						if (level.getPlayer().isBoosting() == false) {
-							game.startGameOver();
-						} else {
-							Hostile hostileB = (Hostile) contact.getFixtureB()
-									.getUserData();
+						Hostile hostileB = (Hostile) contact.getFixtureB()
+								.getUserData();
+						if (hostileB.getType()
+								== ((level.getKeySeq().get(0)))) {
 							hostileB.setFlaggedForDeletion(true);
-							keySeqListener(hostileB);
+								//keySeqListener(hostileB);
+						} else {
+							game.startGameOver();
 						}
 					}
 				} else if (contact.getFixtureB()
 						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
 					if (contact.getFixtureA()
 							.getUserData() instanceof Hostile) {
-						if (level.getPlayer().isBoosting() == false) {
-							game.startGameOver();
-						} else {
-							Hostile hostileA = (Hostile) contact.getFixtureA()
-									.getUserData();
+						Hostile hostileA = (Hostile) contact.getFixtureB()
+								.getUserData();
+						if (hostileA.getType()
+								 == ((level.getKeySeq().get(0)))) {
 							hostileA.setFlaggedForDeletion(true);
-							keySeqListener(hostileA);
+							//keySeqListener(hostileA);
+						} else {
+							game.startGameOver();
 						}
 					}
 				}
@@ -217,23 +218,16 @@ public class GameController implements Screen {
 	 * Listens and reacts to player boosting enemies to death.
 	 */
 	private void keySeqListener(Hostile hostile) {
-		if (keySeqProgression.size() != 0) {
-			if (hostile.getType().equals(keySeqProgression.get(0))) {
-				System.out.println("ENEMY SLAIN");
-				keySeqProgression.remove(0);
-				keySeqTextureList.remove(0);
-				if (keySeqProgression.size() == 0) {
-					numWins++;
-					refreshKeySeq();
-				}
-			} else {
-				game.startGameOver();
-			}
-		}
+		System.out.println("ENEMY SLAIN");
+		keySeqProgression.remove(0);
+		keySeqTextureList.remove(0);
+		numWins++;
+		refreshKeySeq();
+
 	}
 
 	public void refreshKeySeq() {
-		ArrayList<HostileType> list = new ArrayList<HostileType>();
+		ArrayList<HostileType> list = new ArrayList<HostileType>(1);
 		Collections.shuffle(level.getHostiles());
 		for (int i = 0; i < 1; i++) {
 			if (!level.getHostiles().get(i).isFlaggedForDeletion()) {

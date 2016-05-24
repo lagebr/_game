@@ -24,7 +24,7 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 	public PanicHostileWithTarget(float x, float y, float width, float height,
 			Texture texture, World world, Entity target) {
 		super(texture);
-
+		
 		this.target = target;
 		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 
