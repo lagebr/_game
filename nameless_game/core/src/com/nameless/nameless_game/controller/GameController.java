@@ -45,6 +45,8 @@ public class GameController implements Screen {
 
 	private boolean isPreparing;
 	private float timeCount;
+	
+	private int numWins;
 
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
@@ -53,6 +55,8 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
+		numWins = 0;
+		
 		random = new Random();
 		
 		isPreparing = true;
@@ -76,10 +80,10 @@ public class GameController implements Screen {
 
 		createCollisionListener();
 		
-		keySeqProgression = level.getKeySeq();
+		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
 		
 		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType hostileType : level.getKeySeq()) {
+		for (HostileType hostileType : keySeqProgression) {
 			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
 		}
 	}
@@ -101,6 +105,7 @@ public class GameController implements Screen {
 		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
+		renderer.renderWinCount(numWins);
 		//renderer.renderDebug(level.getWorld());
 
 		if (!isPreparing) {
@@ -209,6 +214,7 @@ public class GameController implements Screen {
 				keySeqProgression.remove(0);
 				keySeqTextureList.remove(0);
 				if (keySeqProgression.size() == 0) {
+					numWins++;
 					game.startMainMenu();
 				}
 			} else {
