@@ -11,9 +11,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
+ * A fixture border for the rectangle in the game.
+ * 
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2015-05-09
- *
  */
 public class Border extends Entity {
 	private static Body bodyEdgeScreen;

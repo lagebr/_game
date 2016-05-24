@@ -66,9 +66,6 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 								+ (float) Math
 										.sqrt(width * width + height * height));
 				angVelocity = 0.01f;
-				// TODO removing testing code below
-				// System.out.println((body.getAngle() * 180 / Math.PI) % 360);
-				// System.out.println((angle * 180 / Math.PI) % 360);
 			}
 
 		} else {
