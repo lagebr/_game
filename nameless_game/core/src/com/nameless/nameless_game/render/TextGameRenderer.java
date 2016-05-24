@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.nameless.nameless_game.render;
 
 import java.util.ArrayList;
@@ -14,20 +11,18 @@ import com.nameless.nameless_game.model.Hostile;
  * A text renderer for testing purposes.
  * 
  * @author Isaac Arvestad, Henrik Lagebrand
+ * @version 2016-05-24
  *
  */
 public class TextGameRenderer extends GameRenderer {
 
-
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void renderHostiles(ArrayList<Hostile> hostiles) {
 		// TODO Auto-generated method stub
-		
 	}
 }

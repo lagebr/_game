@@ -45,7 +45,9 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
 		body.setAngularVelocity(angVelocity);
+		
 		if (!isSleeping) {
 			// Cartesian with origo in bottom left of Borders.
 			double dx = body.getPosition().x - target.getBody().getPosition().x;
@@ -70,6 +72,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 		} else {
 			timeSlept += deltaTime;
+			
 			if (timeSlept > napTime) {
 				charge();
 				// After charge return to start state
