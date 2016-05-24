@@ -38,9 +38,8 @@ public class GameOverMenuController implements Screen {
 		
 		renderer.render();
 		
-		if (Gdx.app.getInput().isKeyPressed(Input.Keys.P)) {
-			game.startGame();
-		} else if (Gdx.app.getInput().isKeyPressed(Input.Keys.S)) {
+
+		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.SPACE)) {
 			game.startMainMenu();
 		}
 	}
