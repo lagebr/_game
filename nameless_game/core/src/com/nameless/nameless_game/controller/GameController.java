@@ -73,7 +73,7 @@ public class GameController implements Screen {
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
-		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 2);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 5);
 
 		createCollisionListener();
 	}
