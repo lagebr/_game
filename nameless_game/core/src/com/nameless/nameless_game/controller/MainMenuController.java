@@ -16,7 +16,7 @@ import com.nameless.nameless_game.render.MainMenuRenderer;
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-22
  */
-public class MenuController implements Screen {
+public class MainMenuController implements Screen {
 
 	private NamelessGame game;
 
@@ -30,7 +30,7 @@ public class MenuController implements Screen {
 	 * 
 	 * @param game
 	 */
-	public MenuController(NamelessGame game) {
+	public MainMenuController(NamelessGame game) {
 		this.game = game;
 
 		renderer = new MainMenuRenderer();
