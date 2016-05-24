@@ -40,7 +40,7 @@ public class Player extends Entity {
 	 * @return the physics body
 	 */
 	public Player(float x, float y, float radius, Texture texture, World world) {
-		super(texture); // calls alternative super-constructor from Entity
+		super(texture);
 
 		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
