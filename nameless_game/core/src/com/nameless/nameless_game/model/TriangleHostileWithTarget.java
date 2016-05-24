@@ -27,13 +27,25 @@ public class TriangleHostileWithTarget extends HostileWithTarget {
 		type = HostileType.TRIANGLE;
 
 		body = createDynamicTriangleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y), world);
-		
+
 		updateSpritePosition();
 	}
 
+	/**
+	 * Creates a dynamic triangle body.
+	 * 
+	 * @param x
+	 *            Center x-coordinate of triangle in pixels.
+	 * @param y
+	 *            Center y-coordinate of triangle in pixels.
+	 * @param world
+	 *            The physics world to add it to.
+	 * @return The create physics body.
+	 */
 	public Body createDynamicTriangleBody(float x, float y, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
+		physicsBody.setFixedRotation(true);
 
 		Vector2 p1 = new Vector2(0, 0);
 		Vector2 p2 = new Vector2(ScreenGameRenderer.pixelToMeter(70), 0);
@@ -53,5 +65,16 @@ public class TriangleHostileWithTarget extends HostileWithTarget {
 		triangle.dispose(); // LibGDX
 
 		return physicsBody;
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	protected void updateSpritePosition() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x);
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y);
+
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
 	}
 }
