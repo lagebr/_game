@@ -28,7 +28,7 @@ public class NamelessGame extends Game {
 	 * MenuController.
 	 */
 	public void startMainMenu() {
-		this.setScreen(new MenuController(this));
+		this.setScreen(new MainMenuController(this));
 	}
 
 	/**

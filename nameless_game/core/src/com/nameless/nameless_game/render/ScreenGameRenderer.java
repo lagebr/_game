@@ -80,7 +80,8 @@ public class ScreenGameRenderer extends GameRenderer {
 		fragmentShader = Gdx.files.internal("fragment.glsl").readString();
 		shader = new ShaderProgram(vertexShader, fragmentShader);
 
-		background = new Texture(Gdx.files.internal("simple_white_background.png"));
+		background = new Texture(
+				Gdx.files.internal("simple_white_background.png"));
 	}
 
 	/**
