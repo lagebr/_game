@@ -136,6 +136,8 @@ public class GameController implements Screen {
 			renderer.renderCountDown((int) timeCount);
 			if (timeCount < 0) {
 				isPreparing = false;
+				// Clear InputEvents from during the preparation
+				inputProcessor.getActionQueue().clear(); 
 			}
 		}
 	}
