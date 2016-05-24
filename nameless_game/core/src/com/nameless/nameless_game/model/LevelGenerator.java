@@ -1,6 +1,8 @@
 package com.nameless.nameless_game.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -37,15 +39,30 @@ public class LevelGenerator {
 
 			Texture texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
 			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
-			level.addEntity(hostile);
+			level.addHostile(hostile);
 		}
 
 		Texture texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
 		Vector2 chargerLocation = getValidLocation(50, 50, width - 50, height - 50, locations);
 		locations.add(chargerLocation);
 		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
-		level.addEntity(charger);
-
+		level.addHostile(charger);
+		
+		ArrayList<HostileType> list = new ArrayList<HostileType>();
+		Collections.shuffle(level.getHostiles());
+		for (int i = 0; i < 5; i++) {
+			list.add(level.getHostiles().get(i).getType());
+		}
+		level.setKeyTypes(list);
+		
+		HashMap<HostileType, Texture> textureLookUp;
+		textureLookUp = new HashMap<HostileType, Texture>();
+		textureLookUp.put(HostileType.PANIC,
+				new Texture(Gdx.files.internal("GreenSquare50x50.png")));
+		textureLookUp.put(HostileType.CHARGE,
+				new Texture(Gdx.files.internal("PlayerCircle120x120.png")));
+		level.setTextureLookUp(textureLookUp);
+		
 		return level;
 	}
 

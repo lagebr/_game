@@ -1,7 +1,10 @@
 package com.nameless.nameless_game.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -17,14 +20,24 @@ public class Level {
 
 	private ArrayList<Hostile> hostiles;
 
-	private ArrayList<HostileType> keyTypes;
+	private ArrayList<HostileType> keySeq;
 
-	public ArrayList<HostileType> getKeyTypes() {
-		return keyTypes;
+	private HashMap<HostileType, Texture> textureLookUp;
+
+	public HashMap<HostileType, Texture> getTextureLookUp() {
+		return textureLookUp;
+	}
+
+	public void setTextureLookUp(HashMap<HostileType, Texture> textureLookUp) {
+		this.textureLookUp = textureLookUp;
+	}
+
+	public ArrayList<HostileType> getKeySeq() {
+		return keySeq;
 	}
 
 	public void setKeyTypes(ArrayList<HostileType> keyTypes) {
-		this.keyTypes = keyTypes;
+		this.keySeq = keyTypes;
 	}
 
 	/**
@@ -39,7 +52,7 @@ public class Level {
 	 *         <li>False - entity was not added.</li>
 	 *         </ul>
 	 */
-	public boolean addEntity(Hostile hostile) {
+	public boolean addHostile(Hostile hostile) {
 		if (hostile.getBody().getWorld().equals(world)) {
 			hostiles.add(hostile);
 			addTypes(hostile);
@@ -51,8 +64,8 @@ public class Level {
 
 	/* Helper method. Keeps a list of unique hostile types. */
 	private void addTypes(Hostile hostile) {
-		if (!keyTypes.contains((hostile).getType())) {
-			keyTypes.add(( hostile).getType());
+		if (!keySeq.contains((hostile).getType())) {
+			keySeq.add((hostile).getType());
 		}
 	}
 
@@ -74,7 +87,7 @@ public class Level {
 
 		border = new Border(width, height, world);
 		hostiles = new ArrayList<Hostile>();
-		keyTypes = new ArrayList<HostileType>(5);
+		keySeq = new ArrayList<HostileType>(5);
 	}
 
 	public World getWorld() {

@@ -38,9 +38,11 @@ public class ScreenGameRenderer extends GameRenderer {
 	private ShaderProgram shader;
 	private String vertexShader;
 	private String fragmentShader;
-	
+
 	private int countDown = 1;
 	private BitmapFont font;
+	
+	private float start;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -51,9 +53,11 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The height of the screen.
 	 */
 	public ScreenGameRenderer(float width, float height) {
+		start = 0f;
+		
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		
+
 		camera = new PerspectiveCamera(67, width, height);
 
 		batch = new SpriteBatch();
@@ -115,46 +119,44 @@ public class ScreenGameRenderer extends GameRenderer {
 
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
-		float iconSize = 45;
 		float offset = 50;
 		float wHalf = Gdx.graphics.getWidth() / 2;
 		float hFull = Gdx.graphics.getHeight();
+		int iconSize = 45;
+		
+		if (start == 0) { 
+			start = centering(keySeqTextureList, offset);
+		}
+		float x = start;
+		guiBatch.begin();
+		for (Texture texture : keySeqTextureList) {
+			guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize);
+			x = x + offset + texture.getWidth();
+		}
+		guiBatch.end();
+	}
 
-		// TODO Refine it
-		float start = wHalf - (offset * ((keySeqTextureList.size() - 1 / 2)));
-		// Centering
+	private float centering(ArrayList<Texture> keySeqTextureList,
+			float offset) {
+		float iconSize = 45;
+		float wHalf = Gdx.graphics.getWidth() / 2;
+		float hFull = Gdx.graphics.getHeight();
+		float start;
+
 		if (keySeqTextureList.size() % 2 == 1) {
-			float x = start; // start point, origo bottom left corner of window
-			guiBatch.begin();
-			for (Texture texture : keySeqTextureList) {
-				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add
-																			// width
-																			// and
-																			// height
-				x = x + offset + texture.getWidth();
-			}
-			guiBatch.end();
-
+			start = wHalf - (offset * ((keySeqTextureList.size() - 1 / 2)));
 		} else {
 			start = wHalf - offset * (keySeqTextureList.size() / 2);
-			float x = start;
-			guiBatch.begin();
-			for (Texture texture : keySeqTextureList) {
-				guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize); // add
-																			// width
-																			// and
-																			// height
-				x = x - offset;
-			}
-			guiBatch.end();
 		}
 
+		return start;
 	}
-	
+
 	public void renderCountDown(int time) {
 		batch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2,
+				Gdx.graphics.getHeight() / 2);
 		batch.end();
 		if (time % 1 > 0) {
 			time -= 1;
