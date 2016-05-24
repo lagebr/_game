@@ -21,6 +21,8 @@ public class MenuController implements Screen {
 	private NamelessGame game;
 
 	private MainMenuRenderer renderer;
+	
+	private int markerIndex = 0;
 
 	/**
 	 * Creates a menu controller with a reference to NamelessGame. The reference
@@ -42,10 +44,32 @@ public class MenuController implements Screen {
 
 	@Override
 	public void render(float delta) {
+		renderer.prepare();
 		renderer.render();
+		renderer.renderMarker(markerIndex);
+
+		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.DOWN)) {
+			markerIndex += 1;
+			if (markerIndex > 1) {
+				markerIndex = 1;
+			}
+		}
 		
-		if (Gdx.app.getInput().isKeyPressed(Input.Keys.P)) {
-			game.startGame();
+		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.UP)) {
+			markerIndex -= 1;
+			if (markerIndex < 0) {
+				markerIndex = 0;
+			}
+		}
+		
+		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.SPACE)) {
+			switch (markerIndex) {
+			case 0:
+				game.startGame();
+				break;
+			case 1:
+				Gdx.app.exit();
+			}
 		}
 	}
 
