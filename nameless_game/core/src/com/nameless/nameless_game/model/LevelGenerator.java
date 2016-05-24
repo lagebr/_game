@@ -37,7 +37,7 @@ public class LevelGenerator {
 			Vector2 location = getValidLocation(50, 50, width - 50, height - 50, locations);
 			locations.add(location);
 
-			Texture texture = new Texture(Gdx.files.internal("GreenSquare50x50.png"));
+			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
 			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
 			level.addHostile(hostile);
 		}
@@ -58,7 +58,7 @@ public class LevelGenerator {
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
 		textureLookUp.put(HostileType.PANIC,
-				new Texture(Gdx.files.internal("GreenSquare50x50.png")));
+				new Texture(Gdx.files.internal("simple_square.png")));
 		textureLookUp.put(HostileType.CHARGE,
 				new Texture(Gdx.files.internal("PlayerCircle120x120.png")));
 		level.setTextureLookUp(textureLookUp);
