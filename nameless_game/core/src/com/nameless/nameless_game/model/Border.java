@@ -15,6 +15,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * 
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2015-05-09
+ * 
  */
 public class Border extends Entity {
 	private static Body bodyEdgeScreen;

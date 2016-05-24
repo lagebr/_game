@@ -16,8 +16,10 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * 
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-04
+ * 
  */
 public class Entity {
+	
 	protected Body body;
 	protected Sprite sprite;
 
@@ -122,13 +124,13 @@ public class Entity {
 
 		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 0.5f);
 
-		// Collision masks
+		// collision masks
 		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
 		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
 
 		physicsBody.createFixture(fixtureDef);
 
-		rectangle.dispose(); // LibGDX
+		rectangle.dispose();
 
 		return physicsBody;
 	}
