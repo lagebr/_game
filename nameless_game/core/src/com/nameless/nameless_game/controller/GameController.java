@@ -38,6 +38,8 @@ public class GameController implements Screen {
 
 	private Level level;
 
+	private int numberOfHostilesToCreate = 0;
+
 	private NamelessGame game;
 
 	private boolean isPreparing;
@@ -72,7 +74,6 @@ public class GameController implements Screen {
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
 		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 2);
-
 
 		createCollisionListener();
 	}
@@ -117,6 +118,16 @@ public class GameController implements Screen {
 					entity = null;
 				}
 			}
+
+			// Create new Hostiles if necessary.
+			for (int i = 0; i < numberOfHostilesToCreate; i++) {
+				Vector2 location = LevelGenerator.getValidNewLocation(50, 50, Gdx.graphics.getWidth() - 100,
+						Gdx.graphics.getHeight() - 100, level.getPlayer());
+				Hostile hostile = LevelGenerator.createRandomHostile(location, level.getWorld(), level.getPlayer());
+				level.addHostile(hostile);
+			}
+
+			numberOfHostilesToCreate = 0;
 		} else {
 			timeCount -= delta;
 			renderer.renderCountDown((int) timeCount);
@@ -150,6 +161,7 @@ public class GameController implements Screen {
 						hostile.setFlaggedForDeletion(true);
 
 						numWins += 1;
+						numberOfHostilesToCreate += 1;
 						level.generateNewKey();
 					} else {
 						game.startGameOver(numWins);
