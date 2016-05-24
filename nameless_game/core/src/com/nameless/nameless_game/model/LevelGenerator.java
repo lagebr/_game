@@ -117,12 +117,12 @@ public class LevelGenerator {
 	 * @param height
 	 * @param locations
 	 *            The locations to compare with.
-	 * @return
+	 * @return The created location.
 	 */
 	private static Vector2 getValidLocation(float x, float y, float width, float height, ArrayList<Vector2> locations) {
 		int iterations = 0;
 
-		Vector2 location = createRandomLocation(50, 50, width - 50, height - 50);
+		Vector2 location = createRandomLocation(x, y, width - x, height - y);
 		while (isLocationValid(location, locations) == false && iterations < 50) {
 			location = createRandomLocation(50, 50, width - 50, height - 50);
 
@@ -148,7 +148,7 @@ public class LevelGenerator {
 	 * @return The created location.
 	 */
 	public static Vector2 getValidNewLocation(float x, float y, float width, float height, Player player) {
-		Vector2 location = createRandomLocation(x, x, width - x, height - y);
+		Vector2 location = createRandomLocation(x, y, width - x, height - y);
 
 		float playerX = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().x);
 		float playerY = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().y);
