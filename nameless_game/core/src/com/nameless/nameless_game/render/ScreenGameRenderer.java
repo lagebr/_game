@@ -72,7 +72,7 @@ public class ScreenGameRenderer extends GameRenderer {
 
 		debugRenderer = new Box2DDebugRenderer();
 
-		camera.position.set(width / 2, height / 2 - 100, 700);
+		camera.position.set(width / 2, height / 2, 700);
 		camera.lookAt(width / 2, height / 2, 0);
 		camera.far = 100000;
 
