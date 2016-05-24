@@ -42,7 +42,7 @@ public class LevelGenerator {
 			level.addHostile(hostile);
 		}
 
-		Texture texture = new Texture(Gdx.files.internal("PlayerCircle120x120.png"));
+		Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
 		Vector2 chargerLocation = getValidLocation(50, 50, width - 50, height - 50, locations);
 		locations.add(chargerLocation);
 		Hostile charger = new ChargeHostileWithTarget(chargerLocation.x, chargerLocation.y, 60, texture, world, player);
@@ -61,7 +61,7 @@ public class LevelGenerator {
 		textureLookUp.put(HostileType.PANIC,
 				new Texture(Gdx.files.internal("simple_square.png")));
 		textureLookUp.put(HostileType.CHARGE,
-				new Texture(Gdx.files.internal("PlayerCircle120x120.png")));
+				new Texture(Gdx.files.internal("charge_hostile.png")));
 		level.setTextureLookUp(textureLookUp);
 		
 		return level;
