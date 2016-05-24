@@ -43,6 +43,10 @@ public class ScreenGameRenderer extends GameRenderer {
 	private BitmapFont font;
 	
 	private float start;
+	float wHalf;
+	float hFull;
+	
+	private boolean isReset;
 
 	/**
 	 * Draws all entities on screen using an perspective camera.
@@ -53,7 +57,10 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The height of the screen.
 	 */
 	public ScreenGameRenderer(float width, float height) {
+		wHalf = Gdx.graphics.getWidth() / 2;
+		hFull = Gdx.graphics.getHeight();
 		start = 0f;
+		isReset = true;
 		
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -120,18 +127,16 @@ public class ScreenGameRenderer extends GameRenderer {
 	@Override
 	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
 		float offset = 50;
-		float wHalf = Gdx.graphics.getWidth() / 2;
-		float hFull = Gdx.graphics.getHeight();
 		int iconSize = 45;
 		
-		if (start == 0) { 
+		if (isReset) { 
 			start = centering(keySeqTextureList, offset);
 		}
 		float x = start;
 		guiBatch.begin();
 		for (Texture texture : keySeqTextureList) {
 			guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize);
-			x = x + offset + texture.getWidth();
+			x = x + offset + 65;
 		}
 		guiBatch.end();
 	}
@@ -144,7 +149,7 @@ public class ScreenGameRenderer extends GameRenderer {
 		float start;
 
 		if (keySeqTextureList.size() % 2 == 1) {
-			start = wHalf - (offset * ((keySeqTextureList.size() - 1 / 2)));
+			start = wHalf - offset * (keySeqTextureList.size() - 1 / 2);
 		} else {
 			start = wHalf - offset * (keySeqTextureList.size() / 2);
 		}
@@ -161,6 +166,10 @@ public class ScreenGameRenderer extends GameRenderer {
 		if (time % 1 > 0) {
 			time -= 1;
 		}
+	}
+	
+	public void resetKeySeq() {
+		isReset = true;
 	}
 
 	/**

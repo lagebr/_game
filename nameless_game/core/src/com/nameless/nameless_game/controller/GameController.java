@@ -76,10 +76,10 @@ public class GameController implements Screen {
 
 		createCollisionListener();
 		
-		keySeqProgression = level.getKeySeq();
+		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
 		
 		keySeqTextureList = new ArrayList<Texture>(5);
-		for (HostileType hostileType : level.getKeySeq()) {
+		for (HostileType hostileType : keySeqProgression) {
 			keySeqTextureList.add(level.getTextureLookUp().get(hostileType));
 		}
 	}
