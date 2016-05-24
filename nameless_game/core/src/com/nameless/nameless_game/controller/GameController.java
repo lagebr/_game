@@ -30,8 +30,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  */
 public class GameController implements Screen {
 
-	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f,
-			72f / 256f, 1f);
+	private static final Color BACKGROUND_COLOR = new Color(0f, 178f / 256f, 72f / 256f, 1f);
 	private Random random;
 
 	private GameInputProcessor inputProcessor;
@@ -69,16 +68,14 @@ public class GameController implements Screen {
 		inputProcessor = new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 
-		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		renderer = new ScreenGameRenderer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		World world = new World(new Vector2(0, 0), false);
 
 		float levelWidth = (float) Gdx.graphics.getWidth();
 		float levelHeight = (float) Gdx.graphics.getHeight();
 
-		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world,
-				10);
+		level = LevelGenerator.generateLevel(levelWidth, levelHeight, world, 10);
 
 		createCollisionListener();
 
@@ -137,7 +134,7 @@ public class GameController implements Screen {
 			if (timeCount < 0) {
 				isPreparing = false;
 				// Clear InputEvents from during the preparation
-				inputProcessor.getActionQueue().clear(); 
+				inputProcessor.getActionQueue().clear();
 			}
 		}
 	}
@@ -146,28 +143,22 @@ public class GameController implements Screen {
 		level.getWorld().setContactListener(new ContactListener() {
 			@Override
 			public void beginContact(Contact contact) {
-				if (contact.getFixtureA()
-						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureB()
-							.getUserData() instanceof Hostile) {
+				if (contact.getFixtureA().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureB().getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
 							game.startGameOver();
 						} else {
-							Hostile hostileB = (Hostile) contact.getFixtureB()
-									.getUserData();
+							Hostile hostileB = (Hostile) contact.getFixtureB().getUserData();
 							hostileB.setFlaggedForDeletion(true);
 							keySeqListener(hostileB);
 						}
 					}
-				} else if (contact.getFixtureB()
-						.getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
-					if (contact.getFixtureA()
-							.getUserData() instanceof Hostile) {
+				} else if (contact.getFixtureB().getFilterData().categoryBits == Entity.PLAYER_ENTITY) {
+					if (contact.getFixtureA().getUserData() instanceof Hostile) {
 						if (level.getPlayer().isBoosting() == false) {
 							game.startGameOver();
 						} else {
-							Hostile hostileA = (Hostile) contact.getFixtureA()
-									.getUserData();
+							Hostile hostileA = (Hostile) contact.getFixtureA().getUserData();
 							hostileA.setFlaggedForDeletion(true);
 							keySeqListener(hostileA);
 						}
