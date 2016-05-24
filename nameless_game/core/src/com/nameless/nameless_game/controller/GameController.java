@@ -151,7 +151,7 @@ public class GameController implements Screen {
 						numWins += 1;
 						level.generateNewKey();
 					} else {
-						game.startGameOver();
+						game.startGameOver(numWins);
 					}
 				}
 			}
