@@ -105,6 +105,7 @@ public class GameController implements Screen {
 		renderer.renderHostiles(level.getHostiles());
 		renderer.render(level.getPlayer());
 		renderer.renderKeySeq(keySeqTextureList);
+		renderer.renderWinCount(numWins);
 		//renderer.renderDebug(level.getWorld());
 
 		if (!isPreparing) {

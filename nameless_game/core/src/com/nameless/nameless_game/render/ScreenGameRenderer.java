@@ -162,6 +162,14 @@ public class ScreenGameRenderer extends GameRenderer {
 			time -= 1;
 		}
 	}
+	
+	public void renderWinCount(int wins) {
+		guiBatch.begin();
+		font.setColor(Color.WHITE);
+		font.draw(guiBatch, String.valueOf(wins), (Gdx.graphics.getWidth() - 65),
+				(Gdx.graphics.getHeight() - 65));
+		guiBatch.end();
+	}
 
 	/**
 	 * Draws a single entity in one batch.
