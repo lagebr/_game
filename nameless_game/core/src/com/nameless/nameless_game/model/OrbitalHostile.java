@@ -42,6 +42,5 @@ public class OrbitalHostile extends Hostile {
 		
 		
 		
-		
 	}
 }
