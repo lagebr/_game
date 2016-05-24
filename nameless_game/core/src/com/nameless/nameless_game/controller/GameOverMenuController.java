@@ -15,14 +15,21 @@ public class GameOverMenuController implements Screen {
 
 	private NamelessGame game;
 	
+	private int score;
+
 	private GameOverMenuRenderer renderer;
-	
+
 	/**
-	 * Creates a GameOverMenuController with a reference to game.
+	 * Creates a GameOverMenuController with a reference to game and the score
+	 * achieved during the most recently played game.
+	 * 
+	 * @param game
+	 * @param score
 	 */
-	public GameOverMenuController(NamelessGame game) {
+	public GameOverMenuController(NamelessGame game, int score) {
 		this.game = game;
-		
+		this.score = score;
+
 		renderer = new GameOverMenuRenderer();
 	}
 
@@ -34,10 +41,7 @@ public class GameOverMenuController implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
-		renderer.render();
-		
+		renderer.render(score);
 
 		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.SPACE)) {
 			game.startMainMenu();

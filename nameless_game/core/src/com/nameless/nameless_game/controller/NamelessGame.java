@@ -37,12 +37,15 @@ public class NamelessGame extends Game {
 	public void startGame() {
 		this.setScreen(new GameController(this));
 	}
-	
+
 	/**
 	 * Goes to game over menu by switching the screen to a new instance of
 	 * GameOverMenuController.
+	 * 
+	 * @param score
+	 *            - The score to display.
 	 */
-	public void startGameOver() {
-		this.setScreen(new GameOverMenuController(this));
+	public void startGameOver(int score) {
+		this.setScreen(new GameOverMenuController(this, score));
 	}
 }
