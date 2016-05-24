@@ -47,8 +47,8 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 
 		if (distance < panicDistance) {
 			// Normalize and multiply by an arbitrary scalar
-			float x = (float) (dx / Math.abs(dx) * 2);
-			float y = (float) (dy / Math.abs(dy) * 2);
+			float x = (float) (dx / Math.abs(dx) * 0.2);
+			float y = (float) (dy / Math.abs(dy) * 0.2);
 
 			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(),
 					true);
