@@ -11,6 +11,7 @@ import com.nameless.nameless_game.model.Hostile;
  * 
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-04
+ * 
  */
 public abstract class GameRenderer {
 

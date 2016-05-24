@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.nameless.nameless_game.model;
 
 /**

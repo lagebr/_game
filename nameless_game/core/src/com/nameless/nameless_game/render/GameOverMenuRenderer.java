@@ -6,6 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Renders the game over menu.
+ * 
+ * @author Henrik Lagebrand, Isaac Arvestad
+ * @version 2016-05-24
+ * 
+ */
 public class GameOverMenuRenderer {
 
 	private SpriteBatch batch;
@@ -31,7 +38,8 @@ public class GameOverMenuRenderer {
 
 		batch.begin();
 		batch.draw(background, 0, 0);
-		font.draw(batch, "You got " + score + " points!", Gdx.graphics.getWidth()/2 - 50, Gdx.graphics.getHeight()/2);
+		font.draw(batch, "You got " + score + " points!",
+				Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
 		batch.end();
 	}
 }

@@ -23,6 +23,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  *
  */
 public class Hostile extends Entity {
+	
 	private Random random = new Random();
 
 	protected HostileType type;
