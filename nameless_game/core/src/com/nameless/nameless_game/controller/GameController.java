@@ -49,10 +49,6 @@ public class GameController implements Screen {
 
 	private int numWins;
 
-	private boolean isFlashRefreshed;
-
-	private float timeLapse;
-
 	/**
 	 * Creates a game controller with a reference to NamelessGame. The reference
 	 * is used when game should pause or exit to main menu. Initializes game.
@@ -60,7 +56,6 @@ public class GameController implements Screen {
 	 * @param game
 	 */
 	public GameController(NamelessGame game) {
-		isFlashRefreshed = false;
 		numWins = 0;
 
 		random = new Random();
@@ -110,25 +105,7 @@ public class GameController implements Screen {
 				entity.update(Gdx.graphics.getDeltaTime());
 			}
 		}
-
-		if (!isFlashRefreshed) {
-			renderer.prepare(Color.BLACK);
-			renderer.renderBackground();
-			renderer.renderHostiles(level.getHostiles());
-			renderer.render(level.getPlayer());
-			renderer.renderKeySeq(keySeqTextureList);
-			renderer.renderWinCount(numWins);
-			// renderer.renderDebug(level.getWorld());
-		} else {
-			timeLapse += delta;
-
-			renderer.prepare(Color.WHITE);
-
-			if (timeLapse > 0.09f) {
-				isFlashRefreshed = false;
-			}
-		}
-
+			
 		renderer.prepare(BACKGROUND_COLOR);
 		renderer.renderBackground();
 		renderer.renderHostiles(level.getHostiles());
@@ -256,7 +233,7 @@ public class GameController implements Screen {
 	public void refreshKeySeq() {
 		ArrayList<HostileType> list = new ArrayList<HostileType>();
 		Collections.shuffle(level.getHostiles());
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			if (!level.getHostiles().get(i).isFlaggedForDeletion()) {
 				list.add(level.getHostiles().get(i).getType());
 			}
@@ -269,8 +246,6 @@ public class GameController implements Screen {
 		generateTextureList(list);
 
 		keySeqProgression = (ArrayList<HostileType>) level.getKeySeq().clone();
-
-		isFlashRefreshed = true;
 
 		renderer.resetKeySeq();
 	}

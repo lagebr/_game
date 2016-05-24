@@ -50,7 +50,7 @@ public class LevelGenerator {
 		
 		ArrayList<HostileType> list = new ArrayList<HostileType>();
 		Collections.shuffle(level.getHostiles());
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			list.add(level.getHostiles().get(i).getType());
 		}
 		
