@@ -10,5 +10,5 @@ package com.nameless.nameless_game.model;
  * @version 2016-05-15
  */
 public enum HostileType {
-	CHARGE, PANIC;
+	CHARGE, PANIC, ORBITAL, TRIANGLE;
 }
