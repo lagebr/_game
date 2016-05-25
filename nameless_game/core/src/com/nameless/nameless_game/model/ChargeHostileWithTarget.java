@@ -81,7 +81,10 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	 * afterwards.
 	 */
 	private void charge() {
-		float c = (float) Math.log(((double) chargeDist));
+		if (chargeDist > Gdx.graphics.getWidth()/2)
+			chargeDist = Gdx.graphics.getWidth()/2; // added ceiling
+		
+		float c = .8f* (float) Math.log(((double) chargeDist));
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
 		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
