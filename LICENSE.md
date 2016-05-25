@@ -1,3 +1,6 @@
+# NamelessGame license
+
+
 # Third Party License(s)
 ## LibGDX
 Copyright 2016 LibGDX
