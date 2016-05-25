@@ -47,6 +47,7 @@ public class LevelGenerator {
 		textureLookUp.put(HostileType.CHARGE, new Texture(Gdx.files.internal("charge_hostile.png")));
 		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
 		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
+		textureLookUp.put(HostileType.RIGHT_ANGLE, new Texture(Gdx.files.internal("BlueSquare100x100.png")));
 		level.setKeyTextureLookUp(textureLookUp);
 
 		level.generateNewKey();
@@ -85,19 +86,22 @@ public class LevelGenerator {
 	public static Hostile createRandomHostile(Vector2 location, World world, Player player) {
 		int number = random.nextInt(100);
 
-		if (number < 70) { // 70% probability
+		Hostile hostile;
+		if (number < 60) { // 60% probability
 			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
-			Hostile hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
-			return hostile;
-		} else if (number < 90) { // 90% - 70% = 20% probability
+			hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
+		} else if (number < 80) { // 80% - 60% = 20% probability
 			Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
-			Hostile hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
-			return hostile;
+			hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
+		} else if (number < 90) { // 90% - 80% = 10% probability 
+			Texture texture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
+			hostile = new RightAngleHostile(location.x, location.y, 100f, 100f, texture, world);
 		} else { // 100% - 90% = 10% probability
 			Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
-			Hostile hostile = new ChargeHostileWithTarget(location.x, location.y, 60, texture, world, player);
-			return hostile;
+			hostile = new ChargeHostileWithTarget(location.x, location.y, 60, texture, world, player);
 		}
+		
+		return hostile;
 	}
 
 	/**
