@@ -47,7 +47,7 @@ public class LevelGenerator {
 		textureLookUp.put(HostileType.CHARGE, new Texture(Gdx.files.internal("charge_hostile.png")));
 		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
 		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
-		textureLookUp.put(HostileType.RIGHT_ANGLE, new Texture(Gdx.files.internal("BlueSquare100x100.png")));
+		textureLookUp.put(HostileType.RIGHT_ANGLE, new Texture(Gdx.files.internal("right_angle_hostile.png")));
 		level.setKeyTextureLookUp(textureLookUp);
 
 		level.generateNewKey();
@@ -94,8 +94,8 @@ public class LevelGenerator {
 			Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
 			hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
 		} else if (number < 90) { // 90% - 80% = 10% probability 
-			Texture texture = new Texture(Gdx.files.internal("BlueSquare100x100.png"));
-			hostile = new RightAngleHostile(location.x, location.y, 100f, 100f, texture, world);
+			Texture texture = new Texture(Gdx.files.internal("right_angle_hostile.png"));
+			hostile = new RightAngleHostile(location.x, location.y, 80f, 80f, texture, world);
 		} else { // 100% - 90% = 10% probability
 			Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
 			hostile = new ChargeHostileWithTarget(location.x, location.y, 60, texture, world, player);
