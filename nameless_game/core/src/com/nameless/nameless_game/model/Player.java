@@ -105,8 +105,8 @@ public class Player extends Entity {
 	 */
 	public static Body createDynamicBody(float x, float y, float radius, World world) {
 		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
-		bodyDef.angularDamping = 5.0f;
-		bodyDef.linearDamping = 1.0f;
+		bodyDef.angularDamping = 10.0f;
+		bodyDef.linearDamping = 2.0f;
 
 		Body physicsBody = world.createBody(bodyDef);
 
