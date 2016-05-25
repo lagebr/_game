@@ -134,7 +134,7 @@ public class ScreenGameRenderer extends GameRenderer {
 		int iconSize = 45;
 
 		guiBatch.begin();
-		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 65, iconSize, iconSize);
+		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 55, iconSize, iconSize);
 		guiBatch.end();
 	}
 
