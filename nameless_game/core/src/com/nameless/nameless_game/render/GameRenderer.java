@@ -24,10 +24,10 @@ public abstract class GameRenderer {
 	public abstract void renderHostiles(ArrayList<Hostile> hostiles);
 
 	/**
-	 * Draws all sprites to screen.
+	 * Draws the texture to screen.
 	 * 
 	 * @param entities
 	 *            The entities to be drawn.
 	 */
-	public abstract void renderKeySeq(ArrayList<Texture> keySeqTextureList);
+	public abstract void renderKey(Texture key);
 }

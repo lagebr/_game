@@ -134,44 +134,15 @@ public class ScreenGameRenderer extends GameRenderer {
 		int iconSize = 45;
 
 		guiBatch.begin();
-		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 65, iconSize, iconSize);
+		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 55, iconSize, iconSize);
 		guiBatch.end();
-	}
-
-	@Override
-	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
-		float offset = 50;
-		int iconSize = 45;
-
-		if (isReset) {
-			start = centering(keySeqTextureList, offset);
-		}
-		float x = start;
-		guiBatch.begin();
-		for (Texture texture : keySeqTextureList) {
-			guiBatch.draw(texture, x, hFull - 65, iconSize, iconSize);
-			x = x + offset + 65;
-		}
-		guiBatch.end();
-	}
-
-	private float centering(ArrayList<Texture> keySeqTextureList, float offset) {
-		float start;
-
-		if (keySeqTextureList.size() % 2 == 1) {
-			start = wHalf - offset * (keySeqTextureList.size() - 1 / 2);
-		} else {
-			start = wHalf - offset * (keySeqTextureList.size() / 2);
-		}
-
-		return start;
 	}
 
 	public void renderCountDown(int time) {
-		batch.begin();
+		guiBatch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(batch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		batch.end();
+		font.draw(guiBatch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		guiBatch.end();
 		if (time % 1 > 0) {
 			time -= 1;
 		}

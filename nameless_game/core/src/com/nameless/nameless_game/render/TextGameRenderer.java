@@ -17,12 +17,13 @@ import com.nameless.nameless_game.model.Hostile;
 public class TextGameRenderer extends GameRenderer {
 
 	@Override
-	public void renderKeySeq(ArrayList<Texture> keySeqTextureList) {
+	public void renderHostiles(ArrayList<Hostile> hostiles) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void renderHostiles(ArrayList<Hostile> hostiles) {
+	public void renderKey(Texture key) {
 		// TODO Auto-generated method stub
+		
 	}
 }
