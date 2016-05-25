@@ -1,5 +1,12 @@
 ### Installation (Desktop)
-TBA
+
+#### Run Jar
+Locate the runnable Jar which is included in the project. Run it in the command line with `java -jar path-to-jar-file` or run it with your operating system's GUI.
+
+#### Install from source
+To install from source, import project to Eclipse using Gradle. [See this article for more information](https://github.com/libgdx/libgdx/wiki/Gradle-and-Eclipse). Once installed, right click on the desktop project, select export, and finally export as runnable Jar. [See this article for more information](https://github.com/libgdx/libgdx/wiki/Deploying-your-application). 
+
+Once the Jar has been created, you can run it.
 
 ### Testing Strategy
 Using the structure of Model-View-Controller we plan to do basic testing in a non-graphic View using JUnit 4.0. Other than that we'll create a test level for users to run through the mechanics and feel of the game.
