@@ -17,6 +17,9 @@ Once the Jar has been created, you can run it.
 ### License
 See LICENSE.md file.
 
+### Game as of 2016-05-25
+![](version_1.gif)
+
 ### Game as of 2016-05-20
 ![](current_game_2016_05_20.png)
 
