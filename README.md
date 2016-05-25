@@ -14,6 +14,9 @@ To install from source, import project to Eclipse using Gradle. [See this articl
 
 Once the Jar has been created, you can run it.
 
+### License
+See LICENSE.md file.
+
 ### First idea
 ![Alt text](prototype.JPG)
 
@@ -22,3 +25,4 @@ Once the Jar has been created, you can run it.
 
 ### Game as of 2016-05-08
 ![Alt text](namelessGIF.gif)
+
