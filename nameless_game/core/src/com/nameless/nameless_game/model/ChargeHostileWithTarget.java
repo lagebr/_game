@@ -20,7 +20,7 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private double chargeDist = 0;
 	private double angle = 0;
 
-	boolean isSleeping = false;
+	boolean isSleeping = true;
 	private float timeSlept = 0;
 	private float napTime = 2.0f;
 	private float angVelocity = 2f;
@@ -81,6 +81,9 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	 * afterwards.
 	 */
 	private void charge() {
+		if (chargeDist > Gdx.graphics.getWidth()/2)
+			chargeDist = Gdx.graphics.getWidth()/2; // added ceiling
+		
 		float c = (float) Math.log(((double) chargeDist));
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
