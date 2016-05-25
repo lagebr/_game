@@ -1,5 +1,5 @@
 ## nameless_project
-The goal in NamelessGame is to survive as long as possible and acquire as many points as possible. You lose if an enemy touches you and they are not the target type, you get a point if they are the target type.
+The goal of NamelessGame is to survive as long as possible and acquire as many points as possible. You lose if an enemy touches you and they are not the target type, you get a point if they are the target type.
 
 The current target type is shown at the top of the screen and is chosen at random. Each time you get a point it will refresh.
 
