@@ -36,10 +36,16 @@ public class GameOverMenuRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		String gameOverMessage;
+		if (score == 1) {
+			gameOverMessage = "You got " + score + " point!";
+		} else {
+			gameOverMessage = "You got " + score + " points!";
+		}
+
 		batch.begin();
 		batch.draw(background, 0, 0);
-		font.draw(batch, "You got " + score + " points!", Gdx.graphics.getWidth() / 2 - 50,
-				Gdx.graphics.getHeight() / 2);
+		font.draw(batch, gameOverMessage, Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
 		batch.end();
 	}
 }
