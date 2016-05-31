@@ -37,7 +37,6 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
-		
 		Random rnd = new Random();
 		body.setTransform(body.getPosition(), rnd.nextFloat()*2*MathUtils.PI);
 		
