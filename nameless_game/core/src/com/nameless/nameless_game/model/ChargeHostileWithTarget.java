@@ -1,5 +1,7 @@
 package com.nameless.nameless_game.model;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
@@ -35,7 +37,10 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 
 		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
-
+		
+		Random rnd = new Random();
+		body.setTransform(body.getPosition(), rnd.nextFloat()*2*MathUtils.PI);
+		
 		body.setFixedRotation(false);
 		updateSpritePosition();
 	}

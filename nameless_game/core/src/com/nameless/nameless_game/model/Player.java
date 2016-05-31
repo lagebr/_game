@@ -1,6 +1,9 @@
 package com.nameless.nameless_game.model;
 
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -44,6 +47,10 @@ public class Player extends Entity {
 
 		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
+		
+		Random rnd = new Random();
+		body.setTransform(body.getPosition(), rnd.nextFloat()*2*MathUtils.PI);
+		
 		updateSpritePosition();
 	}
 
