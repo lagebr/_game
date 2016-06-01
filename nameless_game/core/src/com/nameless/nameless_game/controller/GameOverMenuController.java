@@ -14,7 +14,7 @@ import com.nameless.nameless_game.render.GameOverMenuRenderer;
 public class GameOverMenuController implements Screen {
 
 	private NamelessGame game;
-	
+
 	private int score;
 
 	private GameOverMenuRenderer renderer;

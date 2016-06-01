@@ -54,12 +54,13 @@ public class PhysicsHelper {
 	 *            The body type.
 	 * @param fixedRotation
 	 *            <ul>
-	 *            	<li>True - body can not rotate</li>
-	 *            	<li>False - body can rotate</li>
+	 *            <li>True - body can not rotate</li>
+	 *            <li>False - body can rotate</li>
 	 *            </ul>
 	 * @return The body definition.
 	 */
-	public static BodyDef createBodyDef(float x, float y, BodyType type, boolean fixedRotation) {
+	public static BodyDef createBodyDef(float x, float y, BodyType type,
+			boolean fixedRotation) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = type;
 		bodyDef.position.set(x, y);

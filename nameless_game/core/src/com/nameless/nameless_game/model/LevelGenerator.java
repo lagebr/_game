@@ -1,7 +1,6 @@
 package com.nameless.nameless_game.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -23,7 +22,8 @@ public class LevelGenerator {
 
 	private static Random random = new Random();
 
-	public static Level generateLevel(float width, float height, World world, int numHostiles) {
+	public static Level generateLevel(float width, float height, World world,
+			int numHostiles) {
 		ArrayList<Vector2> locations = new ArrayList<Vector2>();
 
 		float playerX = width / 2;
@@ -34,7 +34,8 @@ public class LevelGenerator {
 		Level level = new Level(width, height, player, world);
 
 		for (int i = 0; i < numHostiles; i++) {
-			Vector2 location = getValidLocation(50, 50, width - 100, height - 100, locations);
+			Vector2 location = getValidLocation(50, 50, width - 100,
+					height - 100, locations);
 			locations.add(location);
 
 			Hostile hostile = createRandomHostile(location, world, player);
@@ -43,11 +44,16 @@ public class LevelGenerator {
 
 		HashMap<HostileType, Texture> textureLookUp;
 		textureLookUp = new HashMap<HostileType, Texture>();
-		textureLookUp.put(HostileType.PANIC, new Texture(Gdx.files.internal("simple_square.png")));
-		textureLookUp.put(HostileType.CHARGE, new Texture(Gdx.files.internal("charge_hostile.png")));
-		textureLookUp.put(HostileType.ORBITAL, new Texture(Gdx.files.internal("orbital_hostile.png")));
-		textureLookUp.put(HostileType.TRIANGLE, new Texture(Gdx.files.internal("triangle_hostile.png")));
-		textureLookUp.put(HostileType.RIGHT_ANGLE, new Texture(Gdx.files.internal("right_angle_hostile.png")));
+		textureLookUp.put(HostileType.PANIC,
+				new Texture(Gdx.files.internal("simple_square.png")));
+		textureLookUp.put(HostileType.CHARGE,
+				new Texture(Gdx.files.internal("charge_hostile.png")));
+		textureLookUp.put(HostileType.ORBITAL,
+				new Texture(Gdx.files.internal("orbital_hostile.png")));
+		textureLookUp.put(HostileType.TRIANGLE,
+				new Texture(Gdx.files.internal("triangle_hostile.png")));
+		textureLookUp.put(HostileType.RIGHT_ANGLE,
+				new Texture(Gdx.files.internal("right_angle_hostile.png")));
 		level.setKeyTextureLookUp(textureLookUp);
 
 		level.generateNewKey();
@@ -83,24 +89,33 @@ public class LevelGenerator {
 	 *            The target, if hostile needs a target.
 	 * @return The created hostile.
 	 */
-	public static Hostile createRandomHostile(Vector2 location, World world, Player player) {
+	public static Hostile createRandomHostile(Vector2 location, World world,
+			Player player) {
 		int number = random.nextInt(100);
 
 		Hostile hostile;
 		if (number < 60) { // 60% probability
-			Texture texture = new Texture(Gdx.files.internal("simple_square.png"));
-			hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50, texture, world, player);
+			Texture texture = new Texture(
+					Gdx.files.internal("simple_square.png"));
+			hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50,
+					texture, world, player);
 		} else if (number < 80) { // 80% - 60% = 20% probability
-			Texture texture = new Texture(Gdx.files.internal("triangle_hostile.png"));
-			hostile = new TriangleHostileWithTarget(location.x, location.y, texture, world, player);
-		} else if (number < 90) { // 90% - 80% = 10% probability 
-			Texture texture = new Texture(Gdx.files.internal("right_angle_hostile.png"));
-			hostile = new RightAngleHostile(location.x, location.y, 80f, 80f, texture, world);
+			Texture texture = new Texture(
+					Gdx.files.internal("triangle_hostile.png"));
+			hostile = new TriangleHostileWithTarget(location.x, location.y,
+					texture, world, player);
+		} else if (number < 90) { // 90% - 80% = 10% probability
+			Texture texture = new Texture(
+					Gdx.files.internal("right_angle_hostile.png"));
+			hostile = new RightAngleHostile(location.x, location.y, 80f, 80f,
+					texture, world);
 		} else { // 100% - 90% = 10% probability
-			Texture texture = new Texture(Gdx.files.internal("charge_hostile.png"));
-			hostile = new ChargeHostileWithTarget(location.x, location.y, 60, texture, world, player);
+			Texture texture = new Texture(
+					Gdx.files.internal("charge_hostile.png"));
+			hostile = new ChargeHostileWithTarget(location.x, location.y, 60,
+					texture, world, player);
 		}
-		
+
 		return hostile;
 	}
 
@@ -123,11 +138,13 @@ public class LevelGenerator {
 	 *            The locations to compare with.
 	 * @return The created location.
 	 */
-	private static Vector2 getValidLocation(float x, float y, float width, float height, ArrayList<Vector2> locations) {
+	private static Vector2 getValidLocation(float x, float y, float width,
+			float height, ArrayList<Vector2> locations) {
 		int iterations = 0;
 
 		Vector2 location = createRandomLocation(x, y, width, height);
-		while (isLocationValid(location, locations) == false && iterations < 50) {
+		while (isLocationValid(location, locations) == false
+				&& iterations < 50) {
 			location = createRandomLocation(x, y, width, height);
 
 			iterations += 1;
@@ -151,11 +168,14 @@ public class LevelGenerator {
 	 * @param player
 	 * @return The created location.
 	 */
-	public static Vector2 getValidNewLocation(float x, float y, float width, float height, Player player) {
+	public static Vector2 getValidNewLocation(float x, float y, float width,
+			float height, Player player) {
 		Vector2 location = createRandomLocation(x, y, width, height);
 
-		float playerX = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().x);
-		float playerY = ScreenGameRenderer.meterToPixel(player.getBody().getPosition().y);
+		float playerX = ScreenGameRenderer
+				.meterToPixel(player.getBody().getPosition().x);
+		float playerY = ScreenGameRenderer
+				.meterToPixel(player.getBody().getPosition().y);
 		Vector2 playerLocation = new Vector2(playerX, playerY);
 
 		int iterations = 0;
@@ -179,7 +199,8 @@ public class LevelGenerator {
 	 * @param height
 	 * @return The created location.
 	 */
-	private static Vector2 createRandomLocation(float x, float y, float width, float height) {
+	private static Vector2 createRandomLocation(float x, float y, float width,
+			float height) {
 		float randomX = random.nextInt((int) (width - x)) + x;
 		float randomY = random.nextInt((int) (height - y)) + y;
 
@@ -201,7 +222,8 @@ public class LevelGenerator {
 	 *         <li>False - location is too close to a different location.</li>
 	 *         </ul>
 	 */
-	private static boolean isLocationValid(Vector2 location, ArrayList<Vector2> locations) {
+	private static boolean isLocationValid(Vector2 location,
+			ArrayList<Vector2> locations) {
 		for (Vector2 otherLocation : locations) {
 			if (location.dst(otherLocation) < 100) {
 				return false;

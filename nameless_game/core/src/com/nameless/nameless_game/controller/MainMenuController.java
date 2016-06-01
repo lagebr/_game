@@ -21,7 +21,7 @@ public class MainMenuController implements Screen {
 	private NamelessGame game;
 
 	private MainMenuRenderer renderer;
-	
+
 	private int markerIndex = 0;
 
 	/**
@@ -54,21 +54,21 @@ public class MainMenuController implements Screen {
 				markerIndex = 1;
 			}
 		}
-		
+
 		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.UP)) {
 			markerIndex -= 1;
 			if (markerIndex < 0) {
 				markerIndex = 0;
 			}
 		}
-		
+
 		if (Gdx.app.getInput().isKeyJustPressed(Input.Keys.SPACE)) {
 			switch (markerIndex) {
-			case 0:
-				game.startGame();
-				break;
-			case 1:
-				Gdx.app.exit();
+				case 0 :
+					game.startGame();
+					break;
+				case 1 :
+					Gdx.app.exit();
 			}
 		}
 	}
