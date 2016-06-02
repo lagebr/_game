@@ -30,12 +30,12 @@ public class TriangleHostileWithTarget extends Hostile {
 		body = createDynamicTriangleBody(ScreenGameRenderer.pixelToMeter(x),
 				ScreenGameRenderer.pixelToMeter(y), world);
 
-		updateSpritePosition();
+		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
+		updateSprite();
 
 		double dx = body.getPosition().x - target.getBody().getPosition().x;
 		double dy = body.getPosition().y - target.getBody().getPosition().y;
@@ -44,8 +44,6 @@ public class TriangleHostileWithTarget extends Hostile {
 		float y = (float) (-dy / Math.abs(dy) * 0.05);
 
 		body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(), true);
-
-		updateSpritePosition();
 	}
 
 	/**
@@ -89,11 +87,15 @@ public class TriangleHostileWithTarget extends Hostile {
 	/**
 	 * Updates the sprite position to correspond to the physics body position.
 	 */
-	protected void updateSpritePosition() {
-		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x);
-		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y);
+	@Override
+	public void updateSprite() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
 
 		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
+
 	}
 }

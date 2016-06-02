@@ -2,13 +2,8 @@ package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.nameless.nameless_game.render.ScreenGameRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * The entity model for the player character.
@@ -42,15 +37,16 @@ public class Player extends Entity {
 	public Player(float x, float y, float radius, Texture texture, World world) {
 		super(texture);
 
-		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+		body = PhysicsHelper.createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
-		updateSpritePosition();
+		
+		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
-
+		updateSprite();
+		
 		if (leftRotate) {
 			body.applyTorque(3.0f, true);
 		}
@@ -88,42 +84,20 @@ public class Player extends Entity {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * createBody creates a rectangular, static physics body, adds it to the
-	 * physics world and returns it.
-	 * 
-	 * @param x
-	 *            The x center of the body in physics meters.
-	 * @param y
-	 *            The y center of the body in physics meters.
-	 * @param radius
-	 *            The radius of the circle in physics meters.
-	 * @param world
-	 *            the world to add the body to
-	 * @return the physics body
+	 * Updates the sprite position to correspond to the physics body position.
 	 */
-	public static Body createDynamicBody(float x, float y, float radius, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
-		bodyDef.angularDamping = 10.0f;
-		bodyDef.linearDamping = 2.0f;
+	@Override
+	public void updateSprite() {
+			float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+					- sprite.getWidth() / 2;
+			float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+					- sprite.getHeight() / 2;
 
-		Body physicsBody = world.createBody(bodyDef);
-
-		CircleShape circle = new CircleShape();
-		circle.setRadius(radius);
-
-		FixtureDef fixtureDef = PhysicsHelper.createFixture(circle, 0.85f);
-		fixtureDef.friction = 0.0f;
-		// collision masks
-		fixtureDef.filter.categoryBits = Entity.PLAYER_ENTITY;
-		fixtureDef.filter.maskBits = Entity.NPC_ENTITY;
-
-		physicsBody.createFixture(fixtureDef);
-
-		circle.dispose();
-
-		return physicsBody;
+			sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+			sprite.setPosition(x, y);
+		
 	}
 
 	public boolean leftRotate() {

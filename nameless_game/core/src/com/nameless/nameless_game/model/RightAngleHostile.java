@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -29,14 +30,16 @@ public class RightAngleHostile extends Hostile {
 		super(x, y, width, height, texture, world);
 		
 		type = HostileType.RIGHT_ANGLE;
+		
+		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
-
-		// 10% chance of changing direction
+		updateSprite();
+		
 		if (random.nextInt(100) < 5) {
+			// 10% chance of changing direction
 			currentDirection = random.nextInt(4);
 		}
 
@@ -93,5 +96,20 @@ public class RightAngleHostile extends Hostile {
 		rectangle.dispose(); // LibGDX
 
 		return physicsBody;
+	}
+	
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	@Override
+	public void updateSprite() {
+			float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+					- sprite.getWidth() / 2;
+			float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+					- sprite.getHeight() / 2;
+
+			sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+			sprite.setPosition(x, y);
+		
 	}
 }

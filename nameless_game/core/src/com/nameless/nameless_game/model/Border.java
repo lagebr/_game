@@ -65,7 +65,8 @@ public class Border extends Entity {
 	 *            Ending y-value
 	 * @param world
 	 */
-	private void createBorder(float xBody, float yBody, float x1, float y1, float x2, float y2, World world) {
+	private void createBorder(float xBody, float yBody, float x1, float y1,
+			float x2, float y2, World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 
@@ -82,5 +83,24 @@ public class Border extends Entity {
 		bodyEdgeScreen.createFixture(fixtureDef);
 
 		border.dispose(); // LibGDX
+	}
+
+	@Override
+	public void update(float deltaTime) {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	@Override
+	public void updateSprite() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
+
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
 	}
 }

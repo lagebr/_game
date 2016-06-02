@@ -229,7 +229,6 @@ public class LevelGenerator {
 				return false;
 			}
 		}
-
 		return true;
 	}
 }

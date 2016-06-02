@@ -31,21 +31,25 @@ public class ChargeHostileWithTarget extends Hostile {
 	public ChargeHostileWithTarget(float x, float y, float radius,
 			Texture texture, World world, Entity target) {
 		super(texture);
+		
 		this.target = target;
+		
 		type = HostileType.CHARGE;
 
-		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x),
+		body = PhysicsHelper.createDynamicCircleBody(this,
+				ScreenGameRenderer.pixelToMeter(x),
 				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
 
 		body.setFixedRotation(false);
-		updateSpritePosition();
+
+		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
-
+		updateSprite();
+		
 		body.setAngularVelocity(angVelocity);
 
 		if (!isSleeping) {
@@ -104,5 +108,20 @@ public class ChargeHostileWithTarget extends Hostile {
 				// Waiting.
 			}
 		}, delay);
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	@Override
+	public void updateSprite() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
+
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
+
 	}
 }
