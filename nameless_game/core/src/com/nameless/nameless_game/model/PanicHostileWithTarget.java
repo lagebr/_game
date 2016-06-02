@@ -15,7 +15,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @author Isaac Arvestad
  * @version 2016-05-11
  */
-public class PanicHostileWithTarget extends HostileWithTarget {
+public class PanicHostileWithTarget extends Hostile {
 
 	private Random random = new Random();
 
@@ -24,7 +24,7 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 	public PanicHostileWithTarget(float x, float y, float width, float height,
 			Texture texture, World world, Entity target) {
 		super(texture);
-		
+
 		this.target = target;
 		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 

@@ -17,16 +17,18 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-24
  */
-public class TriangleHostileWithTarget extends HostileWithTarget {
+public class TriangleHostileWithTarget extends Hostile {
 
-	public TriangleHostileWithTarget(float x, float y, Texture texture, World world, Entity target) {
+	public TriangleHostileWithTarget(float x, float y, Texture texture,
+			World world, Entity target) {
 		super(texture);
 
 		this.target = target;
 
 		type = HostileType.TRIANGLE;
 
-		body = createDynamicTriangleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y), world);
+		body = createDynamicTriangleBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y), world);
 
 		updateSpritePosition();
 	}
@@ -58,16 +60,18 @@ public class TriangleHostileWithTarget extends HostileWithTarget {
 	 * @return The create physics body.
 	 */
 	public Body createDynamicTriangleBody(float x, float y, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
+				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 		physicsBody.setFixedRotation(true);
 
 		Vector2 p1 = new Vector2(0, 0);
 		Vector2 p2 = new Vector2(ScreenGameRenderer.pixelToMeter(70), 0);
-		Vector2 p3 = new Vector2(ScreenGameRenderer.pixelToMeter(35), ScreenGameRenderer.pixelToMeter(60));
+		Vector2 p3 = new Vector2(ScreenGameRenderer.pixelToMeter(35),
+				ScreenGameRenderer.pixelToMeter(60));
 
 		PolygonShape triangle = new PolygonShape();
-		triangle.set(new Vector2[] { p1, p2, p3 });
+		triangle.set(new Vector2[]{p1, p2, p3});
 
 		FixtureDef fixtureDef = PhysicsHelper.createFixture(triangle, 10.0f);
 		// Collision masks
