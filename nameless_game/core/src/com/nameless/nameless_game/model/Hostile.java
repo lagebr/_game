@@ -23,6 +23,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  *
  */
 public class Hostile extends Entity {
+	protected Entity target;
 
 	private Random random = new Random();
 
@@ -36,11 +37,14 @@ public class Hostile extends Entity {
 		this.type = type;
 	}
 
-	public Hostile(float x, float y, float width, float height, Texture texture, World world) {
+	public Hostile(float x, float y, float width, float height, Texture texture,
+			World world) {
 		super(texture);
 
-		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
-				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
+		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width),
+				ScreenGameRenderer.pixelToMeter(height), world);
 		updateSpritePosition();
 	}
 
@@ -62,7 +66,8 @@ public class Hostile extends Entity {
 		float impulseX = ((float) random.nextInt(2000) - 1000) / 50000;
 		float impulseY = ((float) random.nextInt(2000) - 1000) / 50000;
 
-		body.applyLinearImpulse(new Vector2(impulseX, impulseY), body.getLocalCenter(), true);
+		body.applyLinearImpulse(new Vector2(impulseX, impulseY),
+				body.getLocalCenter(), true);
 	}
 
 	/**
@@ -81,8 +86,10 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public Body createDynamicBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+	public Body createDynamicBody(float x, float y, float width, float height,
+			World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
+				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectangle = new PolygonShape();
@@ -115,8 +122,10 @@ public class Hostile extends Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public Body createDynamicCircleBody(float x, float y, float radius, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
+	public Body createDynamicCircleBody(float x, float y, float radius,
+			World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
+				BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();

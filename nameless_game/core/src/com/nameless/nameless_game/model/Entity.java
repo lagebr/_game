@@ -45,9 +45,12 @@ public class Entity {
 	 * @param world
 	 *            Physics world to add body to.
 	 */
-	public Entity(float x, float y, float width, float height, Texture texture, World world) {
-		body = createStaticBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
-				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
+	public Entity(float x, float y, float width, float height, Texture texture,
+			World world) {
+		body = createStaticBody(ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width),
+				ScreenGameRenderer.pixelToMeter(height), world);
 
 		sprite = new Sprite(texture, (int) width, (int) height);
 		updateSpritePosition();
@@ -84,8 +87,10 @@ public class Entity {
 	 * Updates the sprite position to correspond to the physics body position.
 	 */
 	protected void updateSpritePosition() {
-		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
-		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
 
 		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
@@ -107,8 +112,10 @@ public class Entity {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	private Body createStaticBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody, true);
+	private Body createStaticBody(float x, float y, float width, float height,
+			World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody,
+				true);
 
 		Body physicsBody = world.createBody(bodyDef);
 

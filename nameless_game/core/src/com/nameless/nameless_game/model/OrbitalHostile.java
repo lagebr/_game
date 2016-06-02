@@ -2,7 +2,6 @@ package com.nameless.nameless_game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -12,12 +11,14 @@ import com.badlogic.gdx.physics.box2d.World;
  * @author Henrik Lagebrand, Isaac Arvestad
  */
 public class OrbitalHostile extends Hostile {
-	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
+	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2,
+			Gdx.graphics.getHeight());
 
 	/**
 	 * 
 	 */
-	public OrbitalHostile(float x, float y, float width, float height, Texture texture, World world) {
+	public OrbitalHostile(float x, float y, float width, float height,
+			Texture texture, World world) {
 		super(x, y, width, height, texture, world);
 	}
 
