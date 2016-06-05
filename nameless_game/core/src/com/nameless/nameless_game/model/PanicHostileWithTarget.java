@@ -15,7 +15,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @author Isaac Arvestad
  * @version 2016-05-11
  */
-public class PanicHostileWithTarget extends HostileWithTarget {
+public class PanicHostileWithTarget extends Hostile {
 
 	private Random random = new Random();
 
@@ -24,22 +24,25 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 	public PanicHostileWithTarget(float x, float y, float width, float height,
 			Texture texture, World world, Entity target) {
 		super(texture);
-		
+
 		this.target = target;
-		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 
 		type = HostileType.PANIC;
 
-		body = createDynamicBody(ScreenGameRenderer.pixelToMeter(x),
+		body = PhysicsHelper.createDynamicBody(this,
+				ScreenGameRenderer.pixelToMeter(x),
 				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(width),
 				ScreenGameRenderer.pixelToMeter(height), world);
-		updateSpritePosition();
+
+		updateSprite();
+
+		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
+		updateSprite();
 
 		double dx = body.getPosition().x - target.getBody().getPosition().x;
 		double dy = body.getPosition().y - target.getBody().getPosition().y;
@@ -58,5 +61,20 @@ public class PanicHostileWithTarget extends HostileWithTarget {
 			body.applyLinearImpulse(new Vector2(x, y), body.getWorldCenter(),
 					true);
 		}
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	@Override
+	public void updateSprite() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
+
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
+
 	}
 }

@@ -3,10 +3,6 @@ package com.nameless.nameless_game.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.render.ScreenGameRenderer;
 
@@ -18,7 +14,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @version 2016-05-04
  * 
  */
-public class Entity {
+public abstract class Entity {
 
 	protected Body body;
 	protected Sprite sprite;
@@ -45,12 +41,15 @@ public class Entity {
 	 * @param world
 	 *            Physics world to add body to.
 	 */
-	public Entity(float x, float y, float width, float height, Texture texture, World world) {
-		body = createStaticBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
-				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
+	public Entity(float x, float y, float width, float height, Texture texture,
+			World world) {
+		body = PhysicsHelper.createStaticBody(
+				ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width),
+				ScreenGameRenderer.pixelToMeter(height), world);
 
 		sprite = new Sprite(texture, (int) width, (int) height);
-		updateSpritePosition();
 	}
 
 	/**
@@ -76,57 +75,7 @@ public class Entity {
 	 * @param deltaTime
 	 *            Time past since last frame in seconds.
 	 */
-	public void update(float deltaTime) {
-		updateSpritePosition();
-	}
-
-	/**
-	 * Updates the sprite position to correspond to the physics body position.
-	 */
-	protected void updateSpritePosition() {
-		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
-		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
-
-		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
-		sprite.setPosition(x, y);
-	}
-
-	/**
-	 * createStaticBody creates a rectangular, static physics body, adds it to
-	 * the physics world and returns it.
-	 * 
-	 * @param x
-	 *            The x center of the body in physics meters.
-	 * @param y
-	 *            The y center of the body in physics meters.
-	 * @param width
-	 *            The width of the body in physics meters.
-	 * @param height
-	 *            The height of the body in physics meters.
-	 * @param world
-	 *            the world to add the body to
-	 * @return the physics body
-	 */
-	private Body createStaticBody(float x, float y, float width, float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody, true);
-
-		Body physicsBody = world.createBody(bodyDef);
-
-		PolygonShape rectangle = new PolygonShape();
-		rectangle.setAsBox(width / 2, height / 2);
-
-		FixtureDef fixtureDef = PhysicsHelper.createFixture(rectangle, 0.5f);
-
-		// collision masks
-		fixtureDef.filter.categoryBits = Entity.NPC_ENTITY;
-		fixtureDef.filter.maskBits = Entity.PLAYER_ENTITY | Entity.NPC_ENTITY;
-
-		physicsBody.createFixture(fixtureDef);
-
-		rectangle.dispose();
-
-		return physicsBody;
-	}
+	public abstract void update(float deltaTime);
 
 	public Body getBody() {
 		return body;
@@ -151,4 +100,6 @@ public class Entity {
 	public void setFlaggedForDeletion(boolean flaggedForDeletion) {
 		this.flaggedForDeletion = flaggedForDeletion;
 	}
+
+	public abstract void updateSprite();
 }

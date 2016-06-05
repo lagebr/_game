@@ -16,7 +16,7 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  * @author Henrik Lagebrand, Isaac Arvestad
  * @version 2016-05-09
  */
-public class ChargeHostileWithTarget extends HostileWithTarget {
+public class ChargeHostileWithTarget extends Hostile {
 	private double chargeDist = 0;
 	private double angle = 0;
 
@@ -28,22 +28,28 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	private float width = Gdx.graphics.getWidth();
 	private float height = Gdx.graphics.getHeight();
 
-	public ChargeHostileWithTarget(float x, float y, float radius, Texture texture, World world, Entity target) {
+	public ChargeHostileWithTarget(float x, float y, float radius,
+			Texture texture, World world, Entity target) {
 		super(texture);
+		
 		this.target = target;
+		
 		type = HostileType.CHARGE;
 
-		body = createDynamicCircleBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+		body = PhysicsHelper.createDynamicCircleBody(this,
+				ScreenGameRenderer.pixelToMeter(x),
+				ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
 
 		body.setFixedRotation(false);
-		updateSpritePosition();
+
+		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
-
+		updateSprite();
+		
 		body.setAngularVelocity(angVelocity);
 
 		if (!isSleeping) {
@@ -54,12 +60,17 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 			angle = Math.atan2(dy, dx) + Math.PI;
 			chargeDist = Math.sqrt(dx * dx + dy * dy);
 			// Check (radians) if target is in within field of view
-			if (Math.abs(angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6 * MathUtils.PI / 180) {
+			if (Math.abs(
+					angle - (float) (body.getAngle() % (2 * MathUtils.PI))) < 6
+							* MathUtils.PI / 180) {
 				// When target is in sight delay, then charge
 				isSleeping = true;
 
-				napTime = 1 / 4 * (target.getBody().getPosition().dst(body.getPosition()) * -1.9f
-						+ (float) Math.sqrt(width * width + height * height));
+				napTime = 1 / 4
+						* (target.getBody().getPosition()
+								.dst(body.getPosition()) * -1.9f
+								+ (float) Math
+										.sqrt(width * width + height * height));
 				angVelocity = 0.01f;
 			}
 
@@ -81,13 +92,14 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 	 * afterwards.
 	 */
 	private void charge() {
-		if (chargeDist > Gdx.graphics.getWidth()/2)
-			chargeDist = Gdx.graphics.getWidth()/2; // added ceiling
-		
-		float c = .8f* (float) Math.log(((double) chargeDist));
+		if (chargeDist > Gdx.graphics.getWidth() / 2)
+			chargeDist = Gdx.graphics.getWidth() / 2; // added ceiling
+
+		float c = .8f * (float) Math.log(((double) chargeDist));
 		float xImpulse = c * MathUtils.cos(body.getAngle());
 		float yImpulse = c * MathUtils.sin(body.getAngle());
-		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
+		body.applyLinearImpulse(new Vector2(xImpulse, yImpulse),
+				body.getWorldCenter(), true);
 
 		float delay = 1f;
 		Timer.schedule(new Task() {
@@ -96,5 +108,20 @@ public class ChargeHostileWithTarget extends HostileWithTarget {
 				// Waiting.
 			}
 		}, delay);
+	}
+
+	/**
+	 * Updates the sprite position to correspond to the physics body position.
+	 */
+	@Override
+	public void updateSprite() {
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
+				- sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
+				- sprite.getHeight() / 2;
+
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
+
 	}
 }
