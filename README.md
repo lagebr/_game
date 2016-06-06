@@ -18,11 +18,11 @@ Once the JAR has been created, you can run it.
 See `LICENSE.md` file.
 
 ### Timeline
-#### Game as of 2016-05-20
+#### _2016-05-20_
 ![](current_game_2016_05_20.png)
 
-#### Game as of 2016-05-08
+#### _2016-05-08_
 ![Alt text](namelessGIF.gif)
 
-#### First idea
+#### Initial idea
 ![Alt text](prototype.JPG)
