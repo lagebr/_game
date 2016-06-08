@@ -80,7 +80,8 @@ public class ScreenGameRenderer extends GameRenderer {
 		fragmentShader = Gdx.files.internal("fragment.glsl").readString();
 		shader = new ShaderProgram(vertexShader, fragmentShader);
 
-		background = new Texture(Gdx.files.internal("simple_white_background.png"));
+		background = new Texture(
+				Gdx.files.internal("simple_white_background.png"));
 	}
 
 	/**
@@ -99,8 +100,10 @@ public class ScreenGameRenderer extends GameRenderer {
 	}
 
 	public void renderBackground() {
-		float x = (float) -background.getWidth() / 2 + (float) Gdx.graphics.getWidth() / 2;
-		float y = (float) -background.getHeight() / 2 + (float) Gdx.graphics.getHeight() / 2;
+		float x = (float) -background.getWidth() / 2
+				+ (float) Gdx.graphics.getWidth() / 2;
+		float y = (float) -background.getHeight() / 2
+				+ (float) Gdx.graphics.getHeight() / 2;
 
 		batch.begin();
 		batch.draw(background, x, y);
@@ -134,14 +137,16 @@ public class ScreenGameRenderer extends GameRenderer {
 		int iconSize = 45;
 
 		guiBatch.begin();
-		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 55, iconSize, iconSize);
+		guiBatch.draw(keyTexture, Gdx.graphics.getWidth() / 2, hFull - 55,
+				iconSize, iconSize);
 		guiBatch.end();
 	}
 
 	public void renderCountDown(int time) {
 		guiBatch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(guiBatch, String.valueOf(time), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		font.draw(guiBatch, String.valueOf(time), Gdx.graphics.getWidth() / 2,
+				Gdx.graphics.getHeight() / 2);
 		guiBatch.end();
 		if (time % 1 > 0) {
 			time -= 1;
@@ -151,7 +156,9 @@ public class ScreenGameRenderer extends GameRenderer {
 	public void renderWinCount(int wins) {
 		guiBatch.begin();
 		font.setColor(Color.WHITE);
-		font.draw(guiBatch, String.valueOf(wins), (Gdx.graphics.getWidth() - 65), (Gdx.graphics.getHeight() - 65));
+		font.draw(guiBatch, String.valueOf(wins),
+				(Gdx.graphics.getWidth() - 65),
+				(Gdx.graphics.getHeight() - 65));
 		guiBatch.end();
 	}
 
@@ -178,7 +185,8 @@ public class ScreenGameRenderer extends GameRenderer {
 	 *            The world that the physics bodies belongs to.
 	 */
 	public void renderDebug(World world) {
-		debugRenderer.render(world, camera.combined.scale(meterToPixel(1), meterToPixel(1), meterToPixel(1)));
+		debugRenderer.render(world, camera.combined.scale(meterToPixel(1),
+				meterToPixel(1), meterToPixel(1)));
 		// logger.log();
 	}
 

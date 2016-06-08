@@ -1,10 +1,8 @@
 package com.nameless.nameless_game.render;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -55,12 +53,12 @@ public class MainMenuRenderer {
 	public void renderMarker(int index) {
 		batch.begin();
 		switch (index) {
-		case 0:
-			batch.draw(marker, 390, 768-350);
-			break;
-		case 1:
-			batch.draw(marker, 390, 768-495);
-			break;
+			case 0 :
+				batch.draw(marker, 390, 768 - 350);
+				break;
+			case 1 :
+				batch.draw(marker, 390, 768 - 495);
+				break;
 		}
 		batch.end();
 	}
