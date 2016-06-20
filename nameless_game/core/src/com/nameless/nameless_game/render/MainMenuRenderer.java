@@ -53,12 +53,12 @@ public class MainMenuRenderer {
 	public void renderMarker(int index) {
 		batch.begin();
 		switch (index) {
-		case 0:
-			batch.draw(marker, 390, 768-350);
-			break;
-		case 1:
-			batch.draw(marker, 390, 768-495);
-			break;
+			case 0 :
+				batch.draw(marker, 390, 768 - 350);
+				break;
+			case 1 :
+				batch.draw(marker, 390, 768 - 495);
+				break;
 		}
 		batch.end();
 	}
