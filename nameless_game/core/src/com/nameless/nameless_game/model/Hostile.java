@@ -14,7 +14,6 @@ import com.nameless.nameless_game.render.ScreenGameRenderer;
  */
 public abstract class Hostile extends Entity {
 	protected Entity target;
-
 	protected HostileType type;
 
 	public HostileType getType() {
@@ -46,5 +45,4 @@ public abstract class Hostile extends Entity {
 
 	@Override
 	public abstract void update(float deltaTime);
-
 }

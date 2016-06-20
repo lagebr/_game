@@ -39,14 +39,14 @@ public class Player extends Entity {
 
 		body = PhysicsHelper.createDynamicBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
 				ScreenGameRenderer.pixelToMeter(radius), world);
-		
+
 		updateSprite();
 	}
 
 	@Override
 	public void update(float deltaTime) {
 		updateSprite();
-		
+
 		if (leftRotate) {
 			body.applyTorque(3.0f, true);
 		}
@@ -56,8 +56,8 @@ public class Player extends Entity {
 		}
 
 		if (isBoosting) {
-			float xForce = 10 * (float) Math.cos((double) body.getAngle());
-			float yForce = 10 * (float) Math.sin((double) body.getAngle());
+			float xForce = 10 * (float) Math.cos(body.getAngle());
+			float yForce = 10 * (float) Math.sin(body.getAngle());
 
 			body.applyForceToCenter(xForce, yForce, true);
 		}
@@ -75,8 +75,8 @@ public class Player extends Entity {
 	 */
 	public boolean impulseForward() {
 		if (isBoosting == false) {
-			float xImpulse = (float) Math.cos((double) body.getAngle());
-			float yImpulse = (float) Math.sin((double) body.getAngle());
+			float xImpulse = (float) Math.cos(body.getAngle());
+			float yImpulse = (float) Math.sin(body.getAngle());
 
 			body.applyLinearImpulse(new Vector2(xImpulse, yImpulse), body.getWorldCenter(), true);
 			return true;
@@ -84,20 +84,18 @@ public class Player extends Entity {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Updates the sprite position to correspond to the physics body position.
 	 */
 	@Override
 	public void updateSprite() {
-			float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
-					- sprite.getWidth() / 2;
-			float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
-					- sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
-			sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
-			sprite.setPosition(x, y);
-		
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
+
 	}
 
 	public boolean leftRotate() {

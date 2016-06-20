@@ -41,13 +41,9 @@ public abstract class Entity {
 	 * @param world
 	 *            Physics world to add body to.
 	 */
-	public Entity(float x, float y, float width, float height, Texture texture,
-			World world) {
-		body = PhysicsHelper.createStaticBody(
-				ScreenGameRenderer.pixelToMeter(x),
-				ScreenGameRenderer.pixelToMeter(y),
-				ScreenGameRenderer.pixelToMeter(width),
-				ScreenGameRenderer.pixelToMeter(height), world);
+	public Entity(float x, float y, float width, float height, Texture texture, World world) {
+		body = PhysicsHelper.createStaticBody(ScreenGameRenderer.pixelToMeter(x), ScreenGameRenderer.pixelToMeter(y),
+				ScreenGameRenderer.pixelToMeter(width), ScreenGameRenderer.pixelToMeter(height), world);
 
 		sprite = new Sprite(texture, (int) width, (int) height);
 	}

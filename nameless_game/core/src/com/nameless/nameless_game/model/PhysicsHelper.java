@@ -60,8 +60,13 @@ public class PhysicsHelper {
 	 *            The ent.getBody() type.
 	 * @param fixedRotation
 	 *            <ul>
+<<<<<<< HEAD
 	 *            <li>True - ent.getBody() can not rotate</li>
 	 *            <li>False - ent.getBody() can rotate</li>
+=======
+	 *            <li>True - body can not rotate</li>
+	 *            <li>False - body can rotate</li>
+>>>>>>> f7e2e8e7c84caaa3355eef5f52f592123357f552
 	 *            </ul>
 	 * @return The ent.getBody() definition.
 	 */
