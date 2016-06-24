@@ -45,10 +45,8 @@ public class TriangleHostileWithTarget extends Hostile {
 	 */
 	@Override
 	public void updateSprite() {
-		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
-				- sprite.getWidth() / 2;
-		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
-				- sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x);
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y);
 
 		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
