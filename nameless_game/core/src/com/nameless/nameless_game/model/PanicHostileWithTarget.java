@@ -35,9 +35,10 @@ public class PanicHostileWithTarget extends Hostile {
 				ScreenGameRenderer.pixelToMeter(width),
 				ScreenGameRenderer.pixelToMeter(height), world);
 
+		panicDistance = ScreenGameRenderer.pixelToMeter(200);
+		
 		updateSprite();
 
-		panicDistance = ScreenGameRenderer.pixelToMeter(200);
 	}
 
 	@Override
