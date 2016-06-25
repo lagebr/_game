@@ -4,13 +4,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.nameless.nameless_game.render.ScreenGameRenderer;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
  * PhysicsHelper provides static helper methods for creating Box2D related
@@ -62,18 +62,12 @@ public class PhysicsHelper {
 	 *            The ent.getBody() type.
 	 * @param fixedRotation
 	 *            <ul>
-<<<<<<< HEAD
 	 *            <li>True - ent.getBody() can not rotate</li>
 	 *            <li>False - ent.getBody() can rotate</li>
-=======
-	 *            <li>True - body can not rotate</li>
-	 *            <li>False - body can rotate</li>
->>>>>>> f7e2e8e7c84caaa3355eef5f52f592123357f552
 	 *            </ul>
 	 * @return The ent.getBody() definition.
 	 */
-	public static BodyDef createBodyDef(float x, float y, BodyType type,
-			boolean fixedRotation) {
+	public static BodyDef createBodyDef(float x, float y, BodyType type, boolean fixedRotation) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = type;
 		bodyDef.position.set(x, y);
@@ -98,10 +92,8 @@ public class PhysicsHelper {
 	 *            the world to add the ent.getBody() to
 	 * @return the physics ent.getBody()
 	 */
-	public static Body createDynamicBody(float x, float y, float radius,
-			World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
-				BodyType.DynamicBody, false);
+	public static Body createDynamicBody(float x, float y, float radius, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		bodyDef.angularDamping = 10.0f;
 		bodyDef.linearDamping = 2.0f;
 
@@ -137,10 +129,8 @@ public class PhysicsHelper {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createDynamicCircleBody(Entity objRef, float x, float y,
-			float radius, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
-				BodyType.DynamicBody, false);
+	public static Body createDynamicCircleBody(Entity objRef, float x, float y, float radius, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
 		CircleShape circle = new CircleShape();
@@ -176,10 +166,8 @@ public class PhysicsHelper {
 	 *            the world to add the body to
 	 * @return the physics body
 	 */
-	public static Body createStaticBody(float x, float y, float width,
-			float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody,
-				true);
+	public static Body createStaticBody(float x, float y, float width, float height, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.StaticBody, true);
 
 		Body physicsBody = world.createBody(bodyDef);
 
@@ -215,10 +203,8 @@ public class PhysicsHelper {
 	 *            the world to add the ent.getBody() to
 	 * @return the physics ent.getBody()
 	 */
-	public static Body createDynamicBody(Hostile objRef, float x, float y,
-			float width, float height, World world) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
-				BodyType.DynamicBody, false);
+	public static Body createDynamicBody(Hostile objRef, float x, float y, float width, float height, World world) {
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 
 		PolygonShape rectangle = new PolygonShape();
@@ -236,7 +222,7 @@ public class PhysicsHelper {
 
 		return physicsBody;
 	}
-	
+
 	/**
 	 * Creates a dynamic triangle body.
 	 * 
@@ -249,18 +235,16 @@ public class PhysicsHelper {
 	 * @return The create physics body.
 	 */
 	public static Body createDynamicTriangleBody(float x, float y, World world, Hostile self) {
-		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y,
-				BodyType.DynamicBody, false);
+		BodyDef bodyDef = PhysicsHelper.createBodyDef(x, y, BodyType.DynamicBody, false);
 		Body physicsBody = world.createBody(bodyDef);
 		physicsBody.setFixedRotation(true);
 
 		Vector2 p1 = new Vector2(0, 0);
 		Vector2 p2 = new Vector2(ScreenGameRenderer.pixelToMeter(70), 0);
-		Vector2 p3 = new Vector2(ScreenGameRenderer.pixelToMeter(35),
-				ScreenGameRenderer.pixelToMeter(60));
+		Vector2 p3 = new Vector2(ScreenGameRenderer.pixelToMeter(35), ScreenGameRenderer.pixelToMeter(60));
 
 		PolygonShape triangle = new PolygonShape();
-		triangle.set(new Vector2[]{p1, p2, p3});
+		triangle.set(new Vector2[] { p1, p2, p3 });
 
 		FixtureDef fixtureDef = PhysicsHelper.createFixture(triangle, 10.0f);
 		// Collision masks
