@@ -97,12 +97,12 @@ public class LevelGenerator {
 		if (number < 60) { // 60% probability
 			Texture texture = new Texture(
 					Gdx.files.internal("simple_square.png"));
-			hostile = new PanicHostileWithTarget(location.x, location.y, 50, 50,
+			hostile = new PanicHostile(location.x, location.y, 50, 50,
 					texture, world, player);
 		} else if (number < 80) { // 80% - 60% = 20% probability
 			Texture texture = new Texture(
 					Gdx.files.internal("triangle_hostile.png"));
-			hostile = new TriangleHostileWithTarget(location.x, location.y,
+			hostile = new TriangleHostile(location.x, location.y,
 					texture, world, player);
 		} else if (number < 90) { // 90% - 80% = 10% probability
 			Texture texture = new Texture(
@@ -112,7 +112,7 @@ public class LevelGenerator {
 		} else { // 100% - 90% = 10% probability
 			Texture texture = new Texture(
 					Gdx.files.internal("charge_hostile.png"));
-			hostile = new ChargeHostileWithTarget(location.x, location.y, 60,
+			hostile = new ChargeHostile(location.x, location.y, 60,
 					texture, world, player);
 		}
 
