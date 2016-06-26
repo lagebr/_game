@@ -6,15 +6,27 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
- * TriangleHostileWithTarget is a Hostile which constantly follows the player.
+ * TriangleHostile is a Hostile which constantly follows the player.
  * 
  * @author Isaac Arvestad, Henrik Lagebrand
  * @version 2016-05-24
  */
-public class TriangleHostileWithTarget extends Hostile {
+public class TriangleHostile extends Hostile {
 
-	public TriangleHostileWithTarget(float x, float y, Texture texture,
-			World world, Entity target) {
+	/**
+	 * Constructs a RightAngleHostile at a certain position with a certain in a
+	 * certain physics world
+	 * 
+	 * @param x
+	 *            The x-position.
+	 * @param y
+	 *            The y-position.
+	 * @param texture
+	 *            The texture of the hostile.
+	 * @param world
+	 *            The physics world to place the hostile in.
+	 */
+	public TriangleHostile(float x, float y, Texture texture, World world, Entity target) {
 		super(texture);
 
 		this.target = target;

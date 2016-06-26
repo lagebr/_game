@@ -7,26 +7,38 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.nameless.nameless_game.render.ScreenGameRenderer;
 
 /**
- * A hostile that orbits around the center of the screen.
+ * OrbitalHostile orbits around the center of the screen.
  * 
  * @author Henrik Lagebrand, Isaac Arvestad
  */
 public class OrbitalHostile extends Hostile {
-	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2,
-			Gdx.graphics.getHeight());
+	Vector2 center = new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
 
 	/**
+	 * Constructs an OrbitalHostile at a certain position with a certain size,
+	 * texture and places it in a physics world.
 	 * 
+	 * @param x
+	 *            The x-position.
+	 * @param y
+	 *            They y-position.
+	 * @param width
+	 *            The width of the entity.
+	 * @param height
+	 *            The height of the entity.
+	 * @param texture
+	 *            The texture of the entity.
+	 * @param world
+	 *            The physics world to add the entity to.
 	 */
-	public OrbitalHostile(float x, float y, float width, float height,
-			Texture texture, World world) {
+	public OrbitalHostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(x, y, width, height, texture, world);
-		
+
 		updateSprite();
 	}
 
 	/**
-	 * 
+	 * Updates the hostile.
 	 */
 	@Override
 	public void update(float deltaTime) {
@@ -38,19 +50,17 @@ public class OrbitalHostile extends Hostile {
 		float a = (G * m1 * m2) / (r * r);
 		// body.setLinearVelocity(v);
 	}
-	
+
 	/**
 	 * Updates the sprite position to correspond to the physics body position.
 	 */
 	@Override
 	public void updateSprite() {
-			float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
-					- sprite.getWidth() / 2;
-			float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
-					- sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
-			sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
-			sprite.setPosition(x, y);
-		
+		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
+		sprite.setPosition(x, y);
+
 	}
 }
