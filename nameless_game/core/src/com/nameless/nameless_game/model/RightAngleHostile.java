@@ -20,8 +20,24 @@ public class RightAngleHostile extends Hostile {
 
 	private int currentDirection;
 
-	public RightAngleHostile(float x, float y, float width, float height,
-			Texture texture, World world) {
+	/**
+	 * Constructs a RightAngleHostile at a certain position with a certain size
+	 * and certain in a certain physics world
+	 * 
+	 * @param x
+	 *            The x-position.
+	 * @param y
+	 *            The y-position.
+	 * @param width
+	 *            The width of the hostile.
+	 * @param height
+	 *            The height of the hostile.
+	 * @param texture
+	 *            The texture of the hostile.
+	 * @param world
+	 *            The physics world to place the hostile in.
+	 */
+	public RightAngleHostile(float x, float y, float width, float height, Texture texture, World world) {
 		super(x, y, width, height, texture, world);
 
 		type = HostileType.RIGHT_ANGLE;
@@ -40,18 +56,18 @@ public class RightAngleHostile extends Hostile {
 
 		float magnitude = 100;
 		switch (currentDirection) {
-			case 0 :
-				body.applyForceToCenter(new Vector2(-magnitude, 0), true);
-				break;
-			case 1 :
-				body.applyForceToCenter(new Vector2(0, magnitude), true);
-				break;
-			case 2 :
-				body.applyForceToCenter(new Vector2(magnitude, 0), true);
-				break;
-			case 3 :
-				body.applyForceToCenter(new Vector2(0, -magnitude), true);
-				break;
+		case 0:
+			body.applyForceToCenter(new Vector2(-magnitude, 0), true);
+			break;
+		case 1:
+			body.applyForceToCenter(new Vector2(0, magnitude), true);
+			break;
+		case 2:
+			body.applyForceToCenter(new Vector2(magnitude, 0), true);
+			break;
+		case 3:
+			body.applyForceToCenter(new Vector2(0, -magnitude), true);
+			break;
 		}
 	}
 
@@ -60,10 +76,8 @@ public class RightAngleHostile extends Hostile {
 	 */
 	@Override
 	public void updateSprite() {
-		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x)
-				- sprite.getWidth() / 2;
-		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y)
-				- sprite.getHeight() / 2;
+		float x = ScreenGameRenderer.meterToPixel(body.getPosition().x) - sprite.getWidth() / 2;
+		float y = ScreenGameRenderer.meterToPixel(body.getPosition().y) - sprite.getHeight() / 2;
 
 		sprite.setRotation(body.getAngle() * 180.0f / (float) Math.PI);
 		sprite.setPosition(x, y);
